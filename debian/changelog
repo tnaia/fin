@@ -1,0 +1,52 @@
+fin (1.42-1) unstable; urgency=low
+
+  * Adjustments description spans multiple lines
+
+ -- Bob Mottram (4096 bits) <bob@sluggish.dyndns.org>  Thu, 14 Feb 2013 14:50:00 +0100
+
+fin (1.41-1) unstable; urgency=low
+
+  * Import transactions from GnuCash
+
+  * Edits and deletions
+    are recorded in an adjustments table
+
+  * Time of transaction included with date
+
+  * Pie charts can now be plotted
+
+ -- Bob Mottram (4096 bits) <bob@sluggish.dyndns.org>  Tue, 09 Oct 2012 18:00:00 +0100
+
+fin (1.40-1) unstable; urgency=low
+
+  * Improvements to import function
+    Data can be exported from Paypal as csv and imported into
+    fin with no editing required. Also a bug related to the
+    transaction numbers during the import process was fixed.
+
+  * Multiple search criteria are now allowed
+    Search string can contain multiple fields separated by commas
+
+  * Spending distribution graph
+
+  * Colour coding
+    Of positive/negative incoming/outgoing figures
+
+  * Long descriptions
+    Are now displayed over multiple rows
+
+  * Three digit record numbers
+    Should be enough to cover most situations
+
+  * More unit test coverage
+
+  * Short status messages
+    Including forecasting of when funds will be depleted
+
+  * General code tidying
+    Try to keep most lines to less than 80 characters
+
+  * Debian packaging improvements
+    Now passes lintian tests
+
+ -- Bob Mottram (4096 bits) <bob@sluggish.dyndns.org>  Tue, 02 Oct 2012 20:00:00 +0100
