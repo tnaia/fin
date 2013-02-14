@@ -2,7 +2,8 @@
 
 Keeping track of personal finances is an incredibly boring task, and if you don't have much money then juggling it can be tricky.  When looking at the existing software out there to manage accounts it's frequently highly complex and top heavy.  Fin - an abbreviation of "financials" - is an attempt to do the opposite of what most accounting software does, and that's to make things incredibly simple and quick.  Logging a transaction or viewing your current balance should take no more than a few seconds.  This means less time wasted on bureaucracy and more time spent on what you really want to be doing.
 
-* _Installation_
+Installation
+============
 
 The easiest way to install is via a pre-compiled package.  You can also compile from source as follows:
 
@@ -13,7 +14,8 @@ The easiest way to install is via a pre-compiled package.  You can also compile 
 You will need to have the sqlite3 development package installed to be able to compile, and to get the full functionality you'll also need to have gnuplot and bcrypt installed.
 
 
-* _Language_
+Language
+========
 
 First set the language:
 
@@ -25,7 +27,8 @@ Possible languages are: English UK, English US, French, German, Italian, Spanish
 Currently only English UK and English US are implemented.  For translation text see international.c
 
 
-* _Basic Usage_
+Basic Usage
+===========
 
 To log an amount of money spent:
 
@@ -64,11 +67,13 @@ By default transactions will be timestamped according to the system time when th
     fin receive 2.50 from "back of sofa" time 3.45pm
 
 
-* _Brief Status Messages_
+Brief Status Messages
+=====================
 
 It's also possible to produce brief status messages suitable either for including into *.bashrc* files, or for sending to a text-to-speech system.
 
-* Balance
+Balance
+-------
 
 To report the balance for the currently selected account.
 
@@ -76,7 +81,8 @@ To report the balance for the currently selected account.
     fin say | espeak
 
 
-** Average Income
+Average Income
+--------------
 
 To see what your average income has been over the previous year.
 
@@ -84,7 +90,8 @@ To see what your average income has been over the previous year.
     fin say income | espeak
 
 
-** Average Spending
+Average Spending
+----------------
 
 To see what your average spending rate has been over the previous year.
 
@@ -105,7 +112,8 @@ Sets an average savings interest rate of 1.5% per year and an average inflation 
     fin say spending usury 18 inflation 2.0 | espeak
 
 
-** Personal Inflation Rate
+Personal Inflation Rate
+-----------------------
 
 Indepentently from national inflation rates you can also get an idea of your own personal inflation rate.
 
@@ -115,7 +123,8 @@ Indepentently from national inflation rates you can also get an idea of your own
 
 This compares spending within the previous three months with the same three months a year ago, and will report the percentage by which these values have changed.
 
-* _Searching_
+Searching
+=========
 
 To search for transactions with particular words:
 
@@ -152,7 +161,8 @@ You can also aggregate figures on a monthly basis.
 
 
 
-* _Deleting transactions_
+Deleting transactions
+=====================
 
 To delete a transaction first locate the record number on the far left hand side by typing "fin" or doing a search, then type:
 
@@ -160,7 +170,8 @@ To delete a transaction first locate the record number on the far left hand side
 
 
 
-* _Editing transactions_
+Editing transactions
+====================
 
 The status or description for a transaction can be edited as follows:
 
@@ -192,7 +203,8 @@ If necessary you can also search through the edits.
 
 
 
-* _Multiple Accounts_
+Multiple Accounts
+=================
 
 By default any transactions will be added to an account called "current".
 
@@ -215,7 +227,8 @@ Or just to send a particular transaction to a particular account:
 
 
 
-* _Transfering between accounts_
+Transfering between accounts
+============================
 
 To transfer an ammount from one account to another:
 
@@ -230,7 +243,8 @@ For example:
 This will transfer 10.29 from whatever is the currently active account (you can check that by typing "fin") to the savings account.
 
 
-* _Synchronising across multiple machines_
+Synchronising across multiple machines
+======================================
 
 Often people use more than one computer, and want to be able to transfer data.  Fin does this using the scp command, in order to push or pull data from an ssh server.
 
@@ -256,7 +270,8 @@ The same also applies to retrieve data from a server:
     fin pull
 
 
-* _Changing currencies_
+Changing currencies
+===================
 
 It's possible to log amounts in multiple currencies, for example:
 
@@ -273,9 +288,11 @@ You can also change the default currency:
 with any subsequent transactions then occurring in that currency by default.
 
 
-* _Importing data_
+Importing data
+==============
 
-** From CSV
+From CSV
+--------
 
 Data can be imported from a CSV file, which is a common way of exporting bank transactions from online accounts.  The first line of the file is assumed to be a header containing field names.
 
@@ -292,7 +309,8 @@ The filename should have a /.csv/ extension.
 In case the same file is imported more than once the system attempts to avoid adding duplicate transactions.
 
 
-** From Emacs org mode tables
+From Emacs org mode tables
+--------------------------
 
 Tables created with Emacs org mode, such as a shopping list or parts list, can also be imported.
 
@@ -310,7 +328,8 @@ Note that if you use the "Amount" field name then a positive value means money r
 
     fin import mynotes.txt
 
-** From GnuCash
+From GnuCash
+------------
 
 To import from GnuCash first create a new account if you need one.
 
@@ -327,9 +346,11 @@ The GnuCash file will be examined and any active accounts will be listed.  You s
 If you subsequently need to export back to GnuCash then you can use the CSV export feature described below.
 
 
-* _Exporting data_
+Exporting data
+==============
 
-** CSV
+CSV
+---
 
 You can export data in CSV format for viewing in a spreadsheet or import into other systems.
 
@@ -348,7 +369,8 @@ You can also export aggregated figures:
     fin export myexportfilename.csv yearly
 
 
-** Emacs
+Emacs
+-----
 
 Data can be exported to Emacs in the form of org mode formatted tables.
 
@@ -369,7 +391,8 @@ Or yearly
     fin style emacs yearly > yearly.txt
 
 
-* _Date formats_
+Date formats
+============
 
 You can change the date format used in the following way:
 
@@ -380,9 +403,11 @@ You can change the date format used in the following way:
 Only the %d, %m and %Y fields are supported.
 
 
-* _Plotting_
+Plotting
+========
 
-** Balance
+Balance
+-------
 
 You can plot monthly balance figures using the following command:
 
@@ -399,7 +424,8 @@ Perhaps even more useful is to plot particular kinds of expenditure over time by
 
 Will output an image showing spending on groceries on a monthly basis over time. The "*" wildcards can be used to search for any description field containing a particular word.
 
-** Spending Distribution
+Spending Distribution
+---------------------
 
 You can plot the overall distribution of amounts spent in the following way:
 
@@ -416,7 +442,8 @@ Where /startyear/ and /endyear/ specify the range of years, and /maximum/ denote
   fin distribution spending.png year 2015 maximum 100 search "*supermarket*,*groceries*"
 
 
-** Transaction Volumes
+Transaction Volumes
+-------------------
 
 The number of transactions per month can be shown as follows:
 
@@ -430,7 +457,8 @@ As usual you can also apply search criteria and increase or decrease the number 
 
     fin volume mytransactions.png search "*supermarket*" transactions 50
 
-** Pie Charts
+Pie Charts
+----------
 
 Another way of looking at spending is to find out what percentage of income was spent on various things.  This can be done with the /piechart/ command:
 
@@ -455,7 +483,8 @@ A subtlety here is that you can combine searches into a single category using th
 
 
 
-* _Geolocation_
+Geolocation
+===========
 
 Although it's not typical at the time of writing it is expected that embedded devices such as phones will eventually become a replacement for conventional wallets and physical cash, so it might also be useful to be able to log the locations of transactions.  Optionally, a geolocation can be associated with each transaction.
 
@@ -468,7 +497,8 @@ This information can subsequently be exported as part of a search:
     fin find "*" year 2011 kml <filename>
 
 
-* _Security_
+Security
+========
 
 Ordinarily the "data at rest" within the ~/.fin directory is not encrypted.  Since financial data may often be confidential there is an easy way to encrypt the data when you're not using it.
 
