@@ -390,6 +390,8 @@ char * international_text9[] = {
 	" %cDate       %c    In   %c    Out  %cStatus   %cDescription%c","No %cDate       %c    In   %c    Out  %cStatus   %cDescription%c",     "",      "",      "",       "",       "",     "",      "",     "",    "",
 	"style",            "style",             "",      "",      "",       "",       "",     "",      "",     "",    "",
 	"sty",              "sty",               "",      "",      "",       "",       "",     "",      "",     "",    "",
+	"backup",           "backup",            "",      "",      "",       "",       "",     "",      "",     "",    "",
+	"restore",          "restore",           "",      "",      "",       "",       "",     "",      "",     "",    "",
 	"emacs",            "emacs",             "",      "",      "",       "",       "",     "",      "",     "",    "",
 	"org",              "org",               "",      "",      "",       "",       "",     "",      "",     "",    "",
 	"org-mode",         "org-mode",          "",      "",      "",       "",       "",     "",      "",     "",    ""

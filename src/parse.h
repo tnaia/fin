@@ -136,5 +136,7 @@ void search_string_to_sql(char * search_string, char * result,
 char * get_volume(int no_of_fields, char* fieldname, char* value);
 char * get_time(int no_of_fields, char* fieldname, char* value);
 char * get_adjustments(int no_of_fields, char* fieldname, char* value);
+char * get_backup(int no_of_fields, char* fieldname, char* value);
+char * get_restore(int no_of_fields, char* fieldname, char* value);
 
 #endif

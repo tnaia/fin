@@ -94,6 +94,8 @@ int main(int argc, char* argv[])
 	char * distribution_filename = 0;
 	char * volume_filename = 0;
 	char * username = 0;
+	char * backup_filename = 0;
+	char * restore_filename = 0;
 
 	char * srv;
 	char command_str[STRING_BLOCK];
@@ -356,6 +358,24 @@ int main(int argc, char* argv[])
 	kml_filename = get_kml(no_of_fields, (char*)fieldname, (char*)value);
 	field_separator = get_field_separator(no_of_fields,
 										  (char*)fieldname, (char*)value);
+	backup_filename =
+		get_backup(no_of_fields, (char*)fieldname, (char*)value);
+
+
+	/* restore */
+	restore_filename =
+		get_restore(no_of_fields, (char*)fieldname, (char*)value);
+	if (restore_filename != 0) {
+		if (strlen(restore_filename) > 0) {
+			command_run = 1;
+			database_restore(restore_filename);
+			printf("Restored from %s\n", restore_filename);
+		}
+		else {
+			printf("No restore filename specified\n");
+		}
+		return 1;
+	}
 
 	/* speak */
 	speak = get_speak(no_of_fields, (char*)fieldname, (char*)value);
@@ -411,9 +431,22 @@ int main(int argc, char* argv[])
 
 	/* lock */
 	result = get_lock(no_of_fields, (char*)fieldname, (char*)value);
-	if ((result!=0) && (command_run==0)) {
+	if ((result!=0) && (command_run==0) && (backup_filename == 0)) {
 		command_run=1;
 		lock();
+		return 1;
+	}
+
+	/* backup */
+	if (backup_filename != 0) {
+		if (strlen(backup_filename) > 0) {
+			command_run = 1;
+			database_backup(backup_filename, result);
+			printf("Backup created %s\n", backup_filename);
+		}
+		else {
+			printf("No backup filename specified\n");
+		}
 		return 1;
 	}
 

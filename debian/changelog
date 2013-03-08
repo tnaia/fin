@@ -1,8 +1,9 @@
-fin (1.42-1) unstable; urgency=low
+fin (1.50-1) unstable; urgency=low
 
   * Adjustments description spans multiple lines
+  * Backup and restore commands
 
- -- Bob Mottram (4096 bits) <bob@sluggish.dyndns.org>  Thu, 14 Feb 2013 14:50:00 +0100
+ -- Bob Mottram (4096 bits) <bob@sluggish.dyndns.org>  Thu, 08 Mar 2013 18:10:00 +0100
 
 fin (1.41-1) unstable; urgency=low
 

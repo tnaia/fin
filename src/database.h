@@ -148,5 +148,7 @@ int get_totals(char * account, char * search_string,
 			   int month_number, int year,
 			   char * currency,
 			   double * total_receive, double * total_spend);
+int database_backup(char * backup_filename, char * lock);
+int database_restore(char * backup_filename);
 
 #endif
