@@ -604,3 +604,4 @@ To subsequently restore from a backup:
 
 If the backup file has a *.bfe* extension indicating that it is encrypted then you will be asked for a password to decrypt the data.
 
+A subtlety of restoring from backup is that the compressed file contains the full path, including */home/username*, so if you attempt to restore on a system with a different username from when the backup was created this will fail and you will need to extract the files mannually into your *~/.fin* directory.
