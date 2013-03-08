@@ -392,6 +392,10 @@ char * international_text9[] = {
 	"sty",              "sty",               "",      "",      "",       "",       "",     "",      "",     "",    "",
 	"backup",           "backup",            "",      "",      "",       "",       "",     "",      "",     "",    "",
 	"restore",          "restore",           "",      "",      "",       "",       "",     "",      "",     "",    "",
+	"Backup created %s\n","Backup created %s\n","",      "",      "",       "",       "",     "",      "",     "",    "",
+	"No backup filename specified\n","No backup filename specified\n","",      "",      "",       "",       "",     "",      "",     "",    "",
+	"Restored from %s\n","Restored from %s\n","",      "",      "",       "",       "",     "",      "",     "",    "",
+	"No restore filename specified\n","No restore filename specified\n","",      "",      "",       "",       "",     "",      "",     "",    "",
 	"emacs",            "emacs",             "",      "",      "",       "",       "",     "",      "",     "",    "",
 	"org",              "org",               "",      "",      "",       "",       "",     "",      "",     "",    "",
 	"org-mode",         "org-mode",          "",      "",      "",       "",       "",     "",      "",     "",    ""

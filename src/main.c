@@ -369,10 +369,12 @@ int main(int argc, char* argv[])
 		if (strlen(restore_filename) > 0) {
 			command_run = 1;
 			database_restore(restore_filename);
-			printf("Restored from %s\n", restore_filename);
+
+			printf(get_text_from_identifier(RESTORED_FROM_FILE),
+				   restore_filename);
 		}
 		else {
-			printf("No restore filename specified\n");
+			printf("%s",get_text_from_identifier(NOT_RESTORED));
 		}
 		return 1;
 	}
@@ -442,10 +444,11 @@ int main(int argc, char* argv[])
 		if (strlen(backup_filename) > 0) {
 			command_run = 1;
 			database_backup(backup_filename, result);
-			printf("Backup created %s\n", backup_filename);
+			printf(get_text_from_identifier(BACKUP_CREATED),
+				   backup_filename);
 		}
 		else {
-			printf("No backup filename specified\n");
+			printf("%s",get_text_from_identifier(NO_BACKUP));
 		}
 		return 1;
 	}
