@@ -507,3 +507,24 @@ Ordinarily the "data at rest" within the ~/.fin directory is not encrypted.  Sin
 
 
 You will be prompted to enter a password, then the files will be encrypted.  The next time you run fin you will then be prompted for the password.
+
+
+Backup and Restore
+==================
+
+If you wish to make a backup of your data.
+
+    fin backup <filename>
+
+This will compress the contents of the ~/.fin directory into a file with the given name.  An important point here is that the backup file which is created is not encrypted, and so the data could potentially be read by anyone.  If you need more security for the "data at rest" then append the lock command:
+
+    fin backup <filename> lock
+
+The lock command will cause the system to ask for a password and then encrypt the backup file.
+
+To subsequently restore from a backup:
+
+    fin restore <filename>
+
+If the backup file has a .bfe extension indicating that it is encrypted then you will be asked for a password to decrypt the data.
+
