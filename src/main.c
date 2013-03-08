@@ -368,10 +368,15 @@ int main(int argc, char* argv[])
 	if (restore_filename != 0) {
 		if (strlen(restore_filename) > 0) {
 			command_run = 1;
-			database_restore(restore_filename);
+			if (database_restore(restore_filename) > -1) {
 
-			printf(get_text_from_identifier(RESTORED_FROM_FILE),
-				   restore_filename);
+				printf(get_text_from_identifier(RESTORED_FROM_FILE),
+					   restore_filename);
+			}
+			else {
+				printf(get_text_from_identifier(FILE_NOT_FOUND),
+					   restore_filename);
+			}
 		}
 		else {
 			printf("%s",get_text_from_identifier(NOT_RESTORED));

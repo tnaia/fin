@@ -77,6 +77,11 @@ int database_restore(char * backup_filename)
 	int len = strlen(backup_filename);
 	int unlocked = 0;
 	char temp_filename[STRING_BLOCK];
+
+	if (file_exists(backup_filename)==0) {
+		/* file was not found */
+		return -1;
+	}
 		
 	if (len > 4) {
 		if ((backup_filename[len-1]=='e') &&
