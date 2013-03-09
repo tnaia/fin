@@ -1650,7 +1650,7 @@ int transaction_volume(char * account, char * currency, int year,
 	}
 
 	if (strlen(search_string)!=0) {
-		search_string_to_sql(search_string, search_sql, 0, 0);
+		search_string_to_sql(search_string, search_sql, year, 0);
 	}
 
 	/* open file for export */

@@ -484,11 +484,11 @@ void search_string_to_sql(char * search_string, char * result,
 	result[0]=0;
 	if ((year>0) && (month_number==0)) {
 		if (strlen(search_string)>1) {
-			sprintf(result,"(%s) and (substr(date,1,4) is \"%04d\")",
+			sprintf(result,"(%s) and (CAST(substr(date,1,4) as INT) is %04d)",
 					base_result,year);
 		}
 		else {
-			sprintf(result,"(substr(date,1,4) == \"%04d\")",
+			sprintf(result,"(CAST(substr(date,1,4) as INT) is %04d)",
 					year);
 		}
 		return;
@@ -502,13 +502,13 @@ void search_string_to_sql(char * search_string, char * result,
 	}
 	if ((year>0) && (month_number>0)) {
 		if (strlen(search_string)>1) {
-			sprintf(result,"(%s) and (substr(date,1,4) is \"%04d\")"	\
-					" and (substr(date,6,2) is \"%02d\")",
+			sprintf(result,"(%s) and (CAST(substr(date,1,4) as INT) is %04d)"	\
+					" and (CAST(substr(date,6,2) as INT) is %02d)",
 					base_result,year,month_number);
 		}
 		else {
-			sprintf(result,"(substr(date,1,4) is \"%04d\")"	\
-					" and (substr(date,6,2) is \"%02d\")",
+			sprintf(result,"(CAST(substr(date,1,4) as INT) is %04d)"	\
+					" and (CAST(substr(date,6,2) as INT) is %02d)",
 					year,month_number);
 		}
 		return;
