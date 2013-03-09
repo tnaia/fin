@@ -52,20 +52,63 @@ int directory_exists(char * name)
 
 int database_backup(char * backup_filename, char * lock)
 {
+	FILE * fp;
+	int retval,i,contains_path;
 	char directory[STRING_BLOCK];
-	char command[512];
+	char command[STRING_BLOCK];
+	char * script_filename = "temp_fin_script.sh";
 
+	/* get the directory of the database files */
 	database_directory(directory);
-	sprintf(command, "tar -czf %s %s/*",
-			backup_filename, directory);
-	if (lock == 0) {
-		return system(command);
-	}
-	/* encrypt the backup */
-	if (system(command) == 0) {
-		sprintf(command, "bcrypt %s",
-				backup_filename);
-		return system(command);
+
+	/* save a script */
+	fp = fopen(script_filename, "w");
+	if (fp) {
+		/* does the backup filename contain a full path? */
+		contains_path = 0;
+		for (i = 0; i < strlen(backup_filename); i++) {
+			if (backup_filename[i] == '/') {
+				contains_path = 1;
+				break;
+			}
+		}
+
+		/* save a script */
+		fprintf(fp, "%s", "#!/bin/bash\n\n");
+		if (contains_path == 0) {
+			fprintf(fp, "%s", "CURRENT_FIN_DIR=$PWD\n");
+		}
+		fprintf(fp, "cd %s\n", directory);
+		fprintf(fp, "tar -czf %s *\n", backup_filename);
+		if (contains_path == 0) {
+			fprintf(fp, "mv %s $CURRENT_FIN_DIR\n",
+					backup_filename);
+		}
+		fclose(fp);
+
+		sprintf(command, "chmod +x %s", script_filename);
+		retval = system(command);
+
+		sprintf(command, "./%s", script_filename);
+		if (lock == 0) {
+			retval = system(command);
+
+			/* remove the temporary script */
+			sprintf(command, "rm %s", script_filename);
+			retval = system(command);
+			return retval;
+		}
+		/* encrypt the backup */
+		if (system(command) == 0) {
+			/* remove the temporary script */
+			sprintf(command, "rm %s", script_filename);
+			retval = system(command);
+
+			sprintf(command, "bcrypt %s",
+					backup_filename);
+			retval = system(command);
+			return retval;
+		}
 	}
 	return -1;
 }
@@ -73,7 +116,7 @@ int database_backup(char * backup_filename, char * lock)
 int database_restore(char * backup_filename)
 {
 	char directory[STRING_BLOCK];
-	char command[512];
+	char command[STRING_BLOCK];
 	int len = strlen(backup_filename);
 	int unlocked = 0;
 	char temp_filename[STRING_BLOCK];
@@ -106,14 +149,15 @@ int database_restore(char * backup_filename)
 
 	database_directory(directory);
 	if (unlocked == 0) {
-		sprintf(command, "tar -C / -zxpf %s",
-				backup_filename);
+		sprintf(command, "tar -C %s -zxpf %s",
+				directory, backup_filename);
 		len = system(command);
 	}
 	else {
-		sprintf(command, "tar -C / -zxpf %s",
-				temp_filename);
+		sprintf(command, "tar -C %s -zxpf %s",
+				directory, temp_filename);
 		len = system(command);
+
 		/* delete the unencrypted file */
 		sprintf(command, "shred -u %s",
 				temp_filename);
