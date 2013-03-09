@@ -509,17 +509,33 @@ Where /startyear/ and /endyear/ specify the range of years, and /maximum/ denote
 
 ** Transaction Volumes
 
-The number of transactions per month can be shown as follows:
+The number of transactions per year can be shown as follows:
 
+#+BEGIN_SRC sh
   fin volume
+#+END_SRC
 
 or plotted in a graph:
 
+#+BEGIN_SRC sh
   fin volume mytransactions.png
+#+END_SRC
+
+You can also do the same for monthly transactions:
+
+#+BEGIN_SRC sh
+  fin volume monthly
+
+  fin volume monthly year 2012
+
+  fin volume mytransactions.png monthly
+#+END_SRC
 
 As usual you can also apply search criteria and increase or decrease the number of months shown using the *transactions* option.
 
-  fin volume mytransactions.png search "*supermarket*" transactions 50
+#+BEGIN_SRC sh
+  fin volume mytransactions.png monthly search "*supermarket*" transactions 50
+#+END_SRC
 
 ** Pie Charts
 

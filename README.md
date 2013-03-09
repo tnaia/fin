@@ -446,7 +446,7 @@ Where /startyear/ and /endyear/ specify the range of years, and /maximum/ denote
 Transaction Volumes
 -------------------
 
-The number of transactions per month can be shown as follows:
+The number of transactions per year can be shown as follows:
 
     fin volume
 
@@ -454,9 +454,15 @@ or plotted in a graph:
 
     fin volume mytransactions.png
 
+You can also do the same for monthly transactions:
+
+  fin volume monthly
+  fin volume monthly year 2012
+  fin volume mytransactions.png monthly
+
 As usual you can also apply search criteria and increase or decrease the number of months shown using the *transactions* option.
 
-    fin volume mytransactions.png search "*supermarket*" transactions 50
+    fin volume mytransactions.png monthly search "*supermarket*" transactions 50
 
 Pie Charts
 ----------
