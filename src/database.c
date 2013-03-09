@@ -1863,6 +1863,11 @@ int transaction_volume(char * account, char * currency, int year,
 						}
 					}
 
+					if ((col == 0) &&
+						(column_separator == ' ')) {
+						printf(" ");
+					}
+
 					printf("%s",val);
 
 					if (col == 0) {
@@ -1885,7 +1890,7 @@ int transaction_volume(char * account, char * currency, int year,
 					}
 					else {
 						if (col < cols-1) {
-							printf("%c ",field_separator);
+							printf("   ");
 						}
 					}
 				}
