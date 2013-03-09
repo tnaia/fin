@@ -1634,7 +1634,7 @@ int transaction_volume(char * account, char * currency, int year,
 					   char field_separator, char column_separator,
 					   char * search_string, char * export_filename)
 {
-	int retval,cols,col,row=0,i;
+	int retval,cols,col,row=0,i,total_transactions=0;
 	int width_columns = 22;
 	int separator_column = 11;
 	char database_filename[STRING_BLOCK];
@@ -1877,6 +1877,7 @@ int transaction_volume(char * account, char * currency, int year,
 						}
 					}
 					else {
+						total_transactions += atoi(val);
 						while (i<width_columns-3-strlen(val)) {
 							printf(" ");
 							i++;
@@ -1936,6 +1937,19 @@ int transaction_volume(char * account, char * currency, int year,
 		}
 		row++;
 		if (row >= max_transactions) break;
+	}
+
+	if ((fp_export==NULL) &&
+		(column_separator == ' ')) {
+		/* show footer */
+		for (i = 0; i < width_columns; i++) {
+			printf("-");
+		}
+		printf("\n");
+		for (i = 0; i <= separator_column; i++) {
+			printf(" ");
+		}
+		printf("%d\n\n",total_transactions);
 	}
 
 	/* close database */

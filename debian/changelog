@@ -1,10 +1,16 @@
 fin (1.50-1) stable; urgency=medium
 
   * Adjustments description spans multiple lines
+
   * Backup and restore commands
+
   * Bug fix for balance value in monthly listing for a given year
 
- -- Bob Mottram (4096 bits) <bob@sluggish.dyndns.org>  Thu, 08 Mar 2013 18:10:00 +0100
+  * Monthly and yearly transaction volumes
+
+  * Removed version control files from source package
+
+ -- Bob Mottram (4096 bits) <bob@sluggish.dyndns.org>  Sat, 09 Mar 2013 17:47:00 +0100
 
 fin (1.41-1) unstable; urgency=low
 
