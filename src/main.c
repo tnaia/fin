@@ -751,6 +751,11 @@ int main(int argc, char* argv[])
 	if ((command_run==0) && (volume_filename != 0)) {
 		result = get_search(no_of_fields, (char*)fieldname, (char*)value);
 		monthly_flag = 1;
+		if (get_yearly(no_of_fields,
+					   (char*)fieldname, (char*)value)!=0) {
+			monthly_flag = 0;
+		}
+
 		if (strlen(volume_filename)>0) {
 			sprintf(str,"%s","gnuplot3.csv");
 			/*field_separator = ' ';*/
