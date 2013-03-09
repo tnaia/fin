@@ -1634,12 +1634,16 @@ int transaction_volume(char * account, char * currency, int year,
 					   char field_separator, char column_separator,
 					   char * search_string, char * export_filename)
 {
-	int retval,cols,col,row=0;
+	int retval,cols,col,row=0,i;
+	int width_columns = 22;
+	int separator_column = 11;
 	char database_filename[STRING_BLOCK];
 	char query[STRING_BLOCK*2], search_sql[STRING_BLOCK*2];
 	sqlite3_stmt *stmt;
 	sqlite3 *handle;
 	FILE * fp_export=NULL;
+	char datestr[STRING_BLOCK];
+	char volumestr[STRING_BLOCK];
 
 	if (account_exists(account)==0) {
 		return 0;
@@ -1664,12 +1668,57 @@ int transaction_volume(char * account, char * currency, int year,
 		}
 	}
 
+	sprintf(datestr, "%s",
+			get_text_from_identifier(DATE));
+	datestr[0] = toupper(datestr[0]);
+	sprintf(volumestr, "%s",
+			get_text_from_identifier(VOLUME));
+	volumestr[0] = toupper(volumestr[0]);
+
 	if (fp_export==NULL) {
 		if (column_separator == ' ') {
-			printf("Date, Volume\n");
+			/* show title */
+			for (i = 0; i < width_columns; i++) {
+				printf("-");
+			}
+			printf("\n");
+
+			printf(" %s", datestr);
+			for (i = strlen(datestr)+1;
+				 i < separator_column; i++) {
+				printf(" ");
+			}
+			printf(" %s\n", volumestr);
+
+			for (i = 0; i < width_columns; i++) {
+				printf("-");
+			}
+			printf("\n");			
 		}
 		else {
-			printf("| Date | Volume |\n");
+			/* emacs style title */
+			printf("| %s", datestr);
+			for (i = strlen(datestr)+2;
+				 i < separator_column; i++) {
+				printf(" ");
+			}
+			printf("| %s", volumestr);
+			i += strlen(volumestr)+2;
+			while (i < width_columns) {
+				printf(" ");
+				i++;
+			}
+			printf("|\n");
+			printf("|");
+			for (i = 1; i < separator_column; i++) {
+				printf("-");
+			}
+			printf("+");
+			for (i = separator_column+1;
+				 i < width_columns; i++) {
+				printf("-");				
+			}
+			printf("|\n");
 		}
 	}
 
@@ -1815,6 +1864,20 @@ int transaction_volume(char * account, char * currency, int year,
 					}
 
 					printf("%s",val);
+
+					if (col == 0) {
+						for (i = strlen(val)+3;
+							 i < separator_column; i++) {
+							printf(" ");
+						}
+					}
+					else {
+						while (i<width_columns-3-strlen(val)) {
+							printf(" ");
+							i++;
+						}
+					}
+
 					if (column_separator != ' ') {
 						if (col == cols-1) {
 							printf(" %c",column_separator);
