@@ -36,8 +36,7 @@ int show_monthly_summary(char * account, int max_months, int year,
 	char curr_balance_str[STRING_BLOCK];
 	const int line_length = 47;
 	double bal=0;
-	double curr_balance,current_balance =
-		get_current_balance(account,currency);
+	double curr_balance,current_balance;
 	const int balance_field = 4;
 	char alt_export_filename[STRING_BLOCK];
 	sqlite3_stmt *stmt;
@@ -54,6 +53,9 @@ int show_monthly_summary(char * account, int max_months, int year,
 	}
 
 	if (year<1) {
+		current_balance =
+			get_current_balance(account, currency, 0);
+
 		sprintf(query,"select substr(date,1,7) as yearmonth, " \
 				"sum(receive) as monthreceive, sum(spend) as " \
 				"monthspend, sum(receive-spend) as monthbalance " \
@@ -61,6 +63,9 @@ int show_monthly_summary(char * account, int max_months, int year,
 				"group by yearmonth order by yearmonth desc;",currency);
 	}
 	else {
+		current_balance =
+			get_current_balance(account, currency, year);
+
 		sprintf(query,"select substr(date,1,7) as yearmonth, " \
 				"sum(receive) as monthreceive, sum(spend) as " \
 				"monthspend, sum(receive-spend) as monthbalance " \
@@ -267,7 +272,13 @@ int show_monthly_summary(char * account, int max_months, int year,
 					fprintf(fp,"%.5f\n",curr_balance);
 				}
 			}
-			curr_balance -= bal;
+
+			if (year<1) {
+				curr_balance -= bal;
+			}
+			else {
+				curr_balance += bal;
+			}
 			row++;
 			if (row>=max_months) break;
 		}

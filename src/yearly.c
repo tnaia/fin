@@ -33,7 +33,7 @@ int show_yearly_summary(char * account, int max_months,
 	char curr_balance_str[STRING_BLOCK];
 	const int line_length = 65;
 	double bal=0,curr_balance;
-	double current_balance = get_current_balance(account,currency);
+	double current_balance = get_current_balance(account,currency,0);
 	double prev_receive=0,prev_spend=0;
 	double receive_change=0, spend_change=0;
 	sqlite3_stmt *stmt;

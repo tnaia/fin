@@ -23,7 +23,7 @@
 #include "parse.h"
 #include "database.h"
 
-double get_current_balance(char * account, char * currency);
+double get_current_balance(char * account, char * currency, int year);
 int show_recent_transactions(char * account, int no_of_transactions,
 							 char column_separator);
 int show_summary(char * account, int no_of_transactions,

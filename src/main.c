@@ -144,7 +144,7 @@ int main(int argc, char* argv[])
 
 	if (argc<=1) {
 		show_summary(account,no_of_transactions, column_separator);
-		balance = get_current_balance(account, currency);
+		balance = get_current_balance(account, currency, 0);
 		if (balance>=0) {
 			narrate_spending(account, currency, loans_interest_rate,
 							 savings_interest_rate, DEFAULT_INFLATION_RATE);

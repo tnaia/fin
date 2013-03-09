@@ -18,7 +18,7 @@
 
 #include "summary.h"
 
-double get_current_balance(char * account, char * currency)
+double get_current_balance(char * account, char * currency, int year)
 {
 	int retval,col,cols;
 	char database_filename[STRING_BLOCK];
@@ -31,9 +31,17 @@ double get_current_balance(char * account, char * currency)
 		return 0;
 	}
 
-	sprintf((char*)query,
-			"select sum(receive-spend) as totalbalance from " \
-			"transactions where currency=\"%s\";",currency);
+	if (year <= 0) {
+		sprintf((char*)query,
+				"select sum(receive-spend) as totalbalance from "	\
+				"transactions where currency=\"%s\";",currency);
+	}
+	else {
+		sprintf((char*)query,
+				"select sum(receive-spend) as totalbalance from "	\
+				"transactions where ((currency=\"%s\") and " \
+				"(CAST(substr(date,1,4) as INT) < %d));",currency, year);
+	}
     
 	/* if no account is specified use the default one */
 	if (strlen(account)==0) {

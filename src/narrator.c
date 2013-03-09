@@ -56,7 +56,7 @@ static char * get_currency_description(char * currency)
 void narrate_balance(char * account, char * currency)
 {
 	char * str;
-	double balance = get_current_balance(account, currency);
+	double balance = get_current_balance(account, currency, 0);
 	char * currencystr = get_currency_description(currency);
 
 	if (currencystr==0) {
@@ -140,7 +140,7 @@ void narrate_spending(char * account, char * currency,
 					  double savings_interest_rate,
 					  double inflation_rate)
 {
-	double balance = get_current_balance(account, currency);
+	double balance = get_current_balance(account, currency, 0);
 	char * currencystr = get_currency_description(currency);
 	time_t rawtime;
 	struct tm * timeinfo;
