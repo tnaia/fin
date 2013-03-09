@@ -139,7 +139,7 @@ void show_distribution(int * distribution, int distribution_size,
 int get_month_totals(char * account, char * currency,
 					 int year, int month,
 					 double * month_receive, double * month_spend);
-int transaction_volume(char * account, char * currency,
+int transaction_volume(char * account, char * currency, int year,
 					   int monthly, int max_transactions,
 					   char field_separator, char column_separator,
 					   char * search_string, char * export_filename);

@@ -1629,7 +1629,7 @@ int get_month_totals(char * account, char * currency,
 	return -1;
 }
 
-int transaction_volume(char * account, char * currency,
+int transaction_volume(char * account, char * currency, int year,
 					   int monthly, int max_transactions,
 					   char field_separator, char column_separator,
 					   char * search_string, char * export_filename)
@@ -1646,7 +1646,7 @@ int transaction_volume(char * account, char * currency,
 	}
 
 	if (strlen(search_string)!=0) {
-		search_string_to_sql(search_string, search_sql,0,0);
+		search_string_to_sql(search_string, search_sql, 0, 0);
 	}
 
 	/* open file for export */
@@ -1676,44 +1676,94 @@ int transaction_volume(char * account, char * currency,
 	/* create query */
 	if (monthly != 0) {
 		if (strlen(search_string)==0) {
-			sprintf(query,
-					"select substr(date,1,7) " \
-					"as yearmonth, sum(1) as volume " \
-					"from transactions where " \
-					"(currency is \"%s\") "	\
-					"group by yearmonth order by yearmonth desc;",
-					currency);
+			if (year < 1) {
+				sprintf(query,
+						"select substr(date,1,7) " \
+						"as yearmonth, sum(1) as volume " \
+						"from transactions where " \
+						"(currency is \"%s\") " \
+						"group by yearmonth order by yearmonth desc;",
+						currency);
+			}
+			else {
+				sprintf(query,
+						"select substr(date,1,7) " \
+						"as yearmonth, sum(1) as volume " \
+						"from transactions where " \
+						"((currency is \"%s\") and " \
+						"(CAST(substr(date,1,4) as INT) is %d))" \
+						"group by yearmonth order by yearmonth desc;",
+						currency, year);
+			}
 		}
 		else {
-			sprintf(query,
-					"select substr(date,1,7) " \
-					"as yearmonth, sum(1) as volume " \
-					"from transactions where " \
-					"((currency is \"%s\") and " \
-					"(%s)) " \
-					"group by yearmonth order by yearmonth desc;",
-					currency,search_sql);
+			if (year < 1) {
+				sprintf(query,
+						"select substr(date,1,7) " \
+						"as yearmonth, sum(1) as volume " \
+						"from transactions where " \
+						"((currency is \"%s\") and " \
+						"(%s)) " \
+						"group by yearmonth order by yearmonth desc;",
+						currency, search_sql);
+			}
+			else {
+				sprintf(query,
+						"select substr(date,1,7) " \
+						"as yearmonth, sum(1) as volume " \
+						"from transactions where " \
+						"((currency is \"%s\") and " \
+						"(%s) and " \
+						"(CAST(substr(date,1,4) as INT) is %d)) " \
+						"group by yearmonth order by yearmonth desc;",
+						currency, search_sql, year);
+			}
 		}
 	}
 	else {
 		if (strlen(search_string)==0) {
-			sprintf(query,
-					"select substr(date,1,4) " \
-					"as year, sum(1) as volume " \
-					"from transactions where " \
-					"(currency is \"%s\") "	\
-					"group by year order by year desc;",
-					currency);
+			if (year < 1) {
+				sprintf(query,
+						"select substr(date,1,4) "	\
+						"as year, sum(1) as volume " \
+						"from transactions where " \
+						"(currency is \"%s\") " \
+						"group by year order by year desc;",
+						currency);
+			}
+			else {
+				sprintf(query,
+						"select substr(date,1,4) "	\
+						"as year, sum(1) as volume " \
+						"from transactions where " \
+						"((currency is \"%s\") and " \
+						"(CAST(substr(date,1,4) as INT) is %d))" \
+						"group by year order by year desc;",
+						currency, year);
+			}
 		}
 		else {
-			sprintf(query,
-					"select substr(date,1,4) " \
-					"as year, sum(1) as volume " \
-					"from transactions where " \
-					"((currency is \"%s\") and " \
-					"(%s)) " \
-					"group by year order by year desc;",
-					currency,search_sql);
+			if (year < 1) {
+				sprintf(query,
+						"select substr(date,1,4) " \
+						"as year, sum(1) as volume " \
+						"from transactions where " \
+						"((currency is \"%s\") and " \
+						"(%s)) " \
+						"group by year order by year desc;",
+						currency, search_sql);
+			}
+			else {
+				sprintf(query,
+						"select substr(date,1,4) " \
+						"as year, sum(1) as volume " \
+						"from transactions where " \
+						"((currency is \"%s\") and " \
+						"(%s) and " \
+						"(CAST(substr(date,1,4) as INT) is %d)) " \
+						"group by year order by year desc;",
+						currency, search_sql, year);
+			}
 		}
 	}
 
@@ -1756,7 +1806,7 @@ int transaction_volume(char * account, char * currency,
 				if (fp_export==NULL) {
 					/* print to console */
 					if (column_separator != ' ') {
-						if (col>0) {
+						if (col > 0) {
 							printf(" %c ",column_separator);
 						}
 						else {

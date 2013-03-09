@@ -763,7 +763,7 @@ int main(int argc, char* argv[])
 				str[0]=0;
 			}
 		}
-		if (transaction_volume(account, currency,
+		if (transaction_volume(account, currency, year,
 							   monthly_flag, no_of_transactions_volume,
 							   field_separator, column_separator,
 							   result, str)!=0) {
