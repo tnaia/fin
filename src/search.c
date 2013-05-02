@@ -381,10 +381,11 @@ int search(char * account, char * search_string, int month_number,
 	return 1;
 }
 
-int search_monthly(char * account, char * search_string, int year,
+int search_grouped(char * account, char * search_string, int year,
 				   int max_rows, char * date_format,
 				   char * export_filename, char field_separator,
-				   char * image_filename, char column_separator)
+				   char * image_filename, char column_separator,
+				   int monthly)
 {
 	int retval, col, cols, i;
 	char database_filename[STRING_BLOCK];
@@ -407,13 +408,25 @@ int search_monthly(char * account, char * search_string, int year,
 	sqlite3 *handle;
 	char search_sql[STRING_BLOCK];
 
-	sprintf((char*)fields,"%s",
-			"substr(date,1,7) as yearmonth, receive, spend");
+	if (monthly != 0) {
+		/* monthly */
+		sprintf((char*)fields,"%s",
+				"substr(date,1,7) as yearmonth, " \
+				"sum(receive) as totreceive, " \
+				"sum(spend) as totspend");
+	}
+	else {
+		/* yearly */
+		sprintf((char*)fields,"%s",
+				"substr(date,1,4) as yearmonth, " \
+				"sum(receive) as totreceive, " \
+				"sum(spend) as totspend");
+	}
 
-	if (image_filename!=0) {
-		if (strlen(image_filename)>0) {
-			field_separator=9;
-			if (strlen(export_filename)==0) {
+	if (image_filename != 0) {
+		if (strlen(image_filename) > 0) {
+			field_separator = 9;
+			if (strlen(export_filename) == 0) {
 				sprintf((char*)alt_export_filename,"gnuplot.csv");
 				export_filename = alt_export_filename;	
 			}
@@ -423,54 +436,62 @@ int search_monthly(char * account, char * search_string, int year,
 	fp_export = 0;
 
 	/* open file for export */
-	if (export_filename!=0) {
-		if (strlen(export_filename)>2) {
+	if (export_filename != 0) {
+		if (strlen(export_filename) > 2) {
 			fp_export = fopen(export_filename,"w");
-			if (fp_export!=0) {
-				sprintf((char*)str,"%s","Month,receive,spend");
-				for (i=0;i<strlen(str);i++) {
-					if (str[i]==',') {
-						str[i]=field_separator;
+			if (fp_export != 0) {
+				if (monthly != 0) {
+					sprintf((char*)str,"%s","Month,receive,spend");
+				}
+				else {
+					sprintf((char*)str,"%s","Year,receive,spend");
+				}
+				for (i = 0; i < strlen(str); i++) {
+					if (str[i] == ',') {
+						str[i] = field_separator;
 					}
 				}
-				fprintf(fp_export,"%s\n",str);
+				fprintf(fp_export, "%s\n", str);
 			}
 		}
 	}
 
-	if (fp_export==0) {
-		if (column_separator==' ') {
-			sprintf((char*)str,"%s\n",
+	if (fp_export == 0) {
+		if (column_separator == ' ') {
+			sprintf((char*)str, "%s\n",
 					get_text_from_identifier(TITLE_SEARCH_RESULTS));
 		}
 		else {
-			sprintf((char*)str,"* %s\n",
+			sprintf((char*)str, "* %s\n",
 					get_text_from_identifier(TITLE_SEARCH_RESULTS));
 		}
-		sprintf((char*)str2,str,account);
+		sprintf((char*)str2, str, account);
 		str2[0] = toupper(str2[0]);
-		printf("%s",(char*)str2);
+		printf("%s", (char*)str2);
 
-		if (column_separator==' ') {
-			for (i=0;i<line_length;i++) {
+		if (column_separator == ' ') {
+			for (i = 0; i < line_length; i++) {
 				printf("-");
 			}
 		}
 		printf("\n");
 
-		if (column_separator!=' ') {
-			printf("%c",column_separator);
+		if (column_separator != ' ') {
+			printf("%c", column_separator);
 		}
 		printf(get_text_from_identifier(TITLE_RECENT_TRANSACTIONS_MONTHLY),
-			   column_separator,column_separator,column_separator);
+			   column_separator, column_separator, column_separator);
 		printf("\n");
 
-		if (column_separator!=' ') {
-			printf("%c",column_separator);
+		if (column_separator != ' ') {
+			printf("%c", column_separator);
 		}
-		for (i=0;i<line_length;i++) {
-			if ((column_separator==' ') ||
-				((i!=8) && (i!=18))) {
+		for (i = 0;i < line_length; i++) {
+			if ((i==line_length-2) && (column_separator == '|')) {
+				break;
+			}
+			if ((column_separator == ' ') ||
+				((i != 8) && (i != 18))) {
 				printf("-");
 			}
 			else {
@@ -480,23 +501,23 @@ int search_monthly(char * account, char * search_string, int year,
 		printf("%c\n",column_separator);
 	}
 
-	search_string_to_sql(search_string, search_sql,0,0);
+	search_string_to_sql(search_string, search_sql, 0, 0);
 
-	if (year==0) {
+	if (year == 0) {
 		sprintf((char*)query,
 				"select %s from transactions where " \
 				"(%s) or " \
 				"(date like \"%s\") group by yearmonth " \
 				"order by yearmonth desc;",
-				fields,search_sql,search_string);
+				fields, search_sql, search_string);
 	}
 	else {
-		if (strcmp(search_string,"*")==0) {
+		if (strcmp(search_string,"*") == 0) {
 			sprintf((char*)query,
 					"select %s from transactions where " \
 					"(date like \"%d-%c-%c\") group by " \
 					"yearmonth order by yearmonth desc;",
-					fields,year,'%','%');
+					fields, year, '%', '%');
 		}
 		else {
 			sprintf((char*)query,
@@ -504,26 +525,26 @@ int search_monthly(char * account, char * search_string, int year,
 					"(%s) and " \
 					"(date like \"%d-%c-%c\") group by " \
 					"yearmonth order by yearmonth desc;",
-					fields,search_sql,year,'%','%');
+					fields, search_sql, year, '%', '%');
 		}
 	}
 
 	/* if no account is specified use the default one */
-	if (strlen(account)==0) {
+	if (strlen(account) == 0) {
 		settings_set_account(get_text_from_identifier(SETTINGS_DEFAULT_CURRENT_ACCOUNT));
-		if (strlen(get_text_from_identifier(SETTINGS_DEFAULT_CURRENT_ACCOUNT))==0) {
+		if (strlen(get_text_from_identifier(SETTINGS_DEFAULT_CURRENT_ACCOUNT)) == 0) {
 			printf("Unable to get default account name\n");
 			return 0;
 		}
 		account = settings_get_account();
 	}
 
-	if (strlen(account)==0) {
+	if (strlen(account) == 0) {
 		printf("No account specified\n");
 		return 0;
 	}
 	sprintf((char*)database_filename,"%s/.fin/%s.sqlite3",
-			getenv("HOME"),account);
+			getenv("HOME"), account);
 	retval = sqlite3_open_v2(database_filename,
 							 &handle,
 							 SQLITE_OPEN_READWRITE|SQLITE_OPEN_CREATE,
@@ -537,7 +558,7 @@ int search_monthly(char * account, char * search_string, int year,
 	retval = sqlite3_prepare_v2(handle,query,-1,&stmt,0);
 	if (retval) {
 		printf("Unable to retrieve search information.  " \
-			   "Does this account '%s' exist?\n",account);
+			   "Does this account '%s' exist?\n", account);
 		return 0;
 	}
     
@@ -549,53 +570,58 @@ int search_monthly(char * account, char * search_string, int year,
         
 		if(retval == SQLITE_ROW) {
 
-			if (fp_export!=0) {
-				for(col=0; col<cols; col++) {
-					char *val = (char*)sqlite3_column_text(stmt,col);
-					if (col>0) {
-						fprintf(fp_export,"%c",field_separator);
+			if (fp_export != 0) {
+				for(col = 0; col < cols; col++) {
+					char *val = (char*)sqlite3_column_text(stmt, col);
+					if (col > 0) {
+						fprintf(fp_export, "%c", field_separator);
 					}
-					fprintf(fp_export,"%s",val);
+					fprintf(fp_export, "%s", val);
 				}
-				fprintf(fp_export,"%s","\n");
+				fprintf(fp_export, "%s", "\n");
 			}
 			else {
-				if (column_separator!=' ') {
-					printf("%c",column_separator);
+				if (column_separator != ' ') {
+					printf("%c", column_separator);
 				}
-				for(col=0; col<cols; col++) {
-					char *val = (char*)sqlite3_column_text(stmt,col);
-					if (col==1) {
+				for(col = 0; col < cols; col++) {
+					char *val = (char*)sqlite3_column_text(stmt, col);
+					if (col == 1) {
 						total_receive += atof(val);
 					}
-					if (col==2) {
+					if (col == 2) {
 						total_spend += atof(val);
 					}
 
-					if (col==1) {
+					if (col == 1) {
 						pad_value(val, (char *)receive_str,
 								  LEADING_SPACES, TRAILING_ZEROS);
-						printf("%s %c",receive_str,column_separator);
+						printf("%s %c", receive_str, column_separator);
 					}
 					else {
-						if (col==2) {
+						if (col == 2) {
 							pad_value(val, (char *)spend_str,
 									  LEADING_SPACES, TRAILING_ZEROS);
-							printf("%s %c",spend_str,column_separator);
+							printf("%s %c", spend_str, column_separator);
 						}
 						else {
-							if (strlen(val)>0) {
-								printf("%s %c",val,column_separator);
+							if (strlen(val) > 0) {
+								if ((col == 0) && (monthly == 0)) {
+									printf("%s    %c", val, column_separator);
+								}
+								else {
+									printf("%s %c", val, column_separator);
+								}
 							}
 						}
 					}
 				}
 			}
-			if (fp_export==0) {
+			if (fp_export == 0) {
 				printf("\n");
 			}
 			row++;
-			if (row>=max_rows) break;
+			if (row >= max_rows) break;
 		}
 		else if(retval == SQLITE_DONE) {
 			break;
@@ -607,53 +633,53 @@ int search_monthly(char * account, char * search_string, int year,
 		}
 	}
 
-	if (fp_export==0) {
-		if (column_separator==' ') {
-			for (i=0;i<58;i++) {
+	if (fp_export == 0) {
+		if (column_separator == ' ') {
+			for (i = 0; i < 58; i++) {
 				printf("-");
 			}
 		}
 		printf("\n");
   
-		sprintf((char*)currency_str,"%s",
+		sprintf((char*)currency_str, "%s",
 				get_text_from_identifier(TOTALS));
-		sprintf((char*)total_receive_str,"%.2f",total_receive);
-		sprintf((char*)total_spend_str,"%.2f",total_spend);
-		sprintf((char*)total_balance_str,"%.2f",total_receive-total_spend);
+		sprintf((char*)total_receive_str, "%.2f", total_receive);
+		sprintf((char*)total_spend_str, "%.2f", total_spend);
+		sprintf((char*)total_balance_str, "%.2f", total_receive - total_spend);
 		printf(get_text_from_identifier(SUMMARY_BALANCE),
-			   (char*)currency_str,(char*)total_receive_str,
-			   (char*)total_spend_str,(char*)total_balance_str);
+			   (char*)currency_str, (char*)total_receive_str,
+			   (char*)total_spend_str, (char*)total_balance_str);
 		printf("\n");
 	}
 	else {
 		fclose(fp_export);
 
-		if (image_filename==0) {
+		if (image_filename == 0) {
 			printf(get_text_from_identifier(EXPORT_COMPLETED),
 				   export_filename);
 			printf("\n");
 		}
 
-		if (image_filename!=0) {
-			if (strlen(image_filename)>0) {
-				for (i=0;i<strlen(search_string);i++) {
-					if (search_string[i]=='%') {
-						search_string[i]='*';
+		if (image_filename != 0) {
+			if (strlen(image_filename) > 0) {
+				for (i = 0; i < strlen(search_string); i++) {
+					if (search_string[i] == '%') {
+						search_string[i] = '*';
 					}
 				}
 
 				/* default title */
 				sprintf((char*)title,
 						get_text_from_identifier(TITLE_SPENDING_ON_ACCOUNT_SEARCH),
-						search_string,account);
+						search_string, account);
 
 				/* if a custom title has been specified */
-				if (strlen(title)!=0) {
-					sprintf(titlestr,"%s",title);
+				if (strlen(title) != 0) {
+					sprintf(titlestr, "%s", title);
 				}
 
-				plot(titlestr, "", 2, export_filename,1024,
-					 480,image_filename);
+				plot(titlestr, "", 2, export_filename, 1024,
+					 480, image_filename);
 
 				printf(get_text_from_identifier(EXPORT_IMAGE),
 					   image_filename);

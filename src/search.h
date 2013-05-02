@@ -35,9 +35,10 @@ int search(char * account, char * search_string, int month_number,
 		   char * export_filename, char field_separator,
 		   char * kml_filename, char column_separator);
 
-int search_monthly(char * account, char * search_string, int year,
+int search_grouped(char * account, char * search_string, int year,
 				   int max_rows, char * date_format,
 				   char * export_filename, char field_separator,
-				   char * image_filename, char column_separator);
+				   char * image_filename, char column_separator,
+				   int monthly);
 
 #endif

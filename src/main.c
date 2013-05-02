@@ -528,14 +528,26 @@ int main(int argc, char* argv[])
 			image_filename = get_monthly(no_of_fields,
 										 (char*)fieldname, (char*)value);
 			if (image_filename == 0) {
-				search(account, result, month_number, year, 10000,
-					   date_format, export_filename, field_separator,
-					   kml_filename, column_separator);
+
+				if (get_yearly(no_of_fields,
+							   (char*)fieldname, (char*)value)==0) {
+					/* general search */
+					search(account, result, month_number, year, 10000,
+						   date_format, export_filename, field_separator,
+						   kml_filename, column_separator);
+				}
+				else {
+					/* yearly search */
+					search_grouped(account, result, year, 10000, date_format,
+								   export_filename, field_separator,
+								   image_filename, column_separator, 0);
+				}
 			}
 			else {
-				search_monthly(account, result, year, 10000, date_format,
+				/* monthly search */
+				search_grouped(account, result, year, 10000, date_format,
 							   export_filename, field_separator,
-							   image_filename, column_separator);
+							   image_filename, column_separator, 1);
 			}
 		}
 	}
