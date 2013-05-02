@@ -8,11 +8,38 @@ Installation
 
 The easiest way to install is via a pre-compiled package.  You can also compile from source as follows:
 
+on Debian, Ubuntu or Linux Mint:
+
+    sudo apt-get install build-essential
     sudo apt-get install libsqlite3-dev bcrypt gnuplot
     make
     sudo make install
 
+or on Fedora:
+
+    sudo yum groupinstall "Development Tools"
+    sudo yum install rpmdevtools sqlite-devel bcrypt gnuplot
+    make
+    sudo make install
+
+or on OpenSUSE:
+
+    sudo zypper install -t pattern devel
+    sudo zypper install sqlite3-devel gnuplot
+    make
+    sudo make install
+    
 You will need to have the sqlite3 development package installed to be able to compile, and to get the full functionality you'll also need to have gnuplot and bcrypt installed.
+
+If bcrypt is unavailable as an installable package on your system:
+
+    mkdir ~/develop
+    cd ~/develop
+    wget http://bcrypt.sourceforge.net/bcrypt-1.1.tar.gz
+    tar xvzf bcrypt-1.1.tar.gz
+    cd bcrypt-1.1
+    make
+    sudo make install
 
 
 Language

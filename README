@@ -6,13 +6,46 @@ Keeping track of personal finances is an incredibly boring task, and if you don'
 
 The easiest way to install is via a pre-compiled package.  You can also compile from source as follows:
 
+on Debian, Ubuntu or Linux Mint:
+
 #+BEGIN_SRC sh
+    sudo apt-get install build-essential
     sudo apt-get install libsqlite3-dev bcrypt gnuplot
     make
     sudo make install
 #+END_SRC
 
+or on Fedora:
+
+#+BEGIN_SRC sh
+    sudo yum groupinstall "Development Tools"
+    sudo yum install rpmdevtools sqlite-devel bcrypt gnuplot
+    make
+    sudo make install
+#+END_SRC
+
+or on OpenSUSE:
+
+#+BEGIN_SRC sh
+    sudo zypper install -t pattern devel
+    sudo zypper install sqlite3-devel gnuplot
+    make
+    sudo make install
+#+END_SRC
+
 You will need to have the sqlite3 development package installed to be able to compile, and to get the full functionality you'll also need to have gnuplot and bcrypt installed.
+
+If bcrypt is unavailable as an installable package on your system:
+
+#+BEGIN_SRC sh
+    mkdir ~/develop
+    cd ~/develop
+    wget http://bcrypt.sourceforge.net/bcrypt-1.1.tar.gz
+    tar xvzf bcrypt-1.1.tar.gz
+    cd bcrypt-1.1
+    make
+    sudo make install
+#+END_SRC
 
 
 * _Language_
