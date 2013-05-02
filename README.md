@@ -185,9 +185,9 @@ As an alternative to "find" you can also use the word "search".
 
 You can also aggregate figures on a monthly or yearly basis basis:
 
-  fin find "*groceries*" monthly
-  fin find "*fuel*" monthly year 2012
-  fin search "*supermarket*" yearly
+    fin find "*groceries*" monthly
+    fin find "*fuel*" monthly year 2012
+    fin search "*supermarket*" yearly
 
 
 Deleting transactions
