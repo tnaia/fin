@@ -1,7 +1,7 @@
 #!/bin/bash
 
 APP=fin
-VERSION=1.50
+VERSION=1.51
 ARCH_TYPE=`uname -m`
 
 if [ $ARCH_TYPE == "x86_64" ]; then

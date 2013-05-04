@@ -19,7 +19,7 @@
 #ifndef GLOBALS_H
 #define GLOBALS_H
 
-#define VERSION_NUMBER                 1.50
+#define VERSION_NUMBER                 1.51
 
 #define MAX_CURRENCIES                 11
 

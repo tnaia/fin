@@ -1,5 +1,5 @@
 APP=fin
-VERSION=1.50
+VERSION=1.51
 SOURCEDIR=.
 ARCH_TYPE=`uname -m`
 

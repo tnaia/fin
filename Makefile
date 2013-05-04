@@ -1,5 +1,5 @@
 APP=fin
-VERSION=1.50
+VERSION=1.51
 
 all:
 	gcc -Wall -ansi -pedantic -O3 -o $(APP) src/*.c -Isrc -lsqlite3

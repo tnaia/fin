@@ -1,3 +1,15 @@
+fin (1.51-1) stable; urgency=medium
+
+  * Compile instructions in README and manpage for OpenSUSE and bcrypt
+
+  * Monthly and yearly totals when searching
+
+  * Colour changes for better readability
+
+  * Summary of accounts
+
+ -- Bob Mottram (4096 bits) <bob@sluggish.dyndns.org>  Sat, 04 May 2013 18:32:00 +0100
+
 fin (1.50-1) stable; urgency=medium
 
   * Adjustments description spans multiple lines

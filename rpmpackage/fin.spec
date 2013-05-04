@@ -8,7 +8,7 @@
 
 Summary: A commandline personal finances manager
 Name: fin
-Version: 1.50
+Version: 1.51
 Release: 1
 License: GPL3
 Group: Utils
