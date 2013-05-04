@@ -21,6 +21,8 @@
 
 #define VERSION_NUMBER                 1.50
 
+#define MAX_CURRENCIES                 11
+
 #define MAX_ARGS                       32
 #define FIELD_WIDTH                    256
 

@@ -38,6 +38,7 @@
 #include "lock.h"
 #include "piechart.h"
 #include "narrator.h"
+#include "accounts.h"
 #include "help.h"
 
 int main(int argc, char* argv[])
@@ -129,7 +130,7 @@ int main(int argc, char* argv[])
 		settings_set_date_format(get_text_from_identifier(SETTINGS_DEFAULT_DATE_FORMAT));
 		settings_save((char*)fin_directory);
 	}
-
+	
 	if (settings_load((char*)fin_directory)!=0) {
 		account = settings_get_account();
 		currency = settings_get_currency();
@@ -361,6 +362,13 @@ int main(int argc, char* argv[])
 	backup_filename =
 		get_backup(no_of_fields, (char*)fieldname, (char*)value);
 
+
+	/* summary of all accounts */
+	if (get_summary(no_of_fields, (char*)fieldname, (char*)value)!=0) {
+		summary_of_accounts(stdout, fin_directory, currency,
+							year, column_separator);
+		return 1;
+	}
 
 	/* restore */
 	restore_filename =

@@ -54,6 +54,7 @@ int get_field_value_from_identifier(int identifier,
 char * get_field(int identifier, int no_of_fields,
 				 char* fieldname, char* value);
 
+char * get_summary(int no_of_fields, char* fieldname, char* value);
 char * get_account_name(int no_of_fields, char* fieldname, char* value);
 char * get_invoice_number(int no_of_fields, char* fieldname, char* value);
 char * get_sale_number(int no_of_fields, char* fieldname, char* value);

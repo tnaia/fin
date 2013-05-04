@@ -722,7 +722,7 @@ int get_balance(
 			((char*)&total_spent[row])[0]=0;
 			((char*)&total_received[row])[0]=0;
 			((char*)&balance[row])[0]=0;
-			if (row>=9) break;
+			if (row>=MAX_CURRENCIES-1) break;
 		}
 		else if(retval == SQLITE_DONE) {
 			break;

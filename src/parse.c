@@ -102,6 +102,11 @@ int is_boolean_parameter(char * word, char * value)
 {
 	int is_boolean = 0;
 
+	if ((strcmp(word,get_text_from_identifier(SUMMARY))==0) ||
+		(strcmp(word,get_text_from_identifier(ACCOUNTS))==0)) {
+		return 1;
+	}
+
 	if (strcmp(word,get_text_from_identifier(PIECHART))==0) {
 		if ((strstr(value,".png")==0) &&
 			(strstr(value,".jpg")==0) &&
@@ -255,6 +260,11 @@ char * get_field(int identifier, int no_of_fields,
 	}
 	to_lower(result);
 	return result;
+}
+
+char * get_summary(int no_of_fields, char* fieldname, char* value)
+{
+	return get_field(SUMMARY, no_of_fields, fieldname, value);
 }
 
 char * get_account_name(int no_of_fields, char* fieldname, char* value)

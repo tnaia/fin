@@ -397,10 +397,10 @@ int show_recent_transactions(char * account, int no_of_transactions,
 int show_summary_balance(char * account)
 {
 	int i,retval = 1;
-	char total_spend[11][30];
-	char total_receive[11][30];
-	char total_balance[11][30];
-	char currency[11][30];
+	char total_spend[MAX_CURRENCIES][30];
+	char total_receive[MAX_CURRENCIES][30];
+	char total_balance[MAX_CURRENCIES][30];
+	char currency[MAX_CURRENCIES][30];
 
 	if (strlen(account)==0) {
 		settings_set_account(get_text_from_identifier(SETTINGS_DEFAULT_CURRENT_ACCOUNT));
@@ -415,7 +415,7 @@ int show_summary_balance(char * account)
 						 (char**)total_receive,(char**)total_balance);
 	if (retval!=0) {
 		i=0;
-		while (i<10) {
+		while (i<MAX_CURRENCIES) {
 			if (atof((char*)&total_spend[i]) +
 				atof((char*)&total_receive[i]) == 0) {
 				break;
@@ -435,10 +435,10 @@ int show_summary(char * account, int no_of_transactions,
 				 char column_separator)
 {
 	int i,retval = 1;
-	char total_spend[11][30];
-	char total_receive[11][30];
-	char total_balance[11][30];
-	char currency[11][30];
+	char total_spend[MAX_CURRENCIES][30];
+	char total_receive[MAX_CURRENCIES][30];
+	char total_balance[MAX_CURRENCIES][30];
+	char currency[MAX_CURRENCIES][30];
 	char str[100],str2[100];
 
 	if (strlen(account)==0) {
@@ -452,7 +452,7 @@ int show_summary(char * account, int no_of_transactions,
 
 	retval = get_balance(account,(char**)currency,(char**)total_spend,
 						 (char**)total_receive,(char**)total_balance);
-	if (retval!=0) {
+	if (retval != 0) {
 
 		if (atof(((char*)&total_receive[0])) +
 			atof(((char*)&total_spend[0]))==0.0) {
@@ -460,19 +460,19 @@ int show_summary(char * account, int no_of_transactions,
 			return 0;
 		}
 
-		if (column_separator==' ') {
-			sprintf((char*)str,"%s\n",
+		if (column_separator == ' ') {
+			sprintf((char*)str, "%s\n",
 					get_text_from_identifier(TITLE_ACCOUNT_SUMMARY));
 		}
 		else {
-			sprintf((char*)str,"* %s\n",
+			sprintf((char*)str, "* %s\n",
 					get_text_from_identifier(TITLE_ACCOUNT_SUMMARY));
 		}
-		sprintf((char*)str2,str,account);
+		sprintf((char*)str2, str, account);
 		str2[0] = toupper(str2[0]);
-		printf("%s",(char*)str2);
-		if (column_separator==' ') {
-			for (i=0;i<80;i++) {
+		printf("%s", (char*)str2);
+		if (column_separator == ' ') {
+			for (i = 0; i < MAX_ROW_LENGTH; i++) {
 				printf("-");
 			}
 		}
@@ -480,14 +480,14 @@ int show_summary(char * account, int no_of_transactions,
       
 		retval = show_recent_transactions(account, no_of_transactions, column_separator);
 
-		if (column_separator==' ') {
-			for (i=0;i<80;i++) {
+		if (column_separator == ' ') {
+			for (i = 0; i < MAX_ROW_LENGTH; i++) {
 				printf("-");
 			}
 		}
 		printf("\n");
 
-		if (retval!=0) {
+		if (retval != 0) {
 			retval = show_summary_totals(account);
 		}
 	}
@@ -587,7 +587,7 @@ int show_recent_adjustments(char * account, int no_of_transactions,
 	if (column_separator!=' ') {
 		printf("%c",column_separator);
 	}
-	for (i=0;i<MAX_ROW_LENGTH;i++) {
+	for (i = 0; i < MAX_ROW_LENGTH; i++) {
 		if ((column_separator==' ') ||
 			((i!=1) && (i!=13) && (i!=23) && (i!=33) && (i!=start_column))) {
 			printf("-");

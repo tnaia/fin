@@ -189,7 +189,6 @@ You can also aggregate figures on a monthly or yearly basis basis:
     fin find "*fuel*" monthly year 2012
     fin search "*supermarket*" yearly
 
-
 Deleting transactions
 =====================
 

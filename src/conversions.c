@@ -121,52 +121,52 @@ void pad_value(char * value, char * padded,
 	int i,decimal_point=-1,zeros,leading;
 	char temp[32];
 
-	if (value==0) return;
+	if (value == 0) return;
 
-	sprintf(temp,"%s",value);
+	sprintf(temp,"%s", value);
 
-	for (i=0;i<strlen(value);i++) {
-		if (value[i]=='.') {
+	for (i = 0; i < strlen(value); i++) {
+		if (value[i] == '.') {
 			decimal_point = i;
 		}
 	}
-	if (decimal_point==-1) {
-		for (i=0;i<strlen(value);i++) {
-			if (value[i]==',') {
+	if (decimal_point == -1) {
+		for (i = 0; i < strlen(value); i++) {
+			if (value[i] == ',') {
 				decimal_point = i;
 			}
 		}
 	}
 
-	if (decimal_point>-1) {
+	if (decimal_point > -1) {
 		zeros = trailing_zeros+1 - (strlen(value) - decimal_point);
-		if (zeros<0) {
-			temp[strlen(value)+zeros] = 0;
+		if (zeros < 0) {
+			temp[strlen(value) + zeros] = 0;
 		}
-		for (i=0;i<zeros;i++) {
-			temp[strlen(value)+i] = '0';
+		for (i = 0; i < zeros; i++) {
+			temp[strlen(value) + i] = '0';
 		}
-		temp[strlen(value)+i] = 0;
+		temp[strlen(value) + i] = 0;
 	}
 	else {
-		temp[strlen(value)]='.';
-		for (i=0;i<trailing_zeros;i++) {
-			temp[strlen(value)+i+1]='0';
+		temp[strlen(value)] = '.';
+		for (i = 0; i < trailing_zeros; i++) {
+			temp[strlen(value) + i + 1]='0';
 		}
-		temp[strlen(value)+i+1]=0;
+		temp[strlen(value) + i + 1]=0;
 	}
 
-	if (decimal_point==-1) {
+	if (decimal_point == -1) {
 		decimal_point = strlen(value);
 	}
 	leading = leading_spaces - decimal_point - 1;
-	for (i=0;i<leading;i++) {
-		padded[i]=' ';
+	for (i = 0; i < leading; i++) {
+		padded[i] = ' ';
 	}
-	for (i=0;i<strlen(temp);i++) {
-		padded[leading+i] = temp[i];
+	for (i = 0; i < strlen(temp); i++) {
+		padded[leading + i] = temp[i];
 	}
-	padded[leading+i]=0;
+	padded[leading + i] = 0;
 }
 
 /* convert a time string into a standard form */

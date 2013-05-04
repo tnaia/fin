@@ -397,6 +397,10 @@ char * international_text9[] = {
 	"Restored from %s\n","Restored from %s\n","",      "",      "",       "",       "",     "",      "",     "",    "",
 	"No restore filename specified\n","No restore filename specified\n","",      "",      "",       "",       "",     "",      "",     "",    "",
 	"File %s not found\n","File %s not found\n","",      "",      "",       "",       "",     "",      "",     "",    "",
+
+	"summary",          "summary",           "",      "",      "",       "",       "",     "",      "",     "",    "",
+	"accounts",         "accounts",          "",      "",      "",       "",       "",     "",      "",     "",    "",
+
 	"emacs",            "emacs",             "",      "",      "",       "",       "",     "",      "",     "",    "",
 	"org",              "org",               "",      "",      "",       "",       "",     "",      "",     "",    "",
 	"org-mode",         "org-mode",          "",      "",      "",       "",       "",     "",      "",     "",    ""
