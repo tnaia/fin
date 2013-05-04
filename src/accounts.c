@@ -211,9 +211,9 @@ void summary_of_accounts(FILE * fp, char * directory,
 
 	/* total */
 	if (column_separator == '|') {
-		fprintf(fp,"%c", column_separator);
+		fprintf(fp,"%c ", column_separator);
 	}
-	for (i = 0;
+	for (i = 1;
 		 i < max_account_name_length+2; i++) {
 		fprintf(fp, "%c", ' ');
 	}
