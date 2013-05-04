@@ -55,6 +55,7 @@ void summary_of_accounts(FILE * fp, char * directory,
 	char filename[STRING_BLOCK];
 	char account[STRING_BLOCK];
 	char balance_str[STRING_BLOCK];
+	char value_format_str[STRING_BLOCK];
 	double balance, abstotal = 0, total = 0;
 	int i, max_account_name_length = 1;
 
@@ -101,7 +102,8 @@ void summary_of_accounts(FILE * fp, char * directory,
 					fprintf(fp, "%c", ' ');
 				}
 				fprintf(fp,"%c ", column_separator);
-				sprintf(balance_str, "%.2f", balance);
+				sprintf(value_format_str,"%%.%df", TRAILING_ZEROS);
+				sprintf(balance_str, value_format_str, balance);
 				for (i = strlen(balance_str)-TRAILING_ZEROS-1;
 					 i < LEADING_SPACES; i++) {
 					fprintf(fp,"%c", ' ');
