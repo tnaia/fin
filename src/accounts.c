@@ -93,6 +93,16 @@ void summary_of_accounts(FILE * fp, char * directory,
 				total += balance;
 				abstotal += fabs(balance);
 
+#ifdef USE_COLOURS
+				if (column_separator == ' ') {
+					if (balance >= 0) {
+						printf("%s",COLOUR_POSITIVE);
+					}
+					else {
+						printf("%s",COLOUR_NEGATIVE);
+					}
+				}
+#endif				
 				if (column_separator == '|') {
 					fprintf(fp,"%c", column_separator);
 				}
@@ -112,6 +122,12 @@ void summary_of_accounts(FILE * fp, char * directory,
 				if (column_separator == '|') {
 					fprintf(fp, " %c", column_separator);
 				}
+
+#ifdef USE_COLOURS
+				if (column_separator == ' ') {
+					printf("%s",NORMAL);
+				}
+#endif
 				fprintf(fp,"%s","\n");
 			}
 		}
@@ -134,6 +150,17 @@ void summary_of_accounts(FILE * fp, char * directory,
 		fprintf(fp,"%s", "\n");
 	}
 
+#ifdef USE_COLOURS
+	if (column_separator == ' ') {
+		if (total >= 0) {
+			printf("%s",COLOUR_POSITIVE);
+		}
+		else {
+			printf("%s",COLOUR_NEGATIVE);
+		}
+	}
+#endif				
+
 	/* total */
 	if (column_separator == '|') {
 		fprintf(fp,"%c", column_separator);
@@ -152,5 +179,10 @@ void summary_of_accounts(FILE * fp, char * directory,
 	if (column_separator == '|') {
 		fprintf(fp, " %c", column_separator);
 	}
+#ifdef USE_COLOURS
+	if (column_separator == ' ') {
+		printf("%s",NORMAL);
+	}
+#endif
 	fprintf(fp,"%s","\n");
 }
