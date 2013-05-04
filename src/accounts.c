@@ -73,6 +73,41 @@ void summary_of_accounts(FILE * fp, char * directory,
 		closedir(dir);
 	}
 
+	/* org mode header */
+	if (column_separator == '|') {
+		fprintf(fp, "%c", '|');
+		sprintf((char*)balance_str, "%s",
+				get_text_from_identifier(ACCOUNT));
+		fprintf(fp, "%s", balance_str);
+
+		for (i = strlen(balance_str);
+			 i < max_account_name_length+1; i++) {
+			fprintf(fp, "%c", ' ');
+		}
+		fprintf(fp, "%c", '|');
+		sprintf((char*)balance_str, "%s",
+				get_text_from_identifier(BALANCE));
+		for (i = strlen(balance_str);
+			 i < TRAILING_ZEROS+LEADING_SPACES+2; i++) {
+			fprintf(fp, "%c", ' ');
+		}
+		fprintf(fp, "%s", balance_str);
+		fprintf(fp, "%s", " |\n");
+
+		fprintf(fp, "%c", '|');
+		for (i = 1;
+			 i < max_account_name_length+6+
+				 TRAILING_ZEROS+LEADING_SPACES; i++) {
+			if (i == max_account_name_length+2) {
+				fprintf(fp, "%c", '+');
+			}
+			else {
+				fprintf(fp, "%c", '-');
+			}
+		}
+		fprintf(fp,"%s", "|\n");
+	}
+
     if ((dir = opendir(directory)) != NULL) {
 		while ((ent = readdir(dir)) != NULL) {
 			sprintf(filename,"%s",ent->d_name);
@@ -140,14 +175,27 @@ void summary_of_accounts(FILE * fp, char * directory,
 	/* total line */
 	if (column_separator == ' ') {
 		for (i = 0;
-			 i < max_account_name_length+2; i++) {
+			 i < max_account_name_length+4+
+				 TRAILING_ZEROS+LEADING_SPACES; i++) {
 			fprintf(fp, "%c", '-');
 		}
-		for (i = 0;
-			 i < TRAILING_ZEROS+LEADING_SPACES+2; i++) {
-			fprintf(fp,"%c", '-');
-		}
 		fprintf(fp,"%s", "\n");
+	}
+
+	/* org mode footer */
+	if (column_separator == '|') {
+		fprintf(fp, "%c", '|');
+		for (i = 1;
+			 i < max_account_name_length+6+
+				 TRAILING_ZEROS+LEADING_SPACES; i++) {
+			if (i == max_account_name_length+2) {
+				fprintf(fp, "%c", '+');
+			}
+			else {
+				fprintf(fp, "%c", '-');
+			}
+		}
+		fprintf(fp,"%s", "|\n");
 	}
 
 #ifdef USE_COLOURS
