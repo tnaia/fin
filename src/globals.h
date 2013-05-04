@@ -56,7 +56,7 @@
 #define CYAN    "\x1B[36m"
 #define WHITE   "\x1B[37m"
 
-#define COLOUR_POSITIVE BLUE
+#define COLOUR_POSITIVE GREEN
 #define COLOUR_NEGATIVE CYAN
 
 #define COLOUR_BEFORE GREEN
