@@ -55,7 +55,7 @@ void summary_of_accounts(FILE * fp, char * directory,
 	char filename[STRING_BLOCK];
 	char account[STRING_BLOCK];
 	char balance_str[STRING_BLOCK];
-	double balance, total = 0;
+	double balance, abstotal = 0, total = 0;
 	int i, max_account_name_length = 1;
 
 	/* get the maximum length of the account name */
@@ -90,6 +90,7 @@ void summary_of_accounts(FILE * fp, char * directory,
 
 				/* update the overall total */
 				total += balance;
+				abstotal += fabs(balance);
 
 				if (column_separator == '|') {
 					fprintf(fp,"%c", column_separator);
@@ -114,4 +115,40 @@ void summary_of_accounts(FILE * fp, char * directory,
 		}
 		closedir(dir);
 	}
+
+	/* don't show a total if there isn't any */
+	if (abstotal == 0) return;
+
+	/* total line */
+	if (column_separator == ' ') {
+		for (i = 0;
+			 i < max_account_name_length+2; i++) {
+			fprintf(fp, "%c", '-');
+		}
+		for (i = 0;
+			 i < TRAILING_ZEROS+LEADING_SPACES+2; i++) {
+			fprintf(fp,"%c", '-');
+		}
+		fprintf(fp,"%s", "\n");
+	}
+
+	/* total */
+	if (column_separator == '|') {
+		fprintf(fp,"%c", column_separator);
+	}
+	for (i = 1;
+		 i < max_account_name_length+2; i++) {
+		fprintf(fp, "%c", ' ');
+	}
+	fprintf(fp,"%c ", column_separator);
+	sprintf(balance_str, "%.2f", total);
+	for (i = strlen(balance_str)-TRAILING_ZEROS-1;
+		 i < LEADING_SPACES; i++) {
+		fprintf(fp,"%c", ' ');
+	}
+	fprintf(fp,"%s", balance_str);
+	if (column_separator == '|') {
+		fprintf(fp, " %c", column_separator);
+	}
+	fprintf(fp,"%s","\n");
 }

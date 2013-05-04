@@ -20,6 +20,7 @@
 #define ACCOUNTS_H
 
 #include <stdio.h>
+#include <math.h>
 #include <dirent.h>
 #include <string.h>
 #include "summary.h"
