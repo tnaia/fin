@@ -304,6 +304,24 @@ Or just to send a particular transaction to a particular account:
    fin spend 2.99 on chips account:expenses
 #+END_SRC
 
+You can also produce a summary of all accounts by typing:
+
+#+BEGIN_SRC sh
+  fin summary
+#+END_SRC
+
+or
+
+#+BEGIN_SRC sh
+  fin accounts
+#+END_SRC
+
+This can be combined with a year number if you want to look at differences between the current balances and those in previous years.
+
+#+BEGIN_SRC sh
+  fin summary year 2012
+#+END_SRC
+
 
 * _Transfering between accounts_
 

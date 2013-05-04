@@ -253,6 +253,17 @@ Or just to send a particular transaction to a particular account:
 
     fin spend 2.99 on chips account:expenses
 
+You can also produce a summary of all accounts by typing:
+
+    fin summary
+
+or
+
+    fin accounts
+
+This can be combined with a year number if you want to look at differences between the current balances and those in previous years.
+
+    fin summary year 2012
 
 
 Transfering between accounts
