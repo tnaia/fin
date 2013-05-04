@@ -75,7 +75,7 @@ void summary_of_accounts(FILE * fp, char * directory,
 
 	/* org mode header */
 	if (column_separator == '|') {
-		fprintf(fp, "%c", '|');
+		fprintf(fp, "%s", "| ");
 		sprintf((char*)balance_str, "%s",
 				get_text_from_identifier(ACCOUNT));
 		fprintf(fp, "%s", balance_str);
@@ -95,7 +95,7 @@ void summary_of_accounts(FILE * fp, char * directory,
 		fprintf(fp, "%s", " |\n");
 
 		fprintf(fp, "%c", '|');
-		for (i = 1;
+		for (i = 0;
 			 i < max_account_name_length+6+
 				 TRAILING_ZEROS+LEADING_SPACES; i++) {
 			if (i == max_account_name_length+2) {
@@ -139,7 +139,7 @@ void summary_of_accounts(FILE * fp, char * directory,
 				}
 #endif				
 				if (column_separator == '|') {
-					fprintf(fp,"%c", column_separator);
+					fprintf(fp,"%c ", column_separator);
 				}
 				fprintf(fp,"%s", account);
 				for (i = strlen(account) + 1;
@@ -184,8 +184,8 @@ void summary_of_accounts(FILE * fp, char * directory,
 
 	/* org mode footer */
 	if (column_separator == '|') {
-		fprintf(fp, "%c", '|');
-		for (i = 1;
+		fprintf(fp, "%s", "|");
+		for (i = 0;
 			 i < max_account_name_length+6+
 				 TRAILING_ZEROS+LEADING_SPACES; i++) {
 			if (i == max_account_name_length+2) {
@@ -213,7 +213,7 @@ void summary_of_accounts(FILE * fp, char * directory,
 	if (column_separator == '|') {
 		fprintf(fp,"%c", column_separator);
 	}
-	for (i = 1;
+	for (i = 0;
 		 i < max_account_name_length+2; i++) {
 		fprintf(fp, "%c", ' ');
 	}
