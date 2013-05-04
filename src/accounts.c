@@ -143,7 +143,7 @@ void summary_of_accounts(FILE * fp, char * directory,
 		fprintf(fp, "%c", ' ');
 	}
 	fprintf(fp,"%c ", column_separator);
-	sprintf(balance_str, "%.2f", total);
+	sprintf(balance_str, value_format_str, total);
 	for (i = strlen(balance_str)-TRAILING_ZEROS-1;
 		 i < LEADING_SPACES; i++) {
 		fprintf(fp,"%c", ' ');
