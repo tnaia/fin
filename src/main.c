@@ -365,8 +365,20 @@ int main(int argc, char* argv[])
 
 	/* summary of all accounts */
 	if (get_summary(no_of_fields, (char*)fieldname, (char*)value)!=0) {
-		summary_of_accounts(stdout, fin_directory, currency,
-							year, column_separator);
+		if (strlen(export_filename) > 0) {
+			/* export to a file */
+			FILE * fp = fopen(export_filename,"w");
+			if (fp) {
+				summary_of_accounts(fp, fin_directory, currency,
+									year, field_separator);
+				fclose(fp);
+			}
+		}
+		else {
+			/* show in the console */
+			summary_of_accounts(stdout, fin_directory, currency,
+								year, column_separator);
+		}
 		return 1;
 	}
 
