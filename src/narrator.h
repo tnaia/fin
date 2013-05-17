@@ -1,6 +1,6 @@
 /*
     Fin - a simple personal accounts manager
-    Copyright (C) 2012-2013  Bob Mottram <bob@sluggish.dyndns.org>
+    Copyright (C) 2012-2013  Bob Mottram <bob@robotics.uk.to>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by

@@ -14,7 +14,7 @@ License: GPL3
 Group: Utils
 SOURCE0 : %{name}-%{version}.tar.gz
 URL: https://launchpad.net/fin
-Packager: Bob Mottram <bob@sluggish.dyndns.org>
+Packager: Bob Mottram <bob@robotics.uk.to>
 Requires: sqlite, sqlite-devel, gnuplot, bcrypt
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
@@ -53,6 +53,6 @@ rm -rf %{buildroot}
 %attr(644,root,root) /usr/share/man/man1/fin.1.gz
 
 %changelog
-* Fri Jan 20 2012  Bob Mottram <bob@sluggish.dyndns.org>
+* Fri Jan 20 2012  Bob Mottram <bob@robotics.uk.to>
 - Spec file created
 

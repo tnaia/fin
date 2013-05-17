@@ -8,7 +8,7 @@ fin (1.51-1) stable; urgency=medium
 
   * Summary of accounts
 
- -- Bob Mottram (4096 bits) <bob@sluggish.dyndns.org>  Sat, 04 May 2013 18:32:00 +0100
+ -- Bob Mottram (4096 bits) <bob@robotics.uk.to>  Sat, 04 May 2013 18:32:00 +0100
 
 fin (1.50-1) stable; urgency=medium
 
@@ -24,7 +24,7 @@ fin (1.50-1) stable; urgency=medium
 
   * Transaction volume totals
 
- -- Bob Mottram (4096 bits) <bob@sluggish.dyndns.org>  Sat, 09 Mar 2013 17:47:00 +0100
+ -- Bob Mottram (4096 bits) <bob@robotics.uk.to>  Sat, 09 Mar 2013 17:47:00 +0100
 
 fin (1.41-1) unstable; urgency=low
 
@@ -37,7 +37,7 @@ fin (1.41-1) unstable; urgency=low
 
   * Pie charts can now be plotted
 
- -- Bob Mottram (4096 bits) <bob@sluggish.dyndns.org>  Tue, 09 Oct 2012 18:00:00 +0100
+ -- Bob Mottram (4096 bits) <bob@robotics.uk.to>  Tue, 09 Oct 2012 18:00:00 +0100
 
 fin (1.40-1) unstable; urgency=low
 
@@ -71,4 +71,4 @@ fin (1.40-1) unstable; urgency=low
   * Debian packaging improvements
     Now passes lintian tests
 
- -- Bob Mottram (4096 bits) <bob@sluggish.dyndns.org>  Tue, 02 Oct 2012 20:00:00 +0100
+ -- Bob Mottram (4096 bits) <bob@robotics.uk.to>  Tue, 02 Oct 2012 20:00:00 +0100

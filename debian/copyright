@@ -3,10 +3,10 @@ Upstream-Name: fin
 Source: https://code.launchpad.net/fin
 
 Files: *
-Copyright: 2011-2012 Bob Mottram <bob@sluggish.dyndns.org>
+Copyright: 2011-2012 Bob Mottram <bob@robotics.uk.to>
 
 Files: debian/*
-Copyright: 2012 Bob Mottram <bob@sluggish.dyndns.org>
+Copyright: 2012 Bob Mottram <bob@robotics.uk.to>
 
 License: GPL-3.0+
  This program is free software: you can redistribute it and/or modify
