@@ -8,7 +8,7 @@ debug:
 	gcc -Wall -ansi -pedantic -g -o $(APP) src/*.c -Isrc -lsqlite3
 
 source:
-	tar -cvzf ../$(APP)_$(VERSION).orig.tar.gz ../$(APP)-$(VERSION) --exclude=.git --exclude=.bzr
+	tar -cvzf ../$(APP)_$(VERSION).orig.tar.gz ../$(APP)-$(VERSION) --exclude-vcs
 
 install:
 	cp $(APP) /usr/bin
