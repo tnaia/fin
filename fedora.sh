@@ -1,44 +1,46 @@
 APP=fin
+PREV_VERSION=1.51
 VERSION=1.51
 SOURCEDIR=.
 ARCH_TYPE=`uname -m`
+CURRDIR=`pwd`
+SOURCE=~/rpmbuild/SOURCES/${APP}_${VERSION}.orig.tar.gz
+
+#update version numbers automatically - so you don't have to
+sed -i 's/VERSION='${PREV_VERSION}'/VERSION='${VERSION}'/g' Makefile debian.sh
+sed -i 's/Version: '${PREV_VERSION}'/Version: '${VERSION}'/g' rpmpackage/${APP}.spec
+sed -i 's/"'${PREV_VERSION}'"/"'${VERSION}'"/g' src/globals.h 
 
 sudo yum groupinstall "Development Tools"
-sudo yum install rpmdevtools sqlite-devel bcrypt gnuplot
+sudo yum install rpmdevtools sqlite sqlite-devel bcrypt gnuplot
 
-make
-
-rm -rf ~/rpmbuild
-sudo rm -rf rpmpackage/$APP-$VERSION
+# setup the rpmbuild directory tree
 rpmdev-setuptree
-mkdir rpmpackage/$APP-$VERSION
 
-mkdir rpmpackage/$APP-$VERSION/etc
-mkdir rpmpackage/$APP-$VERSION/etc/$APP
-mkdir rpmpackage/$APP-$VERSION/usr
-mkdir rpmpackage/$APP-$VERSION/usr/bin
-mkdir rpmpackage/$APP-$VERSION/usr/share
-mkdir rpmpackage/$APP-$VERSION/usr/share/man
-mkdir rpmpackage/$APP-$VERSION/usr/share/man/man1
-install -m 755 $APP rpmpackage/$APP-$VERSION/usr/bin
-install -m 755 man/$APP.1.gz rpmpackage/$APP-$VERSION/usr/share/man/man1
+# create the source code in the SOURCES directory
+make clean
+mkdir -p ~/rpmbuild/SOURCES
+rm -f ${SOURCE}
+# having the root directory called name-version seems essential
+mv ../${APP} ../${APP}-${VERSION}
+tar -cvzf ${SOURCE} ../${APP}-${VERSION} --exclude-vcs
+# rename the root directory without the version number
+mv ../${APP}-${VERSION} ../${APP}
 
-cd rpmpackage
-mkdir $APP-$VERSION/etc/$APP
-install -m 644 $APP.conf $APP-$VERSION/etc/$APP/
-tar -zcvf $APP-$VERSION.tar.gz $APP-$VERSION/
+# copy the spec file into the SPECS directory
+cp -f rpmpackage/${APP}.spec ~/rpmbuild/SPECS
 
-rm -rf ~/rpmbuild/BUILD/$APP-$VERSION
-rm ~/rpmbuild/SOURCES/$APP*.*
-cp $APP-$VERSION.tar.gz ~/rpmbuild/SOURCES/
-cp $APP.spec ~/rpmbuild/SPECS/
+# build
+cd ~/rpmbuild/SPECS
+rpmbuild -ba ${APP}.spec
+cd ${CURRDIR}
 
-rpmbuild -ba ~/rpmbuild/SPECS/$APP.spec
-
-sudo rm -rf $APP-$VERSION
-rm $APP-$VERSION.tar.gz
-cp -r ~/rpmbuild/RPMS/* .
+# Copy the results into the rpmpackage directory
+mkdir -p rpmpackage/${ARCH_TYPE}
+cp -r ~/rpmbuild/RPMS/${ARCH_TYPE}/${APP}* rpmpackage/${ARCH_TYPE}
+cp -r ~/rpmbuild/SRPMS/${APP}* rpmpackage
 cd ..
+
 echo ---------------------------------------------------------
 echo RPM files can be found in the rpmpackage directory
 echo under architecture subdirectories.
