@@ -10,7 +10,7 @@ Vcs-Git: https://github.com/fuzzgun/fin.git
 
 Package: fin
 Architecture: any
-Depends: ${shlibs:Depends}, gnuplot, bcrypt, libsqlite3-0
+Depends: ${shlibs:Depends}, gnuplot, bcrypt, sqlite3
 Description: Command line personal finances manager
  Keeping track of personal finances is an incredibly boring task, and if
  you don't have much money then juggling it can be tricky.  When looking
