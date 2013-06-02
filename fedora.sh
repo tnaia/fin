@@ -39,7 +39,6 @@ cd ${CURRDIR}
 mkdir -p rpmpackage/${ARCH_TYPE}
 cp -r ~/rpmbuild/RPMS/${ARCH_TYPE}/${APP}* rpmpackage/${ARCH_TYPE}
 cp -r ~/rpmbuild/SRPMS/${APP}* rpmpackage
-cd ..
 
 echo ---------------------------------------------------------
 echo RPM files can be found in the rpmpackage directory
