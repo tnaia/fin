@@ -4,7 +4,13 @@ Keeping track of personal finances is an incredibly boring task, and if you don'
 
 * _Installation_
 
-The easiest way to install is via a pre-compiled package.  You can also compile from source as follows:
+The easiest way to install is via a pre-compiled package.  Repositories containing packages for a variety of distros can be found at:
+
+#+BEGIN_SRC sh
+    http://download.opensuse.org/repositories/home:/motters:/fin/
+#+END_SRC
+
+You can also compile from source as follows:
 
 on Debian, Ubuntu or Linux Mint:
 
