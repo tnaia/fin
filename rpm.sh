@@ -1,3 +1,5 @@
+#!/bin/bash
+
 APP=fin
 PREV_VERSION=1.51
 VERSION=1.51

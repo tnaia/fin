@@ -14,7 +14,7 @@ if [ $ARCH_TYPE == "i686" ]; then
 fi
 
 #update version numbers automatically - so you don't have to
-sed -i 's/VERSION='${PREV_VERSION}'/VERSION='${VERSION}'/g' Makefile fedora.sh
+sed -i 's/VERSION='${PREV_VERSION}'/VERSION='${VERSION}'/g' Makefile rpm.sh
 sed -i 's/Version: '${PREV_VERSION}'/Version: '${VERSION}'/g' rpmpackage/${APP}.spec
 sed -i 's/"'${PREV_VERSION}'"/"'${VERSION}'"/g' src/globals.h 
 

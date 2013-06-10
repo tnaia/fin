@@ -1,7 +1,7 @@
 Source: fin
 Section: contrib/utils
 Priority: extra
-Maintainer: Bob Mottram <bob@robotics.uk.to>
+Maintainer: Bob Mottram (4096 bits) <bob@robotics.uk.to>
 Build-Depends: debhelper (>= 9.0.0), libsqlite3-dev
 Standards-Version: 3.9.4
 Homepage: https://launchpad.net/fin
@@ -10,7 +10,7 @@ Vcs-Git: https://github.com/fuzzgun/fin.git
 
 Package: fin
 Architecture: any
-Depends: ${shlibs:Depends}, gnuplot, bcrypt, sqlite3
+Depends: ${shlibs:Depends}, ${misc:Depends}, gnuplot, bcrypt, sqlite3
 Description: Command line personal finances manager
  Keeping track of personal finances is an incredibly boring task, and if
  you don't have much money then juggling it can be tricky.  When looking

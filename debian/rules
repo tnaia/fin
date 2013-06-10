@@ -14,6 +14,8 @@ LDFLAGS:=$(shell dpkg-buildflags --get LDFLAGS)
 build: build-stamp
 	gcc -Wall -ansi -pedantic -O3 $(CFLAGS) $(LDFLAGS) $(CPPFLAGS) $(CXXFLAGS) -o $(APP) src/*.c -Isrc -lsqlite3
 
+build-arch: build-stamp
+build-indep: build-stamp
 build-stamp:
 		dh_testdir
 		touch build-stamp
