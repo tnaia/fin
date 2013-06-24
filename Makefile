@@ -12,13 +12,16 @@ source:
 	tar -cvzf ../$(APP)_$(VERSION).orig.tar.gz ../$(APP)-$(VERSION) --exclude-vcs
 
 install:
-	cp $(APP) $(DESTDIR)/usr/bin
-	cp man/$(APP).1.gz $(DESTDIR)/usr/share/man/man1
-	chmod 755 $(DESTDIR)/usr/bin/$(APP)
-	chmod 644 $(DESTDIR)/usr/share/man/man1/$(APP).1.gz
+	mkdir -p $(DESTDIR)/usr
+	mkdir -p $(DESTDIR)/usr/bin
+	mkdir -p $(DESTDIR)/usr/share
+	mkdir -p $(DESTDIR)/usr/share/man
+	mkdir -p $(DESTDIR)/usr/share/man/man1
+	install -m 755 $(APP) $(DESTDIR)/usr/bin
+	install -m 644 man/$(APP).1.gz $(DESTDIR)/usr/share/man/man1
 
 clean:
 	rm -f $(APP) \#* \.#* gnuplot* *.png debian/*.substvars debian/*.log
 	rm -rf deb.* debian/$(APP) rpmpackage/$(ARCH_TYPE)
 	rm -f ../$(APP)*.deb ../$(APP)*.changes ../$(APP)*.asc ../$(APP)*.dsc
-	rm -f rpmpackage/*.src.rpm
+	rm -f rpmpackage/*.src.rpm archpackage/*.gz
