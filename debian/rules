@@ -22,11 +22,7 @@ install: build clean $(application)
 		 dh_testroot
 		 dh_prep
 		 dh_installdirs
-		 mkdir -m 755 -p $(CURDIR)/debian/$(APP)/usr/bin
-		 mkdir -m 755 -p $(CURDIR)/debian/$(APP)/usr/share
-		 mkdir -m 755 -p $(CURDIR)/debian/$(APP)/usr/share/man
-		 mkdir -m 755 -p $(CURDIR)/debian/$(APP)/usr/share/man/man1
-		 install -m 755 --strip $(APP) $(DESTDIR)/usr/bin
+		 ${MAKE} install -B DESTDIR=$(CURDIR)/debian/$(APP)
 binary-indep: build install
 			  dh_shlibdeps
 			  dh_testdir
