@@ -1,13 +1,13 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: fin
-Source: https://github.com/fuzzgun/fin
+Upstream-Name: 
+Source: 
 
 Files: *
-Copyright: 2011-2012 Bob Mottram <bob@robotics.uk.to>
+Copyright: Copyright 2013 Bob Mottram (4096 bits) <bob@robotics.uk.to>
 License: GPL-3.0+
 
 Files: debian/*
-Copyright: 2012 Bob Mottram <bob@robotics.uk.to>
+Copyright: Copyright 2013 Bob Mottram (4096 bits) <bob@robotics.uk.to>
 License: GPL-3.0+
 
 License: GPL-3.0+

@@ -1,11 +1,10 @@
 Source: fin
-Section: contrib/utils
+Section: utils
 Priority: extra
 Maintainer: Bob Mottram (4096 bits) <bob@robotics.uk.to>
 Build-Depends: debhelper (>= 9.0.0), libsqlite3-dev
 Standards-Version: 3.9.4
-Homepage: https://launchpad.net/fin
-Vcs-Browser: https://github.com/fuzzgun/fin
+Homepage: https://github.com/fuzzgun/fin
 Vcs-Git: https://github.com/fuzzgun/fin.git
 
 Package: fin
@@ -13,12 +12,9 @@ Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, gnuplot, bcrypt, sqlite3
 Description: Command line personal finances manager
  Keeping track of personal finances is an incredibly boring task, and if
- you don't have much money then juggling it can be tricky.  When looking
- at the existing software out there to manage accounts it's frequently
- highly complex and top heavy.  Fin - an abbreviation of "financials" -
- is an attempt to do the opposite of what most accounting software does,
- and that's to make things incredibly simple and quick.  Logging a
- transaction or viewing your current balance should take no more than a
- few seconds.  This means less time wasted on bureaucracy and more time
- spent on what you really want to be doing.  Fin can import and export
- to CSV files, Emacs org mode tables and GnuCash.
+ you don't have much money then juggling it can be tricky. When looking at
+ the existing software out there to manage accounts it's frequently highly
+ complex and top heavy. Fin - an abbreviation of "financials" - is an
+ attempt to do the opposite of what most accounting software does, and
+ that's to make things incredibly simple and quick. Logging a transaction
+ or viewing your current balance should take no more than a few sec

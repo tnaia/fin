@@ -1,19 +1,10 @@
 #!/usr/bin/make -f
 
 APP=fin
-
-fin_application = $(CURDIR)/$(APP)
-
-DEST_APP = $(CURDIR)/debian/$(APP)/usr/bin
-
-CPPFLAGS:=$(shell dpkg-buildflags --get CPPFLAGS)
-CFLAGS:=$(shell dpkg-buildflags --get CFLAGS)
-CXXFLAGS:=$(shell dpkg-buildflags --get CXXFLAGS)
-LDFLAGS:=$(shell dpkg-buildflags --get LDFLAGS)
-
+application = $(CURDIR)/$(APP)
+DESTDIR=$(CURDIR)/debian/$(APP)
 build: build-stamp
-	gcc -Wall -ansi -pedantic -O3 $(CFLAGS) $(LDFLAGS) $(CPPFLAGS) $(CXXFLAGS) -o $(APP) src/*.c -Isrc -lsqlite3
-
+	make
 build-arch: build-stamp
 build-indep: build-stamp
 build-stamp:
@@ -26,15 +17,16 @@ clean:
 		rm -f build-stamp
 		dh_clean
 
-install: build clean $(fin_application)
+install: build clean $(application)
 		 dh_testdir
 		 dh_testroot
 		 dh_prep
 		 dh_installdirs
-
-		 mkdir -m 755 -p $(DEST_APP)
-		 install -m 755 --strip $(fin_application) $(DEST_APP)
-
+		 mkdir -m 755 -p $(CURDIR)/debian/$(APP)/usr/bin
+		 mkdir -m 755 -p $(CURDIR)/debian/$(APP)/usr/share
+		 mkdir -m 755 -p $(CURDIR)/debian/$(APP)/usr/share/man
+		 mkdir -m 755 -p $(CURDIR)/debian/$(APP)/usr/share/man/man1
+		 install -m 755 --strip $(APP) $(DESTDIR)/usr/bin
 binary-indep: build install
 			  dh_shlibdeps
 			  dh_testdir
