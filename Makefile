@@ -19,6 +19,6 @@ install:
 	install -m 644 man/${APP}.1.gz ${DESTDIR}/usr/share/man/man1
 clean:
 	rm -f ${APP} \#* \.#* gnuplot* *.png debian/*.substvars debian/*.log
-	rm -fr deb.* debian/$(APP) rpmpackage/${ARCH_TYPE}
+	rm -fr deb.* debian/${APP} rpmpackage/${ARCH_TYPE}
 	rm -f ../${APP}*.deb ../${APP}*.changes ../${APP}*.asc ../${APP}*.dsc
 	rm -f rpmpackage/*.src.rpm archpackage/*.gz puppypackage/*.gz puppypackage/*.pet

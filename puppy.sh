@@ -17,6 +17,7 @@ sed -i 's/pkgver='${PREV_VERSION}'/pkgver='${VERSION}'/g' archpackage/PKGBUILD
 sed -i "s/-${PREV_VERSION}-/-${VERSION}-/g" puppypackage/*.specs
 sed -i "s/|${PREV_VERSION}|/|${VERSION}|/g" puppypackage/*.specs
 sed -i 's/VERSION='${PREV_VERSION}'/VERSION='${VERSION}'/g' puppypackage/pinstall.sh puppypackage/puninstall.sh
+sed -i 's/-'${PREV_VERSION}'.so/-'${VERSION}'.so/g' debian/*.links
 
 
 # Make directories within which the project will be built
