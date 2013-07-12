@@ -23,7 +23,6 @@ install: build clean ${application}
 		 dh_installdirs
 		 ${MAKE} install -B DESTDIR=${CURDIR}/debian/${APP}
 binary-indep: build install
-			  dh_shlibdeps
 			  dh_testdir
 			  dh_testroot
 			  dh_installchangelogs

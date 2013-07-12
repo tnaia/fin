@@ -17,8 +17,13 @@ install:
 	mkdir -m 755 -p ${DESTDIR}/usr/share/man
 	mkdir -m 755 -p ${DESTDIR}/usr/share/man/man1
 	install -m 644 man/${APP}.1.gz ${DESTDIR}/usr/share/man/man1
+uninstall:
+	rm -f /usr/share/man/man1/${APP}.1.gz
+	rm -rf /usr/share/${APP}
+	rm -f /usr/bin/${APP}
 clean:
 	rm -f ${APP} \#* \.#* gnuplot* *.png debian/*.substvars debian/*.log
 	rm -fr deb.* debian/${APP} rpmpackage/${ARCH_TYPE}
 	rm -f ../${APP}*.deb ../${APP}*.changes ../${APP}*.asc ../${APP}*.dsc
-	rm -f rpmpackage/*.src.rpm archpackage/*.gz puppypackage/*.gz puppypackage/*.pet
+	rm -f rpmpackage/*.src.rpm archpackage/*.gz archpackage/*.xz
+	rm -f  puppypackage/*.gz puppypackage/*.pet slackpackage/*.txz

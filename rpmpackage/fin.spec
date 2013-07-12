@@ -56,13 +56,13 @@ make install -B DESTDIR=%{buildroot}
 %{_mandir}/man1/*
 
 %changelog
-* Sat, 04 May 2013 Bob Mottram (4096 bits) <bob@robotics.uk.to> 1.51-1
+* Sat May 04 2013 Bob Mottram (4096 bits) <bob@robotics.uk.to> - 1.51-1
 - Compile instructions in README and manpage for OpenSUSE and bcrypt
 - Monthly and yearly totals when searching
 - Colour changes for better readability
 - Summary of accounts
 
-* Sat, 09 Mar 2013 Bob Mottram (4096 bits) <bob@robotics.uk.to> 1.50-1
+* Sat Mar 09 2013 Bob Mottram (4096 bits) <bob@robotics.uk.to> - 1.50-1
 - Adjustments description spans multiple lines
 - Backup and restore commands
 - Bug fix for balance value in monthly listing for a given year
@@ -70,14 +70,14 @@ make install -B DESTDIR=%{buildroot}
 - Removed version control files from source package
 - Transaction volume totals
 
-* Tue, 09 Oct 2012 Bob Mottram (4096 bits) <bob@robotics.uk.to> 1.41-1
+* Tue Oct 09 2012 Bob Mottram (4096 bits) <bob@robotics.uk.to> - 1.41-1
 - Import transactions from GnuCash
 - Edits and deletions
   are recorded in an adjustments table
 - Time of transaction included with date
 - Pie charts can now be plotted
 
-* Tue, 02 Oct 2012 Bob Mottram (4096 bits) <bob@robotics.uk.to> 1.40-1
+* Tue Oct 02 2012 Bob Mottram (4096 bits) <bob@robotics.uk.to> - 1.40-1
 - Improvements to import function
   Data can be exported from Paypal as csv and imported into
   fin with no editing required. Also a bug related to the
