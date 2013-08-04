@@ -126,6 +126,33 @@ By default transactions will be timestamped according to the system time when th
 #+END_SRC
 
 
+* _Colour Themes_
+
+The default colours may not always look very good or be very easy to read within your terminal, depending upon your chosen background  colour.   To make things easier to read a number of colour themes are available.
+
+#+BEGIN_SRC sh
+   fin theme normal
+#+END_SRC
+
+or
+
+#+BEGIN_SRC sh
+   fin theme default
+#+END_SRC
+
+Doesn't use any colours and so the text will appear in whatever foreground colour is used by default within your terminal.  Other themes are:
+
+#+BEGIN_SRC sh
+   fin theme dark
+   fin theme light
+   fin theme green
+   fin theme green
+   fin theme black
+   fin theme white
+   fin theme blue
+#+END_SRC
+
+
 * _Brief Status Messages_
 
 It's also possible to produce brief status messages suitable either for including into *.bashrc* files, or for sending to a text-to-speech system.

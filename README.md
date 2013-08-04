@@ -99,6 +99,28 @@ By default transactions will be timestamped according to the system time when th
     fin receive 2.50 from "back of sofa" time 3.45pm
 
 
+Colour Themes
+=============
+
+The default colours may not always look very good or be very easy to read within your terminal, depending upon your chosen background  colour.   To make things easier to read a number of colour themes are available.
+
+    fin theme normal
+
+or
+
+    fin theme default
+
+Doesn't use any colours and so the text will appear in whatever foreground colour is used by default within your terminal.  Other themes are:
+
+    fin theme dark
+    fin theme light
+    fin theme green
+    fin theme green
+    fin theme black
+    fin theme white
+    fin theme blue
+
+
 Brief Status Messages
 =====================
 
