@@ -388,7 +388,7 @@ int database_save_transaction(
 {
 	int retval;
 	char database_filename[STRING_BLOCK];
-	char query[STRING_BLOCK*2];
+	char query[STRING_BLOCK_LONG];
 	char lat[32],lng[32],alt[32];
 	char transaction_identifier[STRING_BLOCK];
 	char curr[STRING_BLOCK],date_str[STRING_BLOCK];
@@ -524,7 +524,7 @@ int database_save_adjustment(
 {
 	int retval;
 	char database_filename[STRING_BLOCK];
-	char query[STRING_BLOCK*2];
+	char query[STRING_BLOCK_LONG];
 	char lat[32],lng[32],alt[32];
 	char curr[STRING_BLOCK];
 	char datetime[STRING_BLOCK];
@@ -831,7 +831,7 @@ int database_edit_record(
 {
 	int retval,tries,max_tries=4;
 	char database_filename[STRING_BLOCK];
-	char query[STRING_BLOCK];
+	char query[STRING_BLOCK_LONG];
 	char transaction_identifier[STRING_BLOCK];
 	char current_datetime[STRING_BLOCK];
 	char datetime[STRING_BLOCK];
@@ -948,7 +948,7 @@ int database_delete_record(char * account, int record_number)
 {
 	int retval,tries,max_tries=4;
 	char database_filename[STRING_BLOCK];
-	char query[STRING_BLOCK];
+	char query[STRING_BLOCK_LONG];
 	char transaction_identifier[STRING_BLOCK];
 
 	/* Create a handle for database connection,
@@ -1071,7 +1071,7 @@ int database_get_record(
 {
 	int retval,col,cols;
 	char database_filename[STRING_BLOCK];
-	char query[STRING_BLOCK];
+	char query[STRING_BLOCK_LONG];
 	sqlite3_stmt *stmt;
 	sqlite3 *handle;
 
@@ -1233,7 +1233,7 @@ int database_transaction_exists(
 {
 	int retval,exists=0;
 	char database_filename[STRING_BLOCK];
-	char query[STRING_BLOCK];
+	char query[STRING_BLOCK_LONG];
 	char datetime[STRING_BLOCK];
 
 	/* A prepered statement for fetching tables */
@@ -1312,7 +1312,7 @@ int get_annual_cashflow(char * account, char * currency,
 {
 	int retval,col,cols,row;
 	char database_filename[STRING_BLOCK];
-	char query[STRING_BLOCK*2];
+	char query[STRING_BLOCK_LONG];
 	sqlite3_stmt *stmt;
 	sqlite3 *handle;
 
@@ -1403,7 +1403,7 @@ int get_distribution(char * account, char * currency,
 {
 	int retval,index;
 	char database_filename[STRING_BLOCK];
-	char query[STRING_BLOCK*2],search_sql[STRING_BLOCK*2];
+	char query[STRING_BLOCK_LONG],search_sql[STRING_BLOCK*10];
 	sqlite3_stmt *stmt;
 	sqlite3 *handle;
 	int	perform_search = 0;
@@ -1548,7 +1548,7 @@ int get_month_totals(char * account, char * currency,
 {
 	int retval;
 	char database_filename[STRING_BLOCK];
-	char query[STRING_BLOCK*2];
+	char query[STRING_BLOCK_LONG];
 	sqlite3_stmt *stmt;
 	sqlite3 *handle;
 	int total_transactions = 0;
@@ -1638,7 +1638,7 @@ int transaction_volume(char * account, char * currency, int year,
 	int width_columns = 22;
 	int separator_column = 11;
 	char database_filename[STRING_BLOCK];
-	char query[STRING_BLOCK*2], search_sql[STRING_BLOCK*2];
+	char query[STRING_BLOCK_LONG], search_sql[STRING_BLOCK_LONG];
 	sqlite3_stmt *stmt;
 	sqlite3 *handle;
 	FILE * fp_export=NULL;
@@ -1970,7 +1970,7 @@ int get_totals(char * account, char * search_string,
 {
 	int retval, col, cols;
 	char database_filename[STRING_BLOCK];
-	char query[STRING_BLOCK];
+	char query[STRING_BLOCK_LONG];
 	char fields[STRING_BLOCK];
 	char search_sql[STRING_BLOCK];
 	sqlite3_stmt *stmt;    

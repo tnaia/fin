@@ -22,7 +22,7 @@ double get_current_balance(char * account, char * currency, int year)
 {
 	int retval,col,cols;
 	char database_filename[STRING_BLOCK];
-	char query[STRING_BLOCK];
+	char query[STRING_BLOCK_LONG];
 	double total=0;
 	sqlite3_stmt *stmt;
 	sqlite3 *handle;
@@ -504,8 +504,8 @@ int show_recent_adjustments(char * account, int no_of_transactions,
 	char receive_str[STRING_BLOCK];
 	char spend_str[STRING_BLOCK], date_str[STRING_BLOCK];
 	char search_sql[STRING_BLOCK];
-	char query_base[STRING_BLOCK*2];
-	char query[STRING_BLOCK*2];
+	char query_base[STRING_BLOCK_LONG];
+	char query[STRING_BLOCK_LONG];
 	char * date_format = settings_get_date_format();
 	int start_column=43;
 	sqlite3_stmt *stmt;

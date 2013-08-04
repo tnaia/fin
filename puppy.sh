@@ -27,7 +27,7 @@ mkdir -p ${PROJECTDIR}
 # Build the project
 make clean
 make
-make install -B DESTDIR=${PROJECTDIR}
+make install -B DESTDIR=${PROJECTDIR} PREFIX=/usr
 
 # Create directories specific to puppy
 mkdir ${PROJECTDIR}/usr

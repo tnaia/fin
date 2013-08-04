@@ -19,7 +19,7 @@ install=
 changelog=
 source=($pkgname-$pkgver.tar.gz)
 noextract=()
-md5sums=(8ed9b4ecf003ec7cc1ac75ad709be6f1)
+md5sums=()
 build() {
   cd "$srcdir/$pkgname-$pkgver"
   ./configure --prefix=/usr
@@ -27,5 +27,5 @@ build() {
 }
 package() {
   cd "$srcdir/$pkgname-$pkgver"
-  make DESTDIR="$pkgdir/" install
+  make DESTDIR="$pkgdir/" PREFIX="/usr" install
 }

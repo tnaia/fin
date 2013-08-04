@@ -25,7 +25,7 @@ int search(char * account, char * search_string, int month_number,
 {
 	int retval, col, cols, i;
 	char database_filename[STRING_BLOCK];
-	char query[STRING_BLOCK*2];
+	char query[STRING_BLOCK_LONG];
 	int row=0;
 	char str[STRING_BLOCK],str2[STRING_BLOCK];
 	double total_receive=0,total_spend=0;
@@ -389,7 +389,7 @@ int search_grouped(char * account, char * search_string, int year,
 {
 	int retval, col, cols, i;
 	char database_filename[STRING_BLOCK];
-	char query[STRING_BLOCK*2];
+	char query[STRING_BLOCK_LONG];
 	int row=0;
 	char str[STRING_BLOCK],str2[STRING_BLOCK],titlestr[STRING_BLOCK];
 	double total_receive=0,total_spend=0;

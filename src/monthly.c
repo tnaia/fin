@@ -27,7 +27,7 @@ int show_monthly_summary(char * account, int max_months, int year,
 	int retval,col,cols,row,i;
 	char database_filename[STRING_BLOCK];
 	char receive_str[STRING_BLOCK],str[STRING_BLOCK];
-	char query[STRING_BLOCK];
+	char query[STRING_BLOCK_LONG];
 	double total_receive=0,total_spend=0;
 	char spend_str[STRING_BLOCK];
 	char balance_str[STRING_BLOCK];
