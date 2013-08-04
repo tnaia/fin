@@ -87,6 +87,9 @@ char * international_text1[] = {
 	"usury",      "usury",       "",      "",      "",       "",       "",     "",      "",     "",    "",
 	"apr",        "apr",         "",      "",      "",       "",       "",     "",      "",     "",    "",
 
+	"theme",      "theme",       "",      "",      "",       "",       "",     "",      "",     "",    "",
+	"colours",    "colors",      "",      "",      "",       "",       "",     "",      "",     "",    "",
+
 	"inflation",  "inflation",   "",      "",      "",       "",       "",     "",      "",     "",    "",
 	"inf",        "inf",         "",      "",      "",       "",       "",     "",      "",     "",    "",
 
@@ -238,6 +241,17 @@ char * international_text6[] = {
 	"20",               "0",                 "0",     "0",     "0",      "0",      "0",    "0",     "0",    "0",   "0",
 	"%d/%m/%Y",         "%m/%d/%Y",          "%m/%d/%Y",  "%m/%d/%Y", "%m/%d/%Y", "%m/%d/%Y", "%m/%d/%Y", "%m/%d/%Y", "%m/%d/%Y", "%m/%d/%Y", "%m/%d/%Y",
 
+	"normal",           "normal",            "",      "",      "",       "",       "",     "",      "",     "",    "",
+	"default",          "default",           "",      "",      "",       "",       "",     "",      "",     "",    "",
+	"dark",             "dark",              "",      "",      "",       "",       "",     "",      "",     "",    "",
+	"light",            "light",             "",      "",      "",       "",       "",     "",      "",     "",    "",
+	"green",            "green",             "",      "",      "",       "",       "",     "",      "",     "",    "",
+	"black",            "black",             "",      "",      "",       "",       "",     "",      "",     "",    "",
+	"white",            "white",             "",      "",      "",       "",       "",     "",      "",     "",    "",
+	"blue",             "blue",              "",      "",      "",       "",       "",     "",      "",     "",    "",
+	"Theme set to %s",  "Theme set to %s",   "",      "",      "",       "",       "",     "",      "",     "",    "",
+	"%s is not a known theme",  "%s is not a known theme",   "",      "",      "",       "",       "",     "",      "",     "",    "",
+
 	"cancel",           "cancel",            "",      "",      "",       "",       "",     "",      "",     "",    "",
 	"remove",           "remove",            "",      "",      "",       "",       "",     "",      "",     "",    "",
 	"reverse",          "reverse",           "",      "",      "",       "",       "",     "",      "",     "",    "",
@@ -322,7 +336,8 @@ char * international_text7[] = {
 	"#REF %s #TRANSFER to %s", "#REF %s #TRANSFER to %s", "",      "",      "",       "",       "",     "",      "",     "",    "",
 	"#REF %s #TRANSFER from %s", "#REF %s #TRANSFER from %s", "",      "",      "",       "",       "",     "",      "",     "",    "",
 	"Transferred %s from %s to %s", "Transferred %s from %s to %s", "",      "",      "",       "",       "",     "",      "",     "",    "",
-	"Language",         "Language", "",      "",      "",       "",       "",     "",      "",     "",    "",
+	"Language",         "Language",     "",      "",      "",       "",       "",     "",      "",     "",    "",
+	"Theme",            "Theme",        "",      "",      "",       "",       "",     "",      "",     "",    "",
 	"Language changed to %s", "Language changed to %s", "",      "",      "",       "",       "",     "",      "",     "",    "",
 	"kml",              "kml", "",      "",      "",       "",       "",     "",      "",     "",    "",
 	"Version %.3f",     "Version %.3f", "",      "",      "",       "",       "",     "",      "",     "",    "",

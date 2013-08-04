@@ -752,6 +752,18 @@ char * get_part_number(int no_of_fields, char* fieldname, char* value)
 	}
 }
 
+char * get_theme(int no_of_fields, char* fieldname, char* value)
+{
+	char * result = get_field(THEME, no_of_fields,
+							  fieldname, value);
+	if (result==0) {
+		return (char*)"";
+	}
+	else {
+		return result;
+	}
+}
+
 char * get_sale_number(int no_of_fields, char* fieldname, char* value)
 {
 	char * result = get_field(SALE_NUMBER, no_of_fields,

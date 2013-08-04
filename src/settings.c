@@ -25,6 +25,7 @@ char VATrate[STRING_BLOCK];
 char server[STRING_BLOCK];
 char date_format[STRING_BLOCK];
 char language[STRING_BLOCK];
+char theme[STRING_BLOCK];
 
 int settings_load(char * directory)
 {
@@ -113,6 +114,10 @@ int settings_load(char * directory)
 							   get_text_from_identifier(SETTINGS_LANGUAGE))==0) {
 						sprintf((char*)language,"%s",(char*)value);
 					}
+					if (strcmp((char*)fieldname,
+							   get_text_from_identifier(SETTINGS_THEME))==0) {
+						sprintf((char*)theme,"%s",(char*)value);
+					}
 
 				}
 			}
@@ -163,6 +168,9 @@ void settings_save(char * directory)
 		fprintf(fp,"%s: %s\n",
 				get_text_from_identifier(SETTINGS_LANGUAGE),
 				(char*)language);
+		fprintf(fp,"%s: %s\n",
+				get_text_from_identifier(SETTINGS_THEME),
+				(char*)theme);
 		fclose(fp);
 		settings_loaded=1;
 	}
@@ -234,4 +242,103 @@ char * settings_get_language()
 void settings_set_language(char * srv)
 {
 	sprintf((char*)language,"%s",srv);
+}
+
+char * settings_get_theme()
+{
+	return (char*)theme;
+}
+
+void settings_set_theme(char * theme_name)
+{
+	int i;
+
+	sprintf((char*)theme,"%s",theme_name);
+
+	/* convert to lower case */
+	for (i = 0; i < strlen(theme); i++) {
+		theme[i] = tolower(theme[i]);
+	}
+}
+
+char * settings_get_theme_colour(int category)
+{
+	/* normal/default */
+	if ((strcmp(theme,get_text_from_identifier(THEME_NORMAL))==0) ||
+		(strcmp(theme,get_text_from_identifier(THEME_DEFAULT))==0)) {
+		return "";
+	}
+
+	/* dark theme */
+	if (strcmp(theme,get_text_from_identifier(THEME_DARK))==0) {
+		switch(category) {
+		case COLOUR_POSITIVE: { return GREEN; }
+		case COLOUR_NEGATIVE: { return CYAN; }
+		case COLOUR_BEFORE: { return GREEN; }
+		case COLOUR_AFTER: { return YELLOW; }
+		case COLOUR_DELETE: { return RED; }
+		}
+	}
+
+	/* light theme */
+	if (strcmp(theme,get_text_from_identifier(THEME_LIGHT))==0) {
+		switch(category) {
+		case COLOUR_POSITIVE: { return BLUE; }
+		case COLOUR_NEGATIVE: { return BLACK; }
+		case COLOUR_BEFORE: { return GREEN; }
+		case COLOUR_AFTER: { return BLUE; }
+		case COLOUR_DELETE: { return RED; }
+		}
+	}
+
+	/* blue theme */
+	if (strcmp(theme,get_text_from_identifier(THEME_BLUE))==0) {
+		switch(category) {
+		case COLOUR_POSITIVE: { return CYAN; }
+		case COLOUR_NEGATIVE: { return BLUE; }
+		case COLOUR_BEFORE: { return GREEN; }
+		case COLOUR_AFTER: { return BLUE; }
+		case COLOUR_DELETE: { return RED; }
+		}
+	}
+
+	/* green theme */
+	if (strcmp(theme,get_text_from_identifier(THEME_GREEN))==0) {
+		return GREEN;
+	}
+
+	/* black theme */
+	if (strcmp(theme,get_text_from_identifier(THEME_BLACK))==0) {
+		return BLACK;
+	}
+
+	/* white theme */
+	if (strcmp(theme,get_text_from_identifier(THEME_WHITE))==0) {
+		return WHITE;
+	}
+
+	return GREEN;
+}
+
+/* returns a non-zero value if the given theme is valid */
+int settings_valid_theme(char * theme_name)
+{
+	int i;
+
+	/* convert to lower case */
+	for (i = 0; i < strlen(theme_name); i++) {
+		theme_name[i] = tolower(theme_name[i]);
+	}
+
+	if ((strcmp(theme_name,get_text_from_identifier(THEME_NORMAL))==0) ||
+		(strcmp(theme_name,get_text_from_identifier(THEME_DEFAULT))==0) ||
+		(strcmp(theme_name,get_text_from_identifier(THEME_DARK))==0) ||
+		(strcmp(theme_name,get_text_from_identifier(THEME_LIGHT))==0) ||
+		(strcmp(theme_name,get_text_from_identifier(THEME_GREEN))==0) ||
+		(strcmp(theme_name,get_text_from_identifier(THEME_BLACK))==0) ||
+		(strcmp(theme_name,get_text_from_identifier(THEME_BLUE))==0) ||
+		(strcmp(theme_name,get_text_from_identifier(THEME_WHITE))==0)) {
+		return 1;
+	}
+	return 0;
 }

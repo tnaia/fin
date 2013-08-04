@@ -131,10 +131,12 @@ void summary_of_accounts(FILE * fp, char * directory,
 #ifdef USE_COLOURS
 				if (column_separator == ' ') {
 					if (balance >= 0) {
-						printf("%s",COLOUR_POSITIVE);
+						printf("%s",
+							   settings_get_theme_colour(COLOUR_POSITIVE));
 					}
 					else {
-						printf("%s",COLOUR_NEGATIVE);
+						printf("%s",
+							   settings_get_theme_colour(COLOUR_NEGATIVE));
 					}
 				}
 #endif				
@@ -201,10 +203,12 @@ void summary_of_accounts(FILE * fp, char * directory,
 #ifdef USE_COLOURS
 	if (column_separator == ' ') {
 		if (total >= 0) {
-			printf("%s",COLOUR_POSITIVE);
+			printf("%s",
+				   settings_get_theme_colour(COLOUR_POSITIVE));
 		}
 		else {
-			printf("%s",COLOUR_NEGATIVE);
+			printf("%s",
+				   settings_get_theme_colour(COLOUR_NEGATIVE));
 		}
 	}
 #endif				

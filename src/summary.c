@@ -313,12 +313,14 @@ int show_recent_transactions(char * account, int no_of_transactions,
 			if ((column_separator==' ') && (cols>3)) {
 				if ((char*)sqlite3_column_text(stmt,2)!=NULL) {
 					if (atof((char*)sqlite3_column_text(stmt,2))>0) {
-						printf("%s",COLOUR_POSITIVE);
+						printf("%s",
+							   settings_get_theme_colour(COLOUR_POSITIVE));
 					}
 				}
 				if ((char*)sqlite3_column_text(stmt,3)!=NULL) {
 					if (atof((char*)sqlite3_column_text(stmt,3))>0) {
-						printf("%s",COLOUR_NEGATIVE);
+						printf("%s",
+							   settings_get_theme_colour(COLOUR_NEGATIVE));
 					}
 				}
 			}
@@ -624,13 +626,16 @@ int show_recent_adjustments(char * account, int no_of_transactions,
 				str = (char*)sqlite3_column_text(stmt,8);
 				if (str!=NULL) {
 					if (str[0]==ADJUSTMENT_TYPE_BEFORE) {
-						printf("%s",COLOUR_BEFORE);
+						printf("%s",
+							   settings_get_theme_colour(COLOUR_BEFORE));
 					}
 					if (str[0]==ADJUSTMENT_TYPE_AFTER) {
-						printf("%s",COLOUR_AFTER);
+						printf("%s",
+							   settings_get_theme_colour(COLOUR_AFTER));
 					}
 					if (str[0]==ADJUSTMENT_TYPE_DELETE) {
-						printf("%s",COLOUR_DELETE);
+						printf("%s",
+							   settings_get_theme_colour(COLOUR_DELETE));
 					}
 				}
 			}

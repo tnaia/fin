@@ -254,10 +254,13 @@ int search(char * account, char * search_string, int month_number,
 #ifdef USE_COLOURS
 				if (column_separator==' ') {
 					if (atof((char*)sqlite3_column_text(stmt,2))>0) {
-						printf("%s",COLOUR_POSITIVE);
+						printf("%s",
+							   settings_get_theme_colour(COLOUR_POSITIVE));
+
 					}
 					if (atof((char*)sqlite3_column_text(stmt,3))>0) {
-						printf("%s",COLOUR_NEGATIVE);
+						printf("%s",
+							   settings_get_theme_colour(COLOUR_NEGATIVE));
 					}
 				}
 #endif

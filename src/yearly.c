@@ -158,10 +158,12 @@ int show_yearly_summary(char * account, int max_months,
 #ifdef USE_COLOURS
 				if (column_separator==' ') {
 					if (atof((char*)sqlite3_column_text(stmt,3))>=0) {
-						printf("%s",COLOUR_POSITIVE);
+						printf("%s",
+							   settings_get_theme_colour(COLOUR_POSITIVE));
 					}
 					else {
-						printf("%s",COLOUR_NEGATIVE);
+						printf("%s",
+							   settings_get_theme_colour(COLOUR_NEGATIVE));
 					}
 				}
 #endif

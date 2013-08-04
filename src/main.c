@@ -118,6 +118,7 @@ int main(int argc, char* argv[])
 	timestr[0]=0;
 
 	set_language(ENGLISH_UK);  
+	settings_set_theme(get_text_from_identifier(THEME_DARK));
 
 	sprintf((char*)fin_directory,"%s/.fin",getenv("HOME"));
 
@@ -128,6 +129,7 @@ int main(int argc, char* argv[])
 		settings_set_currency(get_text_from_identifier(SETTINGS_DEFAULT_CURRENCY));
 		settings_set_vat_rate(get_text_from_identifier(SETTINGS_DEFAULT_VAT_RATE));
 		settings_set_date_format(get_text_from_identifier(SETTINGS_DEFAULT_DATE_FORMAT));
+		settings_set_theme(get_text_from_identifier(THEME_DARK));
 		settings_save((char*)fin_directory);
 	}
 	
@@ -172,6 +174,25 @@ int main(int argc, char* argv[])
 		printf(get_text_from_identifier(SHOW_VERSION),VERSION_NUMBER);
 		printf("\n");
 		return 1;
+	}
+
+	/* set the theme */
+	if (get_theme(no_of_fields, (char*)fieldname, (char*)value)!=0) {
+		if (strlen(value) > 0) {
+			if (settings_valid_theme((char*)value) == 0) {
+				/* not a valid theme */
+				printf(get_text_from_identifier(MESSAGE_THEME_INVALID),(char*)value);
+				printf("\n");
+				return 1;
+			}
+			else {
+				settings_set_theme((char*)value);
+				settings_save((char*)fin_directory);
+				printf(get_text_from_identifier(MESSAGE_THEME_SET),settings_get_theme());
+				printf("\n");
+				return 1;
+			}
+		}
 	}
 
 	/* Number of transactions to show in the summary */

@@ -48,6 +48,7 @@
 #define USE_COLOURS
 
 #define NORMAL  "\x1B[0m"
+#define BLACK   "\x1B[30m"
 #define RED     "\x1B[31m"
 #define GREEN   "\x1B[32m"
 #define YELLOW  "\x1B[33m"
@@ -56,12 +57,22 @@
 #define CYAN    "\x1B[36m"
 #define WHITE   "\x1B[37m"
 
+enum {
+	COLOUR_POSITIVE = 0,
+	COLOUR_NEGATIVE,
+	COLOUR_BEFORE,
+	COLOUR_AFTER,
+	COLOUR_DELETE
+};
+
+/*
 #define COLOUR_POSITIVE GREEN
 #define COLOUR_NEGATIVE CYAN
 
 #define COLOUR_BEFORE GREEN
 #define COLOUR_AFTER  YELLOW
 #define COLOUR_DELETE RED
+*/
 
 /* maximum string length */
 #define STRING_BLOCK       256

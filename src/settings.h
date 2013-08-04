@@ -37,6 +37,10 @@ char * settings_get_server();
 void settings_set_server(char * srv);
 char * settings_get_language();
 void settings_set_language(char * srv);
+char * settings_get_theme();
+void settings_set_theme(char * theme_name);
+char * settings_get_theme_colour(int category);
+int settings_valid_theme(char * theme_name);
 
 char * settings_get_date_format();
 void settings_set_date_format(char * format);

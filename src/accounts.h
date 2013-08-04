@@ -24,6 +24,7 @@
 #include <dirent.h>
 #include <string.h>
 #include "summary.h"
+#include "settings.h"
 
 void summary_of_accounts(FILE * fp, char * directory,
                          char * currency, int year,
