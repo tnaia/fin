@@ -146,7 +146,6 @@ Doesn't use any colours and so the text will appear in whatever foreground colou
    fin theme dark
    fin theme light
    fin theme green
-   fin theme green
    fin theme black
    fin theme white
    fin theme blue
