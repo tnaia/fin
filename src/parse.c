@@ -206,11 +206,11 @@ char * get_field_string(char * name,
 						int no_of_fields, char * fieldname, char * value)
 {
 	int i;
-	if (name==0) return 0;
-	if (strlen(name)==0) return 0;
-	for (i=0;i<no_of_fields;i++) {
-		/*printf("test %s = %s\n",(char*)&fieldname[i],name);*/
-		if (strcmp((char*)&fieldname[i*FIELD_WIDTH],name)==0) {
+	if (name == 0) return 0;
+	if (strlen(name) == 0) return 0;
+	for (i = 0; i < no_of_fields; i++) {
+		/*printf("test %s = %s\n", (char*)&fieldname[i],name);*/
+		if (strcmp((char*)&fieldname[i*FIELD_WIDTH],name) == 0) {
 			return (char*)&value[i*FIELD_WIDTH];
 		}
 	}
@@ -756,12 +756,7 @@ char * get_theme(int no_of_fields, char* fieldname, char* value)
 {
 	char * result = get_field(THEME, no_of_fields,
 							  fieldname, value);
-	if (result==0) {
-		return (char*)"";
-	}
-	else {
-		return result;
-	}
+	return result;
 }
 
 char * get_sale_number(int no_of_fields, char* fieldname, char* value)

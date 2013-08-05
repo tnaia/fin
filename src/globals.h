@@ -76,7 +76,7 @@ enum {
 
 /* maximum string length */
 #define STRING_BLOCK       256
-#define STRING_BLOCK_LONG  (STRING_BLOCK*10)
+#define STRING_BLOCK_LONG  (STRING_BLOCK*2)
 
 #define ADJUSTMENT_TYPE_BEFORE 'B'
 #define ADJUSTMENT_TYPE_AFTER  'A'
