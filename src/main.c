@@ -563,7 +563,7 @@ int main(int argc, char* argv[])
 		(piechart_filename==0) &&
 		(get_adjustments(no_of_fields, (char*)fieldname, (char*)value)==0)) {
 		result = get_search(no_of_fields, (char*)fieldname, (char*)value);
-		if (strlen(result)>0) {
+		if (result!=0) {
 			command_run=1;
 
 			image_filename = get_monthly(no_of_fields,
@@ -779,7 +779,7 @@ int main(int argc, char* argv[])
 		(distribution_filename == 0) &&
 		(volume_filename == 0)) {
 		result = get_search(no_of_fields, (char*)fieldname, (char*)value);
-		if (strlen(result)>0) {
+		if (result!=0) {
 			command_run=1;
 			if ((strlen(piechart_filename)==0) ||
 				((strlen(piechart_filename)>0) &&

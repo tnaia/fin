@@ -403,12 +403,7 @@ int get_month(int no_of_fields, char* fieldname, char* value)
 char * get_search(int no_of_fields, char* fieldname, char* value)
 {
 	char * result = get_field(SEARCH, no_of_fields, fieldname, value);
-	if (result==0) {
-		return (char*)"";
-	}
-	else {
-		return result;
-	}
+	return result;
 }
 
 /* convert a search string into equivalent sql text */
