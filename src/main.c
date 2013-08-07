@@ -129,7 +129,7 @@ int main(int argc, char* argv[])
 		settings_set_currency(get_text_from_identifier(SETTINGS_DEFAULT_CURRENCY));
 		settings_set_vat_rate(get_text_from_identifier(SETTINGS_DEFAULT_VAT_RATE));
 		settings_set_date_format(get_text_from_identifier(SETTINGS_DEFAULT_DATE_FORMAT));
-		settings_set_theme(get_text_from_identifier(THEME_DARK));
+		settings_set_theme(get_text_from_identifier(THEME_NORMAL));
 		settings_save((char*)fin_directory);
 	}
 	
