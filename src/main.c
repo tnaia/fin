@@ -118,7 +118,7 @@ int main(int argc, char* argv[])
 	timestr[0]=0;
 
 	set_language(ENGLISH_UK);  
-	settings_set_theme(get_text_from_identifier(THEME_DARK));
+	settings_set_theme(get_text_from_identifier(THEME_NORMAL));
 
 	sprintf((char*)fin_directory,"%s/.fin",getenv("HOME"));
 
