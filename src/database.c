@@ -125,7 +125,7 @@ int database_restore(char * backup_filename)
 		/* file was not found */
 		return -1;
 	}
-		
+
 	if (len > 4) {
 		if ((backup_filename[len-1]=='e') &&
 			(backup_filename[len-2]=='f') &&
@@ -161,7 +161,7 @@ int database_restore(char * backup_filename)
 		/* delete the unencrypted file */
 		sprintf(command, "shred -u %s",
 				temp_filename);
-		len = system(command);		
+		len = system(command);
 	}
 	return 1;
 }
@@ -186,7 +186,7 @@ int create_sqlite_adjustments_table(char * account)
 {
 	int retval;
 	char database_filename[128];
-        
+
 	/* Create a handle for database connection, create a pointer to sqlite3 */
 	sqlite3 *handle;
 
@@ -219,7 +219,7 @@ int create_sqlite_adjustments_table(char * account)
 		"customer TEXT," \
 		"vatrate DECIMAL" \
 		")";
-    
+
 	/* try to create the database. If it doesnt exist, it would be created
 	   pass a pointer to the pointer to sqlite3, in short sqlite3 */
 	database_name(account, (char*)database_filename);
@@ -249,7 +249,7 @@ int create_sqlite_account(char * name)
 {
 	int retval;
 	char database_filename[128];
-        
+
 	/* Create a handle for database connection, create a pointer to sqlite3 */
 	sqlite3 *handle;
 
@@ -393,7 +393,7 @@ int database_save_transaction(
 	char transaction_identifier[STRING_BLOCK];
 	char curr[STRING_BLOCK],date_str[STRING_BLOCK];
 	char datetime[STRING_BLOCK];
-    
+
 	/* Create a handle for database connection, create a pointer to sqlite3 */
 	sqlite3 *handle;
 
@@ -405,7 +405,7 @@ int database_save_transaction(
 		printf("%s is not a valid date format\n", date);
 		return 0;
 	}
-    
+
 	/* if no account is specified use the default one */
 	if (strlen(account)==0) {
 		settings_set_account(get_text_from_identifier(SETTINGS_DEFAULT_CURRENT_ACCOUNT));
@@ -528,7 +528,7 @@ int database_save_adjustment(
 	char lat[32],lng[32],alt[32];
 	char curr[STRING_BLOCK];
 	char datetime[STRING_BLOCK];
-    
+
 	/* Create a handle for database connection, create a pointer to sqlite3 */
 	sqlite3 *handle;
 
@@ -542,7 +542,7 @@ int database_save_adjustment(
 		printf("%s is not a valid date format\n", date);
 		return 0;
 	}
-    
+
 	/* if no account is specified use the default one */
 	if (strlen(account)==0) {
 		settings_set_account(get_text_from_identifier(SETTINGS_DEFAULT_CURRENT_ACCOUNT));
@@ -652,14 +652,14 @@ int get_balance(
 
 	/* A prepered statement for fetching tables */
 	sqlite3_stmt *stmt;
-    
+
 	/* Create a handle for database connection, create a pointer to sqlite3 */
 	sqlite3 *handle;
 
 	if (account_exists(account)==0) {
 		return 0;
 	}
-    
+
 	/* if no account is specified use the default one */
 	if (strlen(account)==0) {
 		settings_set_account(get_text_from_identifier(SETTINGS_DEFAULT_CURRENT_ACCOUNT));
@@ -695,13 +695,13 @@ int get_balance(
 		sqlite3_close(handle);
 		return 0;
 	}
-    
+
 	cols = sqlite3_column_count(stmt);
 
 	row = 0;
 	while(1) {
 		retval = sqlite3_step(stmt);
-        
+
 		if (retval == SQLITE_ROW) {
 			for(col=0; col < cols; col++) {
 				const char *val = (const char*)sqlite3_column_text(stmt,col);
@@ -899,7 +899,7 @@ int database_edit_record(
 		}
 		tries++;
 	}
-  
+
 	if (tries==max_tries) {
 		printf("%s\n",sqlite3_errmsg(handle));
 		printf("%s\n",(char*)query);
@@ -1027,7 +1027,7 @@ int database_delete_record(char * account, int record_number)
 		}
 		tries++;
 	}
-  
+
 	if (tries==max_tries) {
 		printf("%s\n",sqlite3_errmsg(handle));
 		printf("%s\n",(char*)query);
@@ -1115,12 +1115,12 @@ int database_get_record(
 		sqlite3_close(handle);
 		return 0;
 	}
-    
+
 	cols = sqlite3_column_count(stmt);
 
 	while(1) {
 		retval = sqlite3_step(stmt);
-        
+
 		if (retval == SQLITE_ROW) {
 			for(col=0; col < cols; col++) {
 				char *val = (char*)sqlite3_column_text(stmt,col);
@@ -1222,7 +1222,7 @@ int database_save_adjustment_short(char * account,
 
 
 /* returns whether a transaction exists.
-   This is used when importing, and it's not infallible since multiple 
+   This is used when importing, and it's not infallible since multiple
    transactions of the same amount could be made on the same day */
 int database_transaction_exists(
 								char * account,
@@ -1238,7 +1238,7 @@ int database_transaction_exists(
 
 	/* A prepered statement for fetching tables */
 	sqlite3_stmt *stmt;
-    
+
 	/* Create a handle for database connection, create a pointer to sqlite3 */
 	sqlite3 *handle;
 
@@ -1246,17 +1246,31 @@ int database_transaction_exists(
 		return 0;
 	}
 
-	if (strlen(timestr)>0) {
-		sprintf(datetime,"%s %s",date,timestr);
-	}
-	else {
+	if (timestr[0]==0) {
 		sprintf(datetime,"%s",date);
 	}
+	else {
+		if (strlen(timestr)>0) {
+			sprintf(datetime,"%s %s",date,timestr);
+		}
+		else {
+			sprintf(datetime,"%s",date);
+		}
+	}
 
-	sprintf((char*)query,
-			"select * from transactions where "	\
-			"(date=\"%s\") and (receive=%s) " \
-			"and (spend=%s);",datetime,receive,spend);
+	if (strlen(datetime)==10) {
+		sprintf((char*)query,
+				"select * from transactions where "						\
+				"(strftime(\"%%Y-%%m-%%d\",date)=\"%s\") and (receive=%s) " \
+				"and (spend=%s);",datetime,receive,spend);
+	}
+	else {
+		sprintf((char*)query,
+				"select * from transactions where "						\
+				"(strftime(\"%%Y-%%m-%%d %%H:%%M:%%S\",date)=\"%s\") and " \
+				"(receive=%s) and " \
+				"(spend=%s);",datetime,receive,spend);
+	}
 
 	if (strlen(account)==0) {
 		printf("No account specified\n");
@@ -1279,10 +1293,10 @@ int database_transaction_exists(
 		sqlite3_close(handle);
 		return 0;
 	}
-    
+
 	while(1) {
 		retval = sqlite3_step(stmt);
-        
+
 		if (retval == SQLITE_ROW) {
 			exists=1;
 		}
@@ -1303,6 +1317,7 @@ int database_transaction_exists(
 			   "finalize error %d\n",retval);
 	}
 	sqlite3_close(handle);
+
 	return exists;
 }
 
@@ -1351,13 +1366,13 @@ int get_annual_cashflow(char * account, char * currency,
 		sqlite3_close(handle);
 		return 0;
 	}
-    
+
 	cols = sqlite3_column_count(stmt);
 
 	row=0;
 	while(1) {
 		retval = sqlite3_step(stmt);
-        
+
 		if(retval == SQLITE_ROW) {
 			for(col=0;col<cols;col++) {
 				char * val = (char*)sqlite3_column_text(stmt,col);
@@ -1436,7 +1451,7 @@ int get_distribution(char * account, char * currency,
 				start_year,end_year,currency);
 	}
 	else {
-		/* apply single search criteria */		
+		/* apply single search criteria */
 		search_string_to_sql(search_string, search_sql,0,0);
 		sprintf(query,
 				"select transaction_number,spend," \
@@ -1476,7 +1491,7 @@ int get_distribution(char * account, char * currency,
 	/* step through results */
 	while(1) {
 		retval = sqlite3_step(stmt);
-        
+
 		if(retval == SQLITE_ROW) {
 			char * val = (char*)sqlite3_column_text(stmt,1);
 			if (is_value(val)!=0) {
@@ -1596,7 +1611,7 @@ int get_month_totals(char * account, char * currency,
 	/* step through results */
 	while(1) {
 		retval = sqlite3_step(stmt);
-        
+
 		if(retval == SQLITE_ROW) {
 			char * val = (char*)sqlite3_column_text(stmt,1);
 			if (is_value(val)!=0) {
@@ -1693,7 +1708,7 @@ int transaction_volume(char * account, char * currency, int year,
 			for (i = 0; i < width_columns; i++) {
 				printf("-");
 			}
-			printf("\n");			
+			printf("\n");
 		}
 		else {
 			/* emacs style title */
@@ -1716,7 +1731,7 @@ int transaction_volume(char * account, char * currency, int year,
 			printf("+");
 			for (i = separator_column+1;
 				 i < width_columns; i++) {
-				printf("-");				
+				printf("-");
 			}
 			printf("|\n");
 		}
@@ -1847,7 +1862,7 @@ int transaction_volume(char * account, char * currency, int year,
 	/* step through results */
 	while(1) {
 		retval = sqlite3_step(stmt);
-        
+
 		if(retval == SQLITE_ROW) {
 			for(col=0; col < cols; col++) {
 				char * val = (char*)sqlite3_column_text(stmt,col);
@@ -1973,7 +1988,7 @@ int get_totals(char * account, char * search_string,
 	char query[STRING_BLOCK_LONG];
 	char fields[STRING_BLOCK];
 	char search_sql[STRING_BLOCK];
-	sqlite3_stmt *stmt;    
+	sqlite3_stmt *stmt;
 	sqlite3 *handle;
 
 	*total_receive=0;
@@ -2021,12 +2036,12 @@ int get_totals(char * account, char * search_string,
 			   "Does this account '%s' exist?\n",account);
 		return 0;
 	}
-    
+
 	cols = sqlite3_column_count(stmt);
 
 	while(1) {
 		retval = sqlite3_step(stmt);
-        
+
 		if(retval == SQLITE_ROW) {
 
 			for(col = 0; col < cols; col++) {

@@ -9,7 +9,8 @@ all:
 debug:
 	gcc -Wall -std=gnu99 -pedantic -g -o ${APP} src/*.c -Isrc -lsqlite3
 source:
-	tar -cvzf ../${APP}_${VERSION}.orig.tar.gz ../${APP}-${VERSION} --exclude-vcs
+	tar -cvf ../${APP}_${VERSION}.orig.tar ../${APP}-${VERSION} --exclude-vcs
+	gzip -f9n ../${APP}_${VERSION}.orig.tar
 install:
 	mkdir -p ${DESTDIR}/usr
 	mkdir -p ${DESTDIR}${PREFIX}
