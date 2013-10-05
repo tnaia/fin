@@ -169,7 +169,7 @@ static void parse_header(char * header, char separator, int * fields)
 			reading_text = 1-reading_text;
 		}
 		if ((reading_text==0) && (header[i]==separator)) {
-			str[i-start]=0;      
+			str[i-start]=0;
 			categorize_string(str, fields, field_number);
 			start=i+1;
 			field_number++;
@@ -178,7 +178,7 @@ static void parse_header(char * header, char separator, int * fields)
 			str[i-start] = tolower(header[i]);
 		}
 	}
-	str[i-start]=0;      
+	str[i-start]=0;
 	categorize_string(str, fields, field_number);
 }
 
@@ -219,7 +219,7 @@ static int parse_row(char * account, char * line, char separator, int * fields,
 			reading_text = 1-reading_text;
 		}
 		if ((reading_text==0) && (line[i]==separator)) {
-			str[i-start]=0;     
+			str[i-start]=0;
 			parse_value(str, fields, field_number,
 						date, timestr, receive, spend,
 						status, description, currency, field_type);
@@ -230,7 +230,7 @@ static int parse_row(char * account, char * line, char separator, int * fields,
 			str[i-start] = line[i];
 		}
 	}
-	str[i-start]=0;      
+	str[i-start]=0;
 	parse_value(str, fields, field_number,
 				date, timestr, receive, spend,
 				status, description, currency, field_type);
@@ -372,7 +372,7 @@ static int show_gnucash_accounts(char * filename)
 						if (i==no_of_accounts) {
 							for (j=0;j<strlen(account_name);j++) {
 								names[i][j]=account_name[j];
-							}							
+							}
 						}
 					}
 					/* guid for the account */
@@ -480,7 +480,7 @@ static void get_gnucash_account_guid(char * filename,
 			}
 		}
 		fclose(fp);
-	}	
+	}
 }
 
 /* parses a single line of a gnucash xml file */
@@ -716,7 +716,7 @@ static int command_import_gnucash(char * account,
 	if (file_exists(extracted_filename) != 0) {
 		sprintf(line,"rm %s",extracted_filename);
 		if (system(line)!=0) {
-			
+
 		}
 	}
 	else {
@@ -728,7 +728,7 @@ static int command_import_gnucash(char * account,
 		}
 	}
 
-	/* unzip the file */	
+	/* unzip the file */
 	sprintf(zipped_filename,"%s/import.xml.gz",gnucash_directory);
 	sprintf(line,"cp %s %s",import_filename,zipped_filename);
 	if (system(line)!=0) return 0;
@@ -812,7 +812,7 @@ static int command_import_csv(char * account,
 					}
 				}
 				row++;
-			}      
+			}
 		}
 		fclose(fp);
 	}
@@ -876,7 +876,7 @@ static int command_import_emacs(char * account,
 						break;
 					}
 				}
-			}      
+			}
 		}
 		fclose(fp);
 	}

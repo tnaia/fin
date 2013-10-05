@@ -4,11 +4,13 @@ fin (1.51-1) stable; urgency=medium
 
   * Monthly and yearly totals when searching
 
-  * Colour changes for better readability
+  * Colour themes for better readability
 
   * Summary of accounts
 
- -- Bob Mottram (4096 bits) <bob@robotics.uk.to>  Sat, 04 May 2013 18:32:00 +0100
+  * Bug fix in data import
+
+ -- Bob Mottram (4096 bits) <bob@robotics.uk.to>  Sat, 05 Oct 2013 08:49:00 +0100
 
 fin (1.50-1) stable; urgency=medium
 

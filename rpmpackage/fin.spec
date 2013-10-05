@@ -56,11 +56,12 @@ make install -B DESTDIR=%{buildroot} PREFIX=/usr
 %{_mandir}/man1/*
 
 %changelog
-* Sat May 04 2013 Bob Mottram (4096 bits) <bob@robotics.uk.to> - 1.51-1
+* Sat Oct 05 2013 Bob Mottram (4096 bits) <bob@robotics.uk.to> - 1.51-1
 - Compile instructions in README and manpage for OpenSUSE and bcrypt
 - Monthly and yearly totals when searching
-- Colour changes for better readability
+- Colour themes for better readability
 - Summary of accounts
+- Bug fix in data import
 
 * Sat Mar 09 2013 Bob Mottram (4096 bits) <bob@robotics.uk.to> - 1.50-1
 - Adjustments description spans multiple lines
