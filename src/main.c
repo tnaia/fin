@@ -764,7 +764,7 @@ int main(int argc, char* argv[])
 	/* adjustments */
 	if (command_run==0) {
 		result = get_adjustments(no_of_fields, (char*)fieldname, (char*)value);
-		if (result!=0) {
+		if (strlen(result)>0) {
 			command_run=1;
 			result = get_search(no_of_fields, (char*)fieldname, (char*)value);
 			printf("%s\n",get_text_from_identifier(RECENT_EDITS));
