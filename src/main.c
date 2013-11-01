@@ -117,7 +117,7 @@ int main(int argc, char* argv[])
 
 	timestr[0]=0;
 
-	set_language(ENGLISH_UK);  
+	set_language(ENGLISH_UK);
 	settings_set_theme(get_text_from_identifier(THEME_NORMAL));
 
 	sprintf((char*)fin_directory,"%s/.fin",getenv("HOME"));
@@ -132,7 +132,7 @@ int main(int argc, char* argv[])
 		settings_set_theme(get_text_from_identifier(THEME_NORMAL));
 		settings_save((char*)fin_directory);
 	}
-	
+
 	if (settings_load((char*)fin_directory)!=0) {
 		account = settings_get_account();
 		currency = settings_get_currency();
@@ -321,7 +321,7 @@ int main(int argc, char* argv[])
 		/* convert the time given into a standard format */
 		convert_time_to_standard(str, timestr,
 								 get_text_from_identifier(TIME_AM),
-								 get_text_from_identifier(TIME_PM));		
+								 get_text_from_identifier(TIME_PM));
 	}
 	volume_filename = get_volume(no_of_fields,
 								 (char*)fieldname, (char*)value);
@@ -451,7 +451,7 @@ int main(int argc, char* argv[])
 			(strcmp(speak,get_text_from_identifier(COMMAND_PURCHASE))==0) ||
 			(strcmp(speak,get_text_from_identifier(COMMAND_PURCHASED))==0) ||
 			(strcmp(speak,get_text_from_identifier(COMMAND_BUY))==0)) {
-			narrate_spending(account, currency, loans_interest_rate, 
+			narrate_spending(account, currency, loans_interest_rate,
 							 savings_interest_rate, inflation_rate);
 			return 1;
 		}
@@ -764,7 +764,7 @@ int main(int argc, char* argv[])
 	/* adjustments */
 	if (command_run==0) {
 		result = get_adjustments(no_of_fields, (char*)fieldname, (char*)value);
-		if (strlen(result)>0) {
+		if (result != 0) {
 			command_run=1;
 			result = get_search(no_of_fields, (char*)fieldname, (char*)value);
 			printf("%s\n",get_text_from_identifier(RECENT_EDITS));
@@ -862,7 +862,7 @@ int main(int argc, char* argv[])
 		command_run=1;
 	}
 
-	/* spending distribution */	
+	/* spending distribution */
 	if ((command_run==0) &&
 		(distribution_filename != 0)) {
 		if ((year==0) && (end_year==0)) {
@@ -968,4 +968,3 @@ int main(int argc, char* argv[])
 
 	return 1;
 }
-

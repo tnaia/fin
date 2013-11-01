@@ -42,7 +42,7 @@ double get_current_balance(char * account, char * currency, int year)
 				"transactions where ((currency=\"%s\") and " \
 				"(CAST(substr(date,1,4) as INT) < %d));",currency, year);
 	}
-    
+
 	/* if no account is specified use the default one */
 	if (strlen(account)==0) {
 		settings_set_account(get_text_from_identifier(SETTINGS_DEFAULT_CURRENT_ACCOUNT));
@@ -74,12 +74,12 @@ double get_current_balance(char * account, char * currency, int year)
 		sqlite3_close(handle);
 		return 0;
 	}
-    
+
 	cols = sqlite3_column_count(stmt);
 
 	while(1) {
 		retval = sqlite3_step(stmt);
-        
+
 		if (retval == SQLITE_ROW) {
 			for(col=0; col < cols; col++) {
 				char *val = (char*)sqlite3_column_text(stmt,col);
@@ -120,7 +120,7 @@ int show_summary_totals(char * account)
 	if (account_exists(account)==0) {
 		return 0;
 	}
-    
+
 	/* if no account is specified use the default one */
 	if (strlen(account)==0) {
 		settings_set_account(get_text_from_identifier(SETTINGS_DEFAULT_CURRENT_ACCOUNT));
@@ -153,13 +153,13 @@ int show_summary_totals(char * account)
 		sqlite3_close(handle);
 		return 0;
 	}
-    
+
 	cols = sqlite3_column_count(stmt);
 
 	row = 0;
 	while(1) {
 		retval = sqlite3_step(stmt);
-        
+
 		if (retval == SQLITE_ROW) {
 			for(col=0; col < cols; col++) {
 				char *val = (char*)sqlite3_column_text(stmt,col);
@@ -260,7 +260,7 @@ int show_recent_transactions(char * account, int no_of_transactions,
 		sqlite3_close(handle);
 		return 0;
 	}
-    
+
 	cols = sqlite3_column_count(stmt);
 
 	/* title */
@@ -292,7 +292,7 @@ int show_recent_transactions(char * account, int no_of_transactions,
 	row=0;
 	while(1) {
 		retval = sqlite3_step(stmt);
-        
+
 		if(retval == SQLITE_ROW) {
 			if (column_separator!=' ') {
 				printf("%c",column_separator);
@@ -361,7 +361,7 @@ int show_recent_transactions(char * account, int no_of_transactions,
 													  column_separator,
 													  start_column);
 							}
-							else {	 
+							else {
 								if (strlen(val)>0) {
 									printf("(%s)%c",val,column_separator);
 								}
@@ -369,7 +369,7 @@ int show_recent_transactions(char * account, int no_of_transactions,
 
 						}
 					}
-				}  
+				}
 			}
 
 #ifdef USE_COLOURS
@@ -421,7 +421,7 @@ int show_summary_balance(char * account)
 			if (atof((char*)&total_spend[i]) +
 				atof((char*)&total_receive[i]) == 0) {
 				break;
-			}	
+			}
 			printf(get_text_from_identifier(SUMMARY_BALANCE),
 				   (char*)&currency[i],(char*)&total_receive[i],
 				   (char*)&total_spend[i],(char*)&total_balance[i]);
@@ -479,7 +479,7 @@ int show_summary(char * account, int no_of_transactions,
 			}
 		}
 		printf("\n");
-      
+
 		retval = show_recent_transactions(account, no_of_transactions, column_separator);
 
 		if (column_separator == ' ') {
@@ -549,17 +549,22 @@ int show_recent_adjustments(char * account, int no_of_transactions,
 			"adjustment_date, adjustment_type" \
 			" from adjustments ");
 
-	if (strlen(search_string)==0) {
+	if (search_string==0) {
 		sprintf(query,"%s order by adjustment_date desc;",query_base);
 	}
 	else {
-		search_string_to_sql(search_string, search_sql,
-							 year, month_number);
-		sprintf(query,"%s " \
-				"where (%s) or " \
-				"(date like \"%s\") " \
-				"order by adjustment_date desc;",
-				query_base, search_sql, search_string);
+		if (strlen(search_string)==0) {
+			sprintf(query,"%s order by adjustment_date desc;",query_base);
+		}
+		else {
+			search_string_to_sql(search_string, search_sql,
+								 year, month_number);
+			sprintf(query,"%s " \
+					"where (%s) or " \
+					"(date like \"%s\") " \
+					"order by adjustment_date desc;",
+					query_base, search_sql, search_string);
+		}
 	}
 
 	retval = sqlite3_prepare_v2(handle,query,-1,&stmt,0);
@@ -569,7 +574,7 @@ int show_recent_adjustments(char * account, int no_of_transactions,
 		sqlite3_close(handle);
 		return 0;
 	}
-    
+
 	cols = sqlite3_column_count(stmt);
 
 	for (i=0;i<MAX_ROW_LENGTH;i++) {
@@ -606,7 +611,7 @@ int show_recent_adjustments(char * account, int no_of_transactions,
 	row=0;
 	while(1) {
 		retval = sqlite3_step(stmt);
-        
+
 		if(retval == SQLITE_ROW) {
 			if (column_separator!=' ') {
 				printf("%c",column_separator);
@@ -683,7 +688,7 @@ int show_recent_adjustments(char * account, int no_of_transactions,
 							}
 						}
 					}
-				}  
+				}
 			}
 
 #ifdef USE_COLOURS
