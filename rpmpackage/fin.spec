@@ -17,7 +17,7 @@ Requires: sqlite
 %if 0%{?mandriva_version}
 BuildRequires: libsqlite3-devel
 %else
-BuildRequires: sqlite-devel
+BuildRequires: libsqlite3x-devel
 %endif
 
 %description
