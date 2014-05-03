@@ -3,11 +3,11 @@ Upstream-Name:
 Source: 
 
 Files: *
-Copyright: Copyright 2013 Bob Mottram (4096 bits) <bob@robotics.uk.to>
+Copyright: Copyright 2014 Bob Mottram (4096 bits) <bob@robotics.uk.to>
 License: GPL-3.0+
 
 Files: debian/*
-Copyright: Copyright 2013 Bob Mottram (4096 bits) <bob@robotics.uk.to>
+Copyright: Copyright 2014 Bob Mottram (4096 bits) <bob@robotics.uk.to>
 License: GPL-3.0+
 
 License: GPL-3.0+

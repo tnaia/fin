@@ -3,7 +3,7 @@ Version: 1.51
 Release: 1%{?dist}
 Summary: Command line personal finances manager
 License: GPL3
-URL: https://github.com/fuzzgun/fin
+URL: https://github.com/bashrc/fin
 Packager: Bob Mottram (4096 bits) <bob@robotics.uk.to>
 Source0: http://yourdomainname.com/src/%{name}_%{version}.orig.tar.gz
 Group: Utility/ConsoleOnly

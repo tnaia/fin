@@ -15,7 +15,7 @@ install:
 	mkdir -p ${DESTDIR}/usr
 	mkdir -p ${DESTDIR}${PREFIX}
 	mkdir -p ${DESTDIR}${PREFIX}/bin
-	install -m 755 --strip ${APP} ${DESTDIR}${PREFIX}/bin
+	install -m 755 -s ${APP} ${DESTDIR}${PREFIX}/bin
 	mkdir -m 755 -p ${DESTDIR}${PREFIX}/share
 	mkdir -m 755 -p ${DESTDIR}${PREFIX}/share/man
 	mkdir -m 755 -p ${DESTDIR}${PREFIX}/share/man/man1
@@ -30,3 +30,7 @@ clean:
 	rm -f ../${APP}*.deb ../${APP}*.changes ../${APP}*.asc ../${APP}*.dsc
 	rm -f rpmpackage/*.src.rpm archpackage/*.gz archpackage/*.xz
 	rm -f puppypackage/*.gz puppypackage/*.pet slackpackage/*.txz
+
+sourcedeb:
+	tar -cvf ../${APP}_${VERSION}.orig.tar ../${APP}-${VERSION} --exclude-vcs --exclude 'debian'
+	gzip -f9n ../${APP}_${VERSION}.orig.tar
