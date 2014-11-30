@@ -742,6 +742,7 @@ int main(int argc, char* argv[])
                 server = srv;
             }
             if (server!=0) {
+                ssh_port = extract_ssh_port(server, server_name);
                 if (directory_exists((char*)fin_directory)==0) {
                     sprintf((char*)command_str,
                             "mkdir %s", (char*)fin_directory);
@@ -750,13 +751,16 @@ int main(int argc, char* argv[])
                 if (username!=0) {
                     /* use username */
                     sprintf((char*)command_str,
-                            "scp -r -o User=%s %s/.fin %s",
-                            username, server, getenv("HOME"));
+                            "scp -P %d -r -o User=%s %s/.fin %s",
+                            ssh_port, username,
+                            server_name, getenv("HOME"));
                 }
                 else {
                     /* assume that the remote username is the same */
-                    sprintf((char*)command_str,"scp -r %s/.fin %s",
-                            server, getenv("HOME"));
+                    sprintf((char*)command_str,
+                            "scp -P %d -r %s/.fin %s",
+                            ssh_port, server_name,
+                            getenv("HOME"));
                 }
                 retval = system(command_str);
                 if (retval) {
