@@ -379,17 +379,17 @@ Often people use more than one computer, and want to be able to transfer data.  
 To push the data to a server:
 
 #+BEGIN_SRC sh
-   fin push <domain>:<directory>
+   fin push <domain>:<ssh port><directory>
 
-   fin push mydomainname.com:/home/myusername
+   fin push mydomainname.com:2222/home/myusername
 #+END_SRC
 
 Optionally you can also include the username for the remote system if it differs from your local username.  If you get a /"permission denied"/ message when attempting to push or pull then try one of the following:
 
 #+BEGIN_SRC sh
-   fin username <myusername> push mydomainname.com:/home/myusername
+   fin username <myusername> push mydomainname.com:2222/home/myusername
 
-   fin username <myusername> pull mydomainname.com:/home/myusername
+   fin username <myusername> pull mydomainname.com:2222/home/myusername
 #+END_SRC
 
 

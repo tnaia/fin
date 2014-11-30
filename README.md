@@ -32,7 +32,7 @@ or on OpenSUSE:
     sudo zypper install sqlite3-devel gnuplot
     make
     sudo make install
-    
+
 You will need to have the sqlite3 development package installed to be able to compile, and to get the full functionality you'll also need to have gnuplot and bcrypt installed.
 
 If bcrypt is unavailable as an installable package on your system:
@@ -314,14 +314,14 @@ Often people use more than one computer, and want to be able to transfer data.  
 
 To push the data to a server:
 
-    fin push <domain>:<directory>
-    fin push mydomainname.com:/home/myusername
+    fin push <domain>:<ssh port><directory>
+    fin push mydomainname.com:2222/home/myusername
 
 
 Optionally you can also include the username for the remote system if it differs from your local username.  If you get a /"permission denied"/ message when attempting to push or pull then try one of the following:
 
-    fin username <myusername> push mydomainname.com:/home/myusername
-    fin username <myusername> pull mydomainname.com:/home/myusername
+    fin username <myusername> push mydomainname.com:2222/home/myusername
+    fin username <myusername> pull mydomainname.com:2222/home/myusername
 
 
 Subsequently you can then just type:
