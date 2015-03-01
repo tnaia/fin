@@ -203,10 +203,11 @@ int valid_language(char * language)
 		"russian",
 		"polish",
 		"dutch",
-		"chinese"
+		"chinese",
+		"swedish"
 	};
   
-	for (i=0;i<11;i++) {
+	for (i=0;i<LANGUAGES;i++) {
 		if (strcmp(language,langs[i])==0) {
 			return i+1;
 		}

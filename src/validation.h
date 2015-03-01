@@ -1,6 +1,6 @@
 /*
     Fin - a simple personal accounts manager
-    Copyright (C) 2012-2013  Bob Mottram <bob@robotics.uk.to>
+    Copyright (C) 2012-2015  Bob Mottram <bob@robotics.uk.to>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -22,6 +22,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include "international.h"
 
 int is_integer(char * str);
 int is_value(char * str);
