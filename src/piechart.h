@@ -31,18 +31,18 @@
 #include "plot.h"
 
 int calc_piechart(char * account, char * search_string,
-				  int month_number, int year,
-				  char field_separator, char * currency,
-				  int spending,
-				  char ** fieldname, double * value,
-				  double * total_value,
-				  int max_fields,
-				  int include_zeros);
+                  int month_number, int year,
+                  char field_separator, char * currency,
+                  int spending,
+                  char ** fieldname, double * value,
+                  double * total_value,
+                  int max_fields,
+                  int include_zeros);
 
 int piechart(char * title, char * account, char * search_string,
-			 int month_number, int year,
-			 char field_separator, char column_separator,
-			 char * currency,
-			 int spending, char * export_filename);
+             int month_number, int year,
+             char field_separator, char column_separator,
+             char * currency,
+             int spending, char * export_filename);
 
 #endif
