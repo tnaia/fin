@@ -1,6 +1,6 @@
 /*
   Fin - a simple personal accounts manager
-  Copyright (C) 2012-2013  Bob Mottram <bob@robotics.uk.to>
+  Copyright (C) 2012-2015  Bob Mottram <bob@robotics.uk.to>
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -35,14 +35,14 @@ static void remove_quotes(char * str)
   if (strlen(str)>2) {
     if (str[0]=='"') {
       for (i=1;i<strlen(str);i++) {
-	str[i-1] = str[i];
+        str[i-1] = str[i];
       }
       str[i-1]=0;
       for (i=strlen(str)-1;i>=0;i--) {
-	if (str[i]=='"') {
-	  str[i]=0;
-	  break;
-	}
+        if (str[i]=='"') {
+          str[i]=0;
+          break;
+        }
       }
     }
   }
@@ -65,7 +65,7 @@ void trim(char * str)
   }
   i=strlen(str)-1;
   while ((i>1) && ((str[i]==' ') || (str[i]=='"') ||
-		   (str[i]==10) || (str[i]==13))) i--;
+                   (str[i]==10) || (str[i]==13))) i--;
   if (i!=strlen(str)-1) {
     str[i+1]=0;
   }
@@ -79,7 +79,7 @@ void remove_eol(char * str)
   if (strlen(str)>0) {
     for (i=1;i<=strlen(str);i++) {
       if ((str[i] == 10) || (str[i] == 13)) {
-	str[i]=0;
+        str[i]=0;
       }
     }
   }
@@ -109,10 +109,10 @@ int is_boolean_parameter(char * word, char * value)
 
   if (strcmp(word,get_text_from_identifier(PIECHART))==0) {
     if ((strstr(value,".png")==0) &&
-	(strstr(value,".jpg")==0) &&
-	(strstr(value,".gif")==0) &&
-	(strstr(value,".txt")==0) &&
-	(strstr(value,".csv")==0)) {
+        (strstr(value,".jpg")==0) &&
+        (strstr(value,".gif")==0) &&
+        (strstr(value,".txt")==0) &&
+        (strstr(value,".csv")==0)) {
       return 1;
     }
   }
@@ -126,8 +126,8 @@ int is_boolean_parameter(char * word, char * value)
       (strcmp(word,get_text_from_identifier(DISTRIBUTION_ABBREV))==0) ||
       (strcmp(word,get_text_from_identifier(DISTRIBUTION))==0)) {
     if ((strstr(value,".png")==0) &&
-	(strstr(value,".jpg")==0) &&
-	(strstr(value,".gif")==0)) {
+        (strstr(value,".jpg")==0) &&
+        (strstr(value,".gif")==0)) {
       is_boolean = 1;
     }
   }
@@ -138,9 +138,9 @@ int is_boolean_parameter(char * word, char * value)
 
 /* separate the parameters into fieldnames and values */
 int parse(int argc, char * argv[],
-	  char * fieldname, char * value,
-	  char separator,
-	  int start_index, int max_results)
+          char * fieldname, char * value,
+          char separator,
+          int start_index, int max_results)
 {
   int results = 0;
   int i, pos, c;
@@ -157,27 +157,27 @@ int parse(int argc, char * argv[],
     if (strlen(argv[i]) > 0) {
       pos = char_index(str, separator);
       if (pos == -1) {
-	sprintf((char*)&fieldname[results*FIELD_WIDTH],
-		"%s",argv[i]);
-	if (i < argc-1) {
-	  if (is_boolean_parameter(argv[i],argv[i+1])==0) {
-	    sprintf((char*)&value[results*FIELD_WIDTH],
-		    "%s",argv[i+1]);
-	    i++;
-	  }
-	}
+        sprintf((char*)&fieldname[results*FIELD_WIDTH],
+                "%s",argv[i]);
+        if (i < argc-1) {
+          if (is_boolean_parameter(argv[i],argv[i+1])==0) {
+            sprintf((char*)&value[results*FIELD_WIDTH],
+                    "%s",argv[i+1]);
+            i++;
+          }
+        }
       }
       else {
-	str2 = (char*)&fieldname[results*FIELD_WIDTH];
-	for (c=0;c<pos;c++) {
-	  str2[c]=str[c];
-	}
-	str2[c]=0;
-	str2 = (char*)&value[results*FIELD_WIDTH];
-	for (c=pos+1;c<strlen(str);c++) {
-	  str2[c-pos-1]=str[c];
-	}
-	str2[c-pos-1]=0;
+        str2 = (char*)&fieldname[results*FIELD_WIDTH];
+        for (c=0;c<pos;c++) {
+          str2[c]=str[c];
+        }
+        str2[c]=0;
+        str2 = (char*)&value[results*FIELD_WIDTH];
+        for (c=pos+1;c<strlen(str);c++) {
+          str2[c-pos-1]=str[c];
+        }
+        str2[c-pos-1]=0;
       }
       results++;
       if (results>=max_results) break;
@@ -203,7 +203,7 @@ int parse(int argc, char * argv[],
 }
 
 char * get_field_string(char * name,
-			int no_of_fields, char * fieldname, char * value)
+                        int no_of_fields, char * fieldname, char * value)
 {
   int i;
   if (name == 0) return 0;
@@ -218,7 +218,7 @@ char * get_field_string(char * name,
 }
 
 int get_field_value(char * name,
-		    int no_of_fields, char * fieldname, char * value)
+                    int no_of_fields, char * fieldname, char * value)
 {
   char * v = get_field_string(name,no_of_fields, fieldname, value);
   if (v!=0) {
@@ -228,35 +228,35 @@ int get_field_value(char * name,
 }
 
 char * get_field_string_from_identifier(int identifier,
-					int no_of_fields,
-					char * fieldname,
-					char * value)
+                                        int no_of_fields,
+                                        char * fieldname,
+                                        char * value)
 {
   return get_field_string(get_text_from_identifier(identifier),
-			  no_of_fields, fieldname, value);
+                          no_of_fields, fieldname, value);
 }
 
 int get_field_value_from_identifier(int identifier,
-				    int no_of_fields,
-				    char * fieldname,
-				    char * value)
+                                    int no_of_fields,
+                                    char * fieldname,
+                                    char * value)
 {
   return get_field_value(get_text_from_identifier(identifier),
-			 no_of_fields, fieldname, value);
+                         no_of_fields, fieldname, value);
 }
 
 char * get_field(int identifier, int no_of_fields,
-		 char* fieldname, char* value)
+                 char* fieldname, char* value)
 {
   char * result =
     get_field_string_from_identifier(identifier,no_of_fields,
-				     fieldname, value);
+                                     fieldname, value);
   if (result==0) {
     identifier++;
     result =
       get_field_string_from_identifier(identifier,
-				       no_of_fields,
-				       fieldname, value);
+                                       no_of_fields,
+                                       fieldname, value);
   }
   to_lower(result);
   return result;
@@ -275,19 +275,19 @@ char * get_account_name(int no_of_fields, char* fieldname, char* value)
 char * get_description(int no_of_fields, char* fieldname, char* value)
 {
   char * description = get_field(DESCRIPTION, no_of_fields,
-				 fieldname, value);
+                                 fieldname, value);
   if (description==0) {
     description = get_field(IMPORT_DESCRIPTION, no_of_fields,
-			    fieldname, value);
+                            fieldname, value);
     if (description==0) {
       description = get_field(MEMO, no_of_fields,
-			      fieldname, value);
+                              fieldname, value);
       if (description==0) {
-	description = get_field(NOTES, no_of_fields,
-				fieldname, value);
-	if (description==0) {
-	  return (char*)"";
-	}
+        description = get_field(NOTES, no_of_fields,
+                                fieldname, value);
+        if (description==0) {
+          return (char*)"";
+        }
       }
     }
   }
@@ -298,7 +298,7 @@ int get_year(int no_of_fields, char* fieldname, char* value)
 {
   int year;
   char * result = get_field(COMMAND_YEAR, no_of_fields,
-			    fieldname, value);
+                            fieldname, value);
   if (result==0) {
     return 0;
   }
@@ -315,7 +315,7 @@ int get_end_year(int no_of_fields, char* fieldname, char* value)
 {
   int year;
   char * result = get_field(COMMAND_END_YEAR, no_of_fields,
-			    fieldname, value);
+                            fieldname, value);
   if (result==0) {
     return 0;
   }
@@ -331,69 +331,69 @@ int get_end_year(int no_of_fields, char* fieldname, char* value)
 int get_month(int no_of_fields, char* fieldname, char* value)
 {
   char * result = get_field(COMMAND_MONTH,
-			    no_of_fields, fieldname, value);
+                            no_of_fields, fieldname, value);
   if (result==0) {
     return 0;
   }
   else {
     if ((strcmp(result,get_text_from_identifier(MONTH_JAN))==0) ||
-	(strcmp(result,
-		get_text_from_identifier(MONTH_JAN_ABBREV))==0)) {
+        (strcmp(result,
+                get_text_from_identifier(MONTH_JAN_ABBREV))==0)) {
       return 1;
     }
     if ((strcmp(result,get_text_from_identifier(MONTH_FEB))==0) ||
-	(strcmp(result,
-		get_text_from_identifier(MONTH_FEB_ABBREV))==0)) {
+        (strcmp(result,
+                get_text_from_identifier(MONTH_FEB_ABBREV))==0)) {
       return 2;
     }
     if ((strcmp(result,get_text_from_identifier(MONTH_MAR))==0) ||
-	(strcmp(result,
-		get_text_from_identifier(MONTH_MAR_ABBREV))==0)) {
+        (strcmp(result,
+                get_text_from_identifier(MONTH_MAR_ABBREV))==0)) {
       return 3;
     }
     if ((strcmp(result,get_text_from_identifier(MONTH_APR))==0) ||
-	(strcmp(result,
-		get_text_from_identifier(MONTH_APR_ABBREV))==0)) {
+        (strcmp(result,
+                get_text_from_identifier(MONTH_APR_ABBREV))==0)) {
       return 4;
     }
     if ((strcmp(result,get_text_from_identifier(MONTH_MAY))==0) ||
-	(strcmp(result,
-		get_text_from_identifier(MONTH_MAY_ABBREV))==0)) {
+        (strcmp(result,
+                get_text_from_identifier(MONTH_MAY_ABBREV))==0)) {
       return 5;
     }
     if ((strcmp(result,get_text_from_identifier(MONTH_JUN))==0) ||
-	(strcmp(result,
-		get_text_from_identifier(MONTH_JUN_ABBREV))==0)) {
+        (strcmp(result,
+                get_text_from_identifier(MONTH_JUN_ABBREV))==0)) {
       return 6;
     }
     if ((strcmp(result,get_text_from_identifier(MONTH_JUL))==0) ||
-	(strcmp(result,
-		get_text_from_identifier(MONTH_JUL_ABBREV))==0)) {
+        (strcmp(result,
+                get_text_from_identifier(MONTH_JUL_ABBREV))==0)) {
       return 7;
     }
     if ((strcmp(result,get_text_from_identifier(MONTH_AUG))==0) ||
-	(strcmp(result,
-		get_text_from_identifier(MONTH_AUG_ABBREV))==0)) {
+        (strcmp(result,
+                get_text_from_identifier(MONTH_AUG_ABBREV))==0)) {
       return 8;
     }
     if ((strcmp(result,get_text_from_identifier(MONTH_SEP))==0) ||
-	(strcmp(result,
-		get_text_from_identifier(MONTH_SEP_ABBREV))==0)) {
+        (strcmp(result,
+                get_text_from_identifier(MONTH_SEP_ABBREV))==0)) {
       return 9;
     }
     if ((strcmp(result,get_text_from_identifier(MONTH_OCT))==0) ||
-	(strcmp(result,
-		get_text_from_identifier(MONTH_OCT_ABBREV))==0)) {
+        (strcmp(result,
+                get_text_from_identifier(MONTH_OCT_ABBREV))==0)) {
       return 10;
     }
     if ((strcmp(result,get_text_from_identifier(MONTH_NOV))==0) ||
-	(strcmp(result,
-		get_text_from_identifier(MONTH_NOV_ABBREV))==0)) {
+        (strcmp(result,
+                get_text_from_identifier(MONTH_NOV_ABBREV))==0)) {
       return 11;
     }
     if ((strcmp(result,get_text_from_identifier(MONTH_DEC))==0) ||
-	(strcmp(result,
-		get_text_from_identifier(MONTH_DEC_ABBREV))==0)) {
+        (strcmp(result,
+                get_text_from_identifier(MONTH_DEC_ABBREV))==0)) {
       return 12;
     }
     return 0;
@@ -417,7 +417,7 @@ static void search_string_to_sql_base(char * search_string, char * result)
   /* replace wildcards */
   for (i = 0; i < strlen(search_string); i++) {
     if ((search_string[i] == ',') ||
-	(search_string[i] == '+')) {
+        (search_string[i] == '+')) {
       multiple_searches = 1;
     }
     if (search_string[i] == '*') {
@@ -434,36 +434,36 @@ static void search_string_to_sql_base(char * search_string, char * result)
     result[0]=0;
     while (i < strlen(search_string)) {
       if ((i==0) || (i==strlen(search_string)-1) ||
-	  (search_string[i]==',') ||
-	  (search_string[i]=='+')) {
-	if (i > 0) {
-	  if (i==strlen(search_string)-1) {
-	    str[ctr++]=search_string[i];
-	  }
-	  str[ctr++]='"';
-	  str[ctr++]=')';
-	  if (i!=strlen(search_string)-1) {
-	    str[ctr++]=' ';
-	    str[ctr++]='o';
-	    str[ctr++]='r';
-	    str[ctr++]=' ';
-	  }
-	  str[ctr++]=0;
-	  sprintf(str2,"%s%s",result,str);
-	  sprintf(result,"%s",str2);
-	}
-	sprintf(str,"%s","(description like \"");
-	ctr = strlen(str);
-	if (i==0) {
-	  str[ctr++]=search_string[i];					
-	}
-	initial=1;
+          (search_string[i]==',') ||
+          (search_string[i]=='+')) {
+        if (i > 0) {
+          if (i==strlen(search_string)-1) {
+            str[ctr++]=search_string[i];
+          }
+          str[ctr++]='"';
+          str[ctr++]=')';
+          if (i!=strlen(search_string)-1) {
+            str[ctr++]=' ';
+            str[ctr++]='o';
+            str[ctr++]='r';
+            str[ctr++]=' ';
+          }
+          str[ctr++]=0;
+          sprintf(str2,"%s%s",result,str);
+          sprintf(result,"%s",str2);
+        }
+        sprintf(str,"%s","(description like \"");
+        ctr = strlen(str);
+        if (i==0) {
+          str[ctr++]=search_string[i];                                  
+        }
+        initial=1;
       }
       else {
-	if (!((initial==1) && (search_string[i]==' '))) {
-	  str[ctr++] = search_string[i];
-	  initial=0;
-	}
+        if (!((initial==1) && (search_string[i]==' '))) {
+          str[ctr++] = search_string[i];
+          initial=0;
+        }
       }
       i++;
     }
@@ -472,7 +472,7 @@ static void search_string_to_sql_base(char * search_string, char * result)
 
 /* convert a search string into equivalent sql text */
 void search_string_to_sql(char * search_string, char * result,
-			  int year, int month_number)
+                          int year, int month_number)
 {
   char base_result[STRING_BLOCK];
   time_t now;
@@ -490,11 +490,11 @@ void search_string_to_sql(char * search_string, char * result,
   if ((year>0) && (month_number==0)) {
     if (strlen(search_string)>1) {
       sprintf(result,"(%s) and (CAST(substr(date,1,4) as INT) is %04d)",
-	      base_result,year);
+              base_result,year);
     }
     else {
       sprintf(result,"(CAST(substr(date,1,4) as INT) is %04d)",
-	      year);
+              year);
     }
     return;
   }
@@ -507,14 +507,14 @@ void search_string_to_sql(char * search_string, char * result,
   }
   if ((year>0) && (month_number>0)) {
     if (strlen(search_string)>1) {
-      sprintf(result,"(%s) and (CAST(substr(date,1,4) as INT) is %04d)"	\
-	      " and (CAST(substr(date,6,2) as INT) is %02d)",
-	      base_result,year,month_number);
+      sprintf(result,"(%s) and (CAST(substr(date,1,4) as INT) is %04d)" \
+              " and (CAST(substr(date,6,2) as INT) is %02d)",
+              base_result,year,month_number);
     }
     else {
-      sprintf(result,"(CAST(substr(date,1,4) as INT) is %04d)"	\
-	      " and (CAST(substr(date,6,2) as INT) is %02d)",
-	      year,month_number);
+      sprintf(result,"(CAST(substr(date,1,4) as INT) is %04d)"  \
+              " and (CAST(substr(date,6,2) as INT) is %02d)",
+              year,month_number);
     }
     return;
   }
@@ -540,10 +540,10 @@ char * get_date_format(int no_of_fields, char* fieldname, char* value)
 int get_summary_transactions(int no_of_fields, char* fieldname, char* value)
 {
   char * transactions_str = get_field(SUMMARY_TRANSACTIONS,
-				      no_of_fields, fieldname, value);
+                                      no_of_fields, fieldname, value);
   if (transactions_str==0) {
     transactions_str = get_field(SUMMARY_RECORDS,
-				 no_of_fields, fieldname, value);
+                                 no_of_fields, fieldname, value);
   }
   if (transactions_str==0) {
     return 0;
@@ -702,7 +702,7 @@ char * get_distrib(int no_of_fields, char* fieldname, char* value)
 double get_savings_interest_rate(int no_of_fields, char* fieldname, char* value)
 {
   char * result = get_field(SAVINGS_INTEREST_RATE, no_of_fields,
-			    fieldname, value);
+                            fieldname, value);
   if (result==0) {
     return 0.0;
   }
@@ -714,7 +714,7 @@ double get_savings_interest_rate(int no_of_fields, char* fieldname, char* value)
 double get_loans_interest_rate(int no_of_fields, char* fieldname, char* value)
 {
   char * result = get_field(LOANS_INTEREST_RATE, no_of_fields,
-			    fieldname, value);
+                            fieldname, value);
   if (result==0) {
     return DEFAULT_USURY_RATE;
   }
@@ -726,7 +726,7 @@ double get_loans_interest_rate(int no_of_fields, char* fieldname, char* value)
 double get_inflation_rate(int no_of_fields, char* fieldname, char* value)
 {
   char * result = get_field(INFLATION_RATE, no_of_fields,
-			    fieldname, value);
+                            fieldname, value);
   if (result==0) {
     return DEFAULT_INFLATION_RATE;
   }
@@ -738,7 +738,7 @@ double get_inflation_rate(int no_of_fields, char* fieldname, char* value)
 char * get_part_number(int no_of_fields, char* fieldname, char* value)
 {
   char * result = get_field(PART_NUMBER, no_of_fields,
-			    fieldname, value);
+                            fieldname, value);
   if (result==0) {
     return (char*)"";
   }
@@ -750,14 +750,14 @@ char * get_part_number(int no_of_fields, char* fieldname, char* value)
 char * get_theme(int no_of_fields, char* fieldname, char* value)
 {
   char * result = get_field(THEME, no_of_fields,
-			    fieldname, value);
+                            fieldname, value);
   return result;
 }
 
 char * get_sale_number(int no_of_fields, char* fieldname, char* value)
 {
   char * result = get_field(SALE_NUMBER, no_of_fields,
-			    fieldname, value);
+                            fieldname, value);
   if (result==0) {
     return (char*)"";
   }
@@ -769,7 +769,7 @@ char * get_sale_number(int no_of_fields, char* fieldname, char* value)
 char * get_purchase_number(int no_of_fields, char* fieldname, char* value)
 {
   char * result = get_field(PURCHASE_NUMBER, no_of_fields,
-			    fieldname, value);
+                            fieldname, value);
   if (result==0) {
     return (char*)"";
   }
@@ -921,7 +921,7 @@ char * get_currency(int no_of_fields, char* fieldname, char* value)
   else {
     if (strlen(result)==3) {
       for (i=0;i<strlen(result);i++) {
-	result[i]=toupper(result[i]);
+        result[i]=toupper(result[i]);
       }
       return result;
     }
@@ -1036,8 +1036,8 @@ char * get_receive(int no_of_fields, char* fieldname, char* value)
 
   for (i = 0; i < 8; i++) {
     result = get_field_string_from_identifier(cmd[i],
-					      no_of_fields,
-					      fieldname, value);
+                                              no_of_fields,
+                                              fieldname, value);
     if (result != 0) break;
   }
 
@@ -1048,8 +1048,8 @@ char * get_receive(int no_of_fields, char* fieldname, char* value)
 char * get_import(int no_of_fields, char* fieldname, char* value)
 {
   char * result = get_field_string_from_identifier(COMMAND_IMPORT,
-						   no_of_fields,
-						   fieldname, value);
+                                                   no_of_fields,
+                                                   fieldname, value);
   if (result == 0) {
     return (char*)"";
   }
@@ -1061,8 +1061,8 @@ char * get_import(int no_of_fields, char* fieldname, char* value)
 char * get_export(int no_of_fields, char* fieldname, char* value)
 {
   char * result = get_field_string_from_identifier(COMMAND_EXPORT,
-						   no_of_fields,
-						   fieldname, value);
+                                                   no_of_fields,
+                                                   fieldname, value);
   if (result == 0) {
     return (char*)"";
   }
@@ -1075,20 +1075,20 @@ char * get_export(int no_of_fields, char* fieldname, char* value)
 char * get_style(int no_of_fields, char* fieldname, char* value)
 {
   char * result = get_field_string_from_identifier(COMMAND_STYLE,
-						   no_of_fields,
-						   fieldname, value);
+                                                   no_of_fields,
+                                                   fieldname, value);
   return result;
 }
 
 char get_field_separator(int no_of_fields, char* fieldname, char* value)
 {
   char * result = get_field_string_from_identifier(COMMAND_SEPARATOR,
-						   no_of_fields, 
-						   fieldname, value);
+                                                   no_of_fields, 
+                                                   fieldname, value);
   if (result != 0) {
     if (strlen(result)>0) {
       if (strcmp(result,get_text_from_identifier(TAB))==0) {
-	return (char)9;
+        return (char)9;
       }
       return result[0];
     }
@@ -1099,8 +1099,8 @@ char get_field_separator(int no_of_fields, char* fieldname, char* value)
 char * get_report(int no_of_fields, char* fieldname, char* value)
 {
   char * result = get_field_string_from_identifier(COMMAND_REPORT,
-						   no_of_fields,
-						   fieldname, value);
+                                                   no_of_fields,
+                                                   fieldname, value);
   to_lower(result);
   return result;
 }
@@ -1108,12 +1108,12 @@ char * get_report(int no_of_fields, char* fieldname, char* value)
 char * get_list(int no_of_fields, char* fieldname, char* value)
 {
   char * result = get_field_string_from_identifier(COMMAND_LIST,
-						   no_of_fields,
-						   fieldname, value);
+                                                   no_of_fields,
+                                                   fieldname, value);
   if (result==0) {
     result = get_field_string_from_identifier(COMMAND_LS,
-					      no_of_fields,
-					      fieldname, value);
+                                              no_of_fields,
+                                              fieldname, value);
   }
   to_lower(result);
   return result;
@@ -1133,7 +1133,7 @@ char * get_undo(int no_of_fields, char* fieldname, char* value)
   };
   for (i=0;i<6;i++) {
     result = get_field_string_from_identifier(cmd[i],no_of_fields,
-					      fieldname, value);
+                                              fieldname, value);
     if (result!=0) break;
   }
 
@@ -1143,8 +1143,8 @@ char * get_undo(int no_of_fields, char* fieldname, char* value)
 char * get_tests(int no_of_fields, char* fieldname, char* value)
 {
   char * result = get_field_string_from_identifier(COMMAND_TESTS,
-						   no_of_fields,
-						   fieldname, value);
+                                                   no_of_fields,
+                                                   fieldname, value);
   to_lower(result);
   return result;
 }
@@ -1152,23 +1152,23 @@ char * get_tests(int no_of_fields, char* fieldname, char* value)
 char * get_monthly(int no_of_fields, char* fieldname, char* value)
 {
   char * result = get_field_string_from_identifier(PERIOD_MONTHLY,
-						   no_of_fields,
-						   fieldname, value);
+                                                   no_of_fields,
+                                                   fieldname, value);
   return result;
 }
 
 char * get_yearly(int no_of_fields, char* fieldname, char* value)
 {
   char * result = get_field_string_from_identifier(PERIOD_YEARLY,
-						   no_of_fields,
-						   fieldname, value);
+                                                   no_of_fields,
+                                                   fieldname, value);
   return result;
 }
 
 char * get_kml(int no_of_fields, char* fieldname, char* value)
 {
   char * result = get_field_string_from_identifier(KML,no_of_fields,
-						   fieldname, value);
+                                                   fieldname, value);
   return result;
 }
 
@@ -1176,7 +1176,7 @@ char * get_title(int no_of_fields, char* fieldname, char* value)
 {
   char * result =
     get_field_string_from_identifier(TITLE,no_of_fields,
-				     fieldname, value);
+                                     fieldname, value);
   return result;
 }
 
@@ -1184,15 +1184,15 @@ char * get_username(int no_of_fields, char* fieldname, char* value)
 {
   char * result =
     get_field_string_from_identifier(USERNAME,
-				     no_of_fields,
-				     fieldname, value);
+                                     no_of_fields,
+                                     fieldname, value);
   return result;
 }
 
 char * get_piechart(int no_of_fields, char* fieldname, char* value)
 {
   char * result = get_field_string_from_identifier(PIECHART,no_of_fields,
-						   fieldname, value);
+                                                   fieldname, value);
   return result;
 }
 
@@ -1200,8 +1200,8 @@ int get_recur(int no_of_fields, char* fieldname, char* value)
 {
   int period = -1;
   char * result = get_field_string_from_identifier(COMMAND_RECUR,
-						   no_of_fields,
-						   fieldname, value);
+                                                   no_of_fields,
+                                                   fieldname, value);
   to_lower(result);
   if (result != 0) {
     if (strcmp(result,get_text_from_identifier(PERIOD_DAILY))==0) {
@@ -1226,7 +1226,7 @@ int get_recur(int no_of_fields, char* fieldname, char* value)
       period = PERIOD_WEEKLY;
     }
     if ((strcmp(result,get_text_from_identifier(PERIOD_BIWEEKLY))==0) ||
-	(strcmp(result,get_text_from_identifier(PERIOD_2WEEKLY))==0)) {
+        (strcmp(result,get_text_from_identifier(PERIOD_2WEEKLY))==0)) {
       period = PERIOD_2WEEKLY;
     }
     if (strcmp(result,get_text_from_identifier(PERIOD_MONTHLY))==0) {
@@ -1242,8 +1242,8 @@ int get_recur(int no_of_fields, char* fieldname, char* value)
       period = PERIOD_6MONTHLY;
     }
     if ((strcmp(result,get_text_from_identifier(PERIOD_YEARLY))==0) ||
-	(strcmp(result,get_text_from_identifier(PERIOD_ANNUAL))==0) ||
-	(strcmp(result,get_text_from_identifier(PERIOD_ANNUALLY))==0)) {
+        (strcmp(result,get_text_from_identifier(PERIOD_ANNUAL))==0) ||
+        (strcmp(result,get_text_from_identifier(PERIOD_ANNUALLY))==0)) {
       period = PERIOD_YEARLY;
     }
     if (strcmp(result,get_text_from_identifier(PERIOD_2YEARLY))==0) {
@@ -1256,7 +1256,7 @@ int get_recur(int no_of_fields, char* fieldname, char* value)
 /* If descriptions are longer than the maximum row length then
    show them on multiple lines */
 void description_multiline(char * str, char column_separator,
-			   int start_column)
+                           int start_column)
 {
   int i,j,max;
   int max_length = MAX_ROW_LENGTH-start_column-1;
@@ -1273,10 +1273,10 @@ void description_multiline(char * str, char column_separator,
     if (strlen(str)>=max_length) {
       i=0;
       while ((i<max_length) && (i<strlen(str))) {
-	if (str[i]==' ') {
-	  max = i+1;
-	}
-	i++;
+        if (str[i]==' ') {
+          max = i+1;
+        }
+        i++;
       }
     }
     i=0;
@@ -1286,12 +1286,12 @@ void description_multiline(char * str, char column_separator,
     }
     if (i<strlen(str)) {
       for (j=i;j<strlen(str);j++) {
-	str[j-i] = str[j];
+        str[j-i] = str[j];
       }
       str[j-i]=0;
       printf("%c\n", column_separator);
       for (j = 0; j <= start_column; j++) {
-	printf(" ");
+        printf(" ");
       }
     }
     else {

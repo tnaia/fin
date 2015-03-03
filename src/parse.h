@@ -1,6 +1,6 @@
 /*
   Fin - a simple personal accounts manager
-  Copyright (C) 2012-2013  Bob Mottram <bob@robotics.uk.to>
+  Copyright (C) 2012-2015  Bob Mottram <bob@robotics.uk.to>
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -31,28 +31,28 @@
 void trim(char * str);
 
 int parse(int argc, char * argv[],
-		  char * fieldname, char * value,
-		  char separator,
-		  int start_index, int max_results);
+          char * fieldname, char * value,
+          char separator,
+          int start_index, int max_results);
 
 void remove_eol(char * str);
 
 char * get_field_string(char * name,
-						int no_of_fields, char * fieldname, char * value);
+                        int no_of_fields, char * fieldname, char * value);
 
 int get_field_value(char * name,
-					int no_of_fields, char * fieldname, char * value);
+                    int no_of_fields, char * fieldname, char * value);
 
 char * get_field_string_from_identifier(int identifier,
-										int no_of_fields,
-										char * fieldname, char * value);
+                                        int no_of_fields,
+                                        char * fieldname, char * value);
 
 int get_field_value_from_identifier(int identifier,
-									int no_of_fields,
-									char * fieldname, char * value);
+                                    int no_of_fields,
+                                    char * fieldname, char * value);
 
 char * get_field(int identifier, int no_of_fields,
-				 char* fieldname, char* value);
+                 char* fieldname, char* value);
 
 char * get_summary(int no_of_fields, char* fieldname, char* value);
 char * get_account_name(int no_of_fields, char* fieldname, char* value);
@@ -81,7 +81,7 @@ char * get_tests(int no_of_fields, char* fieldname, char* value);
 char * get_tracking_number(int no_of_fields, char* fieldname, char* value);
 int get_progress(int no_of_fields, char* fieldname, char* value);
 int get_summary_transactions(int no_of_fields,
-							 char* fieldname, char* value);
+                             char* fieldname, char* value);
 char * get_VAT_rate(int no_of_fields, char* fieldname, char* value);
 char * get_search(int no_of_fields, char* fieldname, char* value);
 char * get_transfer(int no_of_fields, char* fieldname, char* value);
@@ -96,11 +96,11 @@ char * get_username(int no_of_fields, char* fieldname, char* value);
 char * get_piechart(int no_of_fields, char* fieldname, char* value);
 char * get_speak(int no_of_fields, char* fieldname, char* value);
 double get_savings_interest_rate(int no_of_fields,
-								 char* fieldname, char* value);
+                                 char* fieldname, char* value);
 double get_loans_interest_rate(int no_of_fields,
-							   char* fieldname, char* value);
+                               char* fieldname, char* value);
 double get_inflation_rate(int no_of_fields,
-						  char* fieldname, char* value);
+                          char* fieldname, char* value);
 
 int get_recur(int no_of_fields, char* fieldname, char* value);
 
@@ -122,18 +122,18 @@ char * get_push(int no_of_fields, char* fieldname, char* value);
 char * get_style(int no_of_fields, char* fieldname, char* value);
 
 char * get_date_format(int no_of_fields,
-					   char* fieldname, char* value);
+                       char* fieldname, char* value);
 char get_field_separator(int no_of_fields,
-						 char* fieldname, char* value);
+                         char* fieldname, char* value);
 char * get_monthly(int no_of_fields, char* fieldname, char* value);
 char * get_yearly(int no_of_fields, char* fieldname, char* value);
 void description_multiline(char * str,
-						   char column_separator,
-						   int start_column);
+                           char column_separator,
+                           int start_column);
 char * get_distrib(int no_of_fields, char* fieldname, char* value);
 double get_maximum(int no_of_fields, char* fieldname, char* value);
 void search_string_to_sql(char * search_string, char * result,
-						  int year, int month_number);
+                          int year, int month_number);
 char * get_volume(int no_of_fields, char* fieldname, char* value);
 char * get_time(int no_of_fields, char* fieldname, char* value);
 char * get_adjustments(int no_of_fields, char* fieldname, char* value);
