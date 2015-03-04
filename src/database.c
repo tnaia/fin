@@ -1659,13 +1659,19 @@ int transaction_volume(char * account, char * currency, int year,
   FILE * fp_export=NULL;
   char datestr[STRING_BLOCK];
   char volumestr[STRING_BLOCK];
+  int do_search = 0;
 
   if (account_exists(account)==0) {
     return 0;
   }
 
-  if (strlen(search_string)!=0) {
-    search_string_to_sql(search_string, search_sql, year, 0);
+  if (search_string != 0) {
+	  if (strlen(search_string)!=0) {
+		  do_search = 1;
+	  }
+  }
+  if (do_search != 0) {
+	  search_string_to_sql(search_string, search_sql, year, 0);
   }
 
   /* open file for export */
@@ -1739,7 +1745,7 @@ int transaction_volume(char * account, char * currency, int year,
 
   /* create query */
   if (monthly != 0) {
-    if (strlen(search_string)==0) {
+    if (do_search == 0) {
       if (year < 1) {
         sprintf(query,
                 "select substr(date,1,7) " \
@@ -1785,7 +1791,7 @@ int transaction_volume(char * account, char * currency, int year,
     }
   }
   else {
-    if (strlen(search_string)==0) {
+    if (do_search==0) {
       if (year < 1) {
         sprintf(query,
                 "select substr(date,1,4) "      \
