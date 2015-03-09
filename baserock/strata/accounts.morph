@@ -1,0 +1,17 @@
+name: accounts
+kind: stratum
+description: Systems for financial accounts administration
+build-depends:
+- morph: strata/build-essential.morph
+chunks:
+- name: sqlite3
+  repo: upstream:sqlite3
+  ref: 24adc227bc29cd17e39df097fbca389c7724cd14
+  unpetrify-ref: sqlite-autoconf-3080801
+  build-depends: []
+- name: fin
+  repo: github:bashrc/fin
+  ref: 258129099a2456712e73b0cc063c165892d2fd5b
+  build-depends:
+  - sqlite3
+                
