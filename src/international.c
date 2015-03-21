@@ -435,7 +435,7 @@ char * international_narrator[] = {
   "The balance of your %s account is %d %s", /*Polish*/
   "The balance of your %s account is %d %s", /*Dutch*/
   "The balance of your %s account is %d %s", /*Chinese*/
-  "The balance of your %s account is %d %s", /*Swedish*/
+  "Saldot på kontot %s är %d %s", /*Swedish*/
 
   /* balance (negative)*/
   "Your %s account is %d %s overdrawn", /*Eng (uk)*/
@@ -449,7 +449,7 @@ char * international_narrator[] = {
   "Your %s account is %d %s overdrawn", /*Polish*/
   "Your %s account is %d %s overdrawn", /*Dutch*/
   "Your %s account is %d %s overdrawn", /*Chinese*/
-  "Your %s account is %d %s overdrawn", /*Swedish*/
+  "Saldot på kontot %s är minus %d %s", /*Swedish*/
 
   /* average income */
   "Average income to your %s account is %d %s per month", /*Eng (uk)*/
@@ -463,7 +463,7 @@ char * international_narrator[] = {
   "Average income to your %s account is %d %s per month", /*Polish*/
   "Average income to your %s account is %d %s per month", /*Dutch*/
   "Average income to your %s account is %d %s per month", /*Chinese*/
-  "Average income to your %s account is %d %s per month", /*Swedish*/
+  "Snittinkomsten på kontot %s är  %d %s per månad", /*Swedish*/
 
   /* average spending */
   "Average outgoings from your %s account are %d %s per month", /*Eng (uk)*/
@@ -477,7 +477,7 @@ char * international_narrator[] = {
   "Average outgoings from your %s account are %d %s per month", /*Polish*/
   "Average outgoings from your %s account are %d %s per month", /*Dutch*/
   "Average outgoings from your %s account are %d %s per month", /*Chinese*/
-  "Average outgoings from your %s account are %d %s per month", /*Swedish*/
+  "Snittförbrukningen på %s kontoen är %d %s per månad", /*Swedish*/
 
   /* months remaining */
   "Funds will be expended in %d months", /*Eng (uk)*/
@@ -617,7 +617,7 @@ void set_language(int index)
 void set_language_from_string(char * language)
 {
   current_language = valid_language(language)-1;
-  if (current_language<0) current_language=0;  
+  if (current_language<0) current_language=0;
 }
 
 char * get_text_from_identifier(int identifier)
@@ -660,7 +660,7 @@ char * get_text_from_identifier(int identifier)
 
   if ((identifier >= SETTINGS_FILENAME) && (identifier < COMMAND_MONTH)) {
     lookup = international_text6;
-    identifier -= SETTINGS_FILENAME;    
+    identifier -= SETTINGS_FILENAME;
     return lookup[identifier*LANGUAGES + current_language];
   }
 
