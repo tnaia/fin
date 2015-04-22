@@ -129,6 +129,21 @@ int settings_load(char * directory)
   return 0;
 }
 
+int settings_exist(char * directory)
+{
+  FILE * fp;
+  char filename[STRING_BLOCK];
+
+  sprintf((char*)filename,"%s/%s",
+          directory,get_text_from_identifier(SETTINGS_FILENAME));
+  fp  =fopen(filename,"r");
+  if (fp!=0L) {
+      fclose(fp);
+      return 1;
+  }
+  return 0;
+}
+
 void settings_save(char * directory)
 {
   FILE * fp;

@@ -154,9 +154,10 @@ int main(int argc, char* argv[])
   set_language(ENGLISH_UK);
   settings_set_theme(get_text_from_identifier(THEME_NORMAL));
 
-  sprintf((char*)fin_directory,"%s/.fin",getenv("HOME"));
+  sprintf((char*)fin_directory,"%s/.fin", getenv("HOME"));
 
-  if (directory_exists((char*)fin_directory)==0) {
+  if ((directory_exists((char*)fin_directory)==0) ||
+      (settings_exist((char*)fin_directory)==0)) {
     create_sqlite_database();
     settings_set_language("English UK");
     settings_set_account(get_text_from_identifier(SETTINGS_DEFAULT_CURRENT_ACCOUNT));

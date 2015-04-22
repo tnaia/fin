@@ -24,6 +24,7 @@
 #include "validation.h"
 
 
+int settings_exist(char * directory);
 int settings_load(char * directory);
 void settings_save(char * directory);
 
