@@ -1,3 +1,5 @@
+<img src="https://github.com/bashrc/fin/blob/master/img/logo192.png?raw=true" width=200/>
+
 FIN: The command line personal finances manager
 ===============================================
 
