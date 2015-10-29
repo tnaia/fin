@@ -68,7 +68,7 @@ To log an amount of money spent:
 
 Currency symbols such as $ or £ should not be included in the amount.
 
-You might also wish to log where money was spent, so that you can use that as a search criteria later.
+You might also wish to log where money was spent, so that you can use that as a search criterion later.
 
     fin spend 25.39 on groceries at supermarket
 
@@ -150,7 +150,7 @@ To see what your average spending rate has been over the previous year.
     fin say spend | espeak
 
 
-The spending status message will also provide an estimate of when your funds will run out, or if the balance is negative how long it will take to pay off the debt or overdraft at the current average rate of income and spending.  This can help to provide an indication of whether your current rate of income and spending are sustainable or not, based upon the previous years transactions.  If you want to improve this time estimate you can also include average inflation and interest rates.
+The spending status message will also provide an estimate of when your funds will run out, or if the balance is negative how long it will take to pay off the debt or overdraft at the current average rate of income and spending.  This can help to provide an indication of whether your current rate of income and spending are sustainable or not, based on the previous years' transactions.  If you want to improve this time estimate you can also include average inflation and interest rates.
 
 So for example in the case of a savings account where the balance is positive.
 
