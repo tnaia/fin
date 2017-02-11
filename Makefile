@@ -19,7 +19,8 @@ arch:
 		mkdir -p ${ARCH_BUILD_DIR};\
 	fi
 	rm -rf ${ARCH_BUILD_DIR}/*
-	tar -pczf ${ARCH_BUILD_DIR}/${APP}-${VERSION}.tar.gz . --exclude-vcs --exclude "/.git/*"
+	tar -cvf ${ARCH_BUILD_DIR}/${APP}-${VERSION}.tar . --exclude-vcs --exclude ".git"
+	gzip -f9n ${ARCH_BUILD_DIR}/${APP}-${VERSION}.tar
 	cp PKGBUILD ${ARCH_BUILD_DIR}
 	gpg -ba ${ARCH_BUILD_DIR}/${APP}-${VERSION}.tar.gz
 	sed -i "s|arch=()|arch=('${ARCH_TYPE}')|g" ${ARCH_BUILD_DIR}/PKGBUILD
