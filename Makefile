@@ -19,11 +19,11 @@ arch:
 		mkdir -p ${ARCH_BUILD_DIR};\
 	fi
 	rm -rf ${ARCH_BUILD_DIR}/*
-	tar -pczf ${ARCH_BUILD_DIR}/${APP}-${VERSION}.tar.gz . --exclude-vcs
+	tar -pczf ${ARCH_BUILD_DIR}/${APP}-${VERSION}.tar.gz . --exclude-vcs --exclude "/.git/*"
 	cp PKGBUILD ${ARCH_BUILD_DIR}
 	gpg -ba ${ARCH_BUILD_DIR}/${APP}-${VERSION}.tar.gz
 	sed -i "s|arch=()|arch=('${ARCH_TYPE}')|g" ${ARCH_BUILD_DIR}/PKGBUILD
-	cd ${ARCH_BUILD_DIR}; updpkgsums; makepkg -f -c -s
+	cd ${ARCH_BUILD_DIR}; updpkgsums; makepkg -f -c -s; makepkg --printsrcinfo > .SRCINFO
 	unxz ${ARCH_BUILD_DIR}/${APP}-${VERSION}-${RELEASE}-${ARCH_TYPE}.pkg.tar.xz
 	tar -vf ${ARCH_BUILD_DIR}/${APP}-${VERSION}-${RELEASE}-${ARCH_TYPE}.pkg.tar --delete .BUILDINFO
 	xz ${ARCH_BUILD_DIR}/${APP}-${VERSION}-${RELEASE}-${ARCH_TYPE}.pkg.tar
