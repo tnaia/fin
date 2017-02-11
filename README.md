@@ -17,6 +17,12 @@ on Debian, Ubuntu or Linux Mint:
     make
     sudo make install
 
+or on Arch/Parabola:
+
+    sudo pacman -S base-devel sqlite gnuplot
+    make
+    sudo make install
+
 or on Fedora:
 
     sudo yum groupinstall "Development Tools"
@@ -594,3 +600,13 @@ To subsequently restore from a backup:
     fin restore <filename>
 
 If the backup file has a .bfe extension indicating that it is encrypted then you will be asked for a password to decrypt the data.
+
+
+Packaging for Arch GNU/Linux
+============================
+
+If you are running Arch and want to create a package:
+
+    make arch
+
+The resulting files will then appear within the directory *~/abs/fin*.

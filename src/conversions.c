@@ -56,7 +56,7 @@ static void value_to_integer(char * money, char * integer,
     i++;
   }
   decval[ctr]=0;
-  
+
   ctr=0;
   for (i=0;i<strlen(intval);i++) {
     integer[ctr++] = intval[i];
@@ -327,7 +327,7 @@ int reverse_file(char * filename)
           sprintf((char*)header,"%s",line);
         }
         rows++;
-      }      
+      }
     }
     fclose(fp);
   }
@@ -345,7 +345,7 @@ int reverse_file(char * filename)
       while ((!feof(fp)) && (row<i)) {
         if (fgets(line , 255 , fp) != NULL ) {
           row++;
-        }      
+        }
       }
       fclose(fp);
     }
@@ -354,7 +354,7 @@ int reverse_file(char * filename)
     if (fp!=0) {
       fprintf(fp,"%s",line);
       fclose(fp);
-    }    
+    }
   }
 
   if (rows>0) {
@@ -384,11 +384,11 @@ void trim_file_header(char * filename, char * trimmed)
             fprintf(fp_trimmed,"%s",line);
           }
           row++;
-        }       
+        }
       }
 
       fclose(fp_trimmed);
-    }   
+    }
     fclose(fp);
   }
 }

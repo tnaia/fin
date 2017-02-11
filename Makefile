@@ -1,8 +1,10 @@
 APP=fin
 VERSION=1.51
 RELEASE=1
-ARCH_TYPE=`uname -m`
+ARCH_TYPE=$(shell uname -m)
 PREFIX?=/usr/local
+ARCH_BUILD_DIR=${HOME}/abs/${APP}
+CURR_DIR=$(shell pwd)
 
 all:
 	gcc -Wall -std=gnu99 -pedantic -O3 -o ${APP} src/*.c -Isrc -lsqlite3
@@ -11,6 +13,21 @@ debug:
 source:
 	tar -cvf ../${APP}_${VERSION}.orig.tar ../${APP}-${VERSION} --exclude-vcs
 	gzip -f9n ../${APP}_${VERSION}.orig.tar
+arch:
+	rm -f ${APP} *.xz *.sig
+	@if [ ! -d ${ARCH_BUILD_DIR} ]; then\
+		mkdir -p ${ARCH_BUILD_DIR};\
+	fi
+	rm -rf ${ARCH_BUILD_DIR}/*
+	tar -pczf ${ARCH_BUILD_DIR}/${APP}-${VERSION}.tar.gz . --exclude-vcs
+	cp PKGBUILD ${ARCH_BUILD_DIR}
+	gpg -ba ${ARCH_BUILD_DIR}/${APP}-${VERSION}.tar.gz
+	sed -i "s|arch=()|arch=('${ARCH_TYPE}')|g" ${ARCH_BUILD_DIR}/PKGBUILD
+	cd ${ARCH_BUILD_DIR}; updpkgsums; makepkg -f -c -s
+	unxz ${ARCH_BUILD_DIR}/${APP}-${VERSION}-${RELEASE}-${ARCH_TYPE}.pkg.tar.xz
+	tar -vf ${ARCH_BUILD_DIR}/${APP}-${VERSION}-${RELEASE}-${ARCH_TYPE}.pkg.tar --delete .BUILDINFO
+	xz ${ARCH_BUILD_DIR}/${APP}-${VERSION}-${RELEASE}-${ARCH_TYPE}.pkg.tar
+	gpg -ba ${ARCH_BUILD_DIR}/${APP}-${VERSION}-${RELEASE}-${ARCH_TYPE}.pkg.tar.xz
 install:
 	mkdir -p ${DESTDIR}/usr
 	mkdir -p ${DESTDIR}${PREFIX}
@@ -25,8 +42,4 @@ uninstall:
 	rm -rf ${PREFIX}/share/${APP}
 	rm -f ${PREFIX}/bin/${APP}
 clean:
-	rm -f ${APP} \#* \.#* gnuplot* *.png debian/*.substvars debian/*.log
-	rm -fr deb.* debian/${APP} rpmpackage/${ARCH_TYPE}
-	rm -f ../${APP}*.deb ../${APP}*.changes ../${APP}*.asc ../${APP}*.dsc
-	rm -f rpmpackage/*.src.rpm archpackage/*.gz archpackage/*.xz
-	rm -f puppypackage/*.gz puppypackage/*.pet slackpackage/*.txz
+	rm -f ${APP} *.xz *.sig \#* \.#* gnuplot* *.png
