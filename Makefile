@@ -11,7 +11,7 @@ all:
 debug:
 	gcc -Wall -std=gnu99 -pedantic -g -o ${APP} src/*.c -Isrc -lsqlite3
 source:
-	tar -cvf ../${APP}_${VERSION}.orig.tar ../${APP}-${VERSION} --exclude-vcs
+	tar cvf ../${APP}_${VERSION}.orig.tar ../${APP}-${VERSION} --exclude-vcs
 	gzip -f9n ../${APP}_${VERSION}.orig.tar
 arch:
 	rm -f ${APP} *.xz *.sig
@@ -19,14 +19,14 @@ arch:
 		mkdir -p ${ARCH_BUILD_DIR};\
 	fi
 	rm -rf ${ARCH_BUILD_DIR}/*
-	tar -cvf ${ARCH_BUILD_DIR}/${APP}-${VERSION}.tar . --exclude-vcs --exclude ".git"
+	tar cvf ${ARCH_BUILD_DIR}/${APP}-${VERSION}.tar --exclude .git .
 	gzip -f9n ${ARCH_BUILD_DIR}/${APP}-${VERSION}.tar
 	cp PKGBUILD ${ARCH_BUILD_DIR}
 	gpg -ba ${ARCH_BUILD_DIR}/${APP}-${VERSION}.tar.gz
 	sed -i "s|arch=()|arch=('${ARCH_TYPE}')|g" ${ARCH_BUILD_DIR}/PKGBUILD
 	cd ${ARCH_BUILD_DIR}; updpkgsums; makepkg -f -c -s; makepkg --printsrcinfo > .SRCINFO
 	unxz ${ARCH_BUILD_DIR}/${APP}-${VERSION}-${RELEASE}-${ARCH_TYPE}.pkg.tar.xz
-	tar -vf ${ARCH_BUILD_DIR}/${APP}-${VERSION}-${RELEASE}-${ARCH_TYPE}.pkg.tar --delete .BUILDINFO
+	tar vf ${ARCH_BUILD_DIR}/${APP}-${VERSION}-${RELEASE}-${ARCH_TYPE}.pkg.tar --delete .BUILDINFO
 	xz ${ARCH_BUILD_DIR}/${APP}-${VERSION}-${RELEASE}-${ARCH_TYPE}.pkg.tar
 	gpg -ba ${ARCH_BUILD_DIR}/${APP}-${VERSION}-${RELEASE}-${ARCH_TYPE}.pkg.tar.xz
 install:
