@@ -90,7 +90,6 @@ char * get_language(int no_of_fields, char* fieldname, char* value);
 char * get_kml(int no_of_fields, char* fieldname, char* value);
 char * get_help(int no_of_fields, char* fieldname, char* value);
 char * get_version(int no_of_fields, char* fieldname, char* value);
-char * get_lock(int no_of_fields, char* fieldname, char* value);
 char * get_title(int no_of_fields, char* fieldname, char* value);
 char * get_username(int no_of_fields, char* fieldname, char* value);
 char * get_piechart(int no_of_fields, char* fieldname, char* value);

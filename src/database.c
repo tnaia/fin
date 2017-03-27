@@ -117,52 +117,14 @@ int database_restore(char * backup_filename)
 {
     char directory[STRING_BLOCK];
     char command[STRING_BLOCK];
-    int len = strlen(backup_filename);
-    int unlocked = 0;
-    char temp_filename[STRING_BLOCK];
 
-    if (file_exists(backup_filename)==0) {
-        /* file was not found */
+    if (file_exists(backup_filename) == 0)
         return -1;
-    }
-
-    if (len > 4) {
-        if ((backup_filename[len-1]=='e') &&
-            (backup_filename[len-2]=='f') &&
-            (backup_filename[len-3]=='b') &&
-            (backup_filename[len-4]=='.')) {
-
-            /* copy the backup file to a temporary file */
-            sprintf(temp_filename, "%s",
-                    "temp_fin_backup.bfe");
-            sprintf(command, "cp %s %s",
-                    backup_filename, temp_filename);
-            len = system(command);
-
-            /* unlock */
-            sprintf(command, "bcrypt %s", temp_filename);
-            len = system(command);
-            temp_filename[strlen(temp_filename)-4] = 0;
-            unlocked = 1;
-        }
-    }
 
     database_directory(directory);
-    if (unlocked == 0) {
-        sprintf(command, "tar -C %s -zxpf %s",
-                directory, backup_filename);
-        len = system(command);
-    }
-    else {
-        sprintf(command, "tar -C %s -zxpf %s",
-                directory, temp_filename);
-        len = system(command);
-
-        /* delete the unencrypted file */
-        sprintf(command, "shred -u %s",
-                temp_filename);
-        len = system(command);
-    }
+    sprintf(command, "tar -C %s -zxpf %s",
+            directory, backup_filename);
+    system(command);
     return 1;
 }
 

@@ -13,7 +13,7 @@ You can compile from source as follows:
 on Debian, Ubuntu or Linux Mint:
 
     sudo apt-get install build-essential
-    sudo apt-get install libsqlite3-dev bcrypt gnuplot
+    sudo apt-get install libsqlite3-dev gnuplot
     make
     sudo make install
 
@@ -26,7 +26,7 @@ or on Arch/Parabola:
 or on Fedora:
 
     sudo yum groupinstall "Development Tools"
-    sudo yum install rpmdevtools sqlite-devel bcrypt gnuplot
+    sudo yum install rpmdevtools sqlite-devel gnuplot
     make
     sudo make install
 
@@ -37,17 +37,7 @@ or on OpenSUSE:
     make
     sudo make install
 
-You will need to have the sqlite3 development package installed to be able to compile, and to get the full functionality you'll also need to have gnuplot and bcrypt installed.
-
-If bcrypt is unavailable as an installable package on your system:
-
-    mkdir ~/develop
-    cd ~/develop
-    wget http://bcrypt.sourceforge.net/bcrypt-1.1.tar.gz
-    tar xvzf bcrypt-1.1.tar.gz
-    cd bcrypt-1.1
-    make
-    sudo make install
+You will need to have the sqlite3 development package installed to be able to compile, and to get the full functionality you'll also need to have gnuplot installed.
 
 
 Language
@@ -571,17 +561,6 @@ This information can subsequently be exported as part of a search:
     fin find "*" year 2011 kml <filename>
 
 
-Security
-========
-
-Ordinarily the "data at rest" within the ~/.fin directory is not encrypted.  Since financial data may often be confidential there is an easy way to encrypt the data when you're not using it.
-
-    fin lock
-
-
-You will be prompted to enter a password, then the files will be encrypted.  The next time you run fin you will then be prompted for the password.
-
-
 Backup and Restore
 ==================
 
@@ -589,11 +568,7 @@ If you wish to make a backup of your data.
 
     fin backup <filename>
 
-This will compress the contents of the ~/.fin directory into a file with the given name.  An important point here is that the backup file which is created is not encrypted, and so the data could potentially be read by anyone.  If you need more security for the "data at rest" then append the lock command:
-
-    fin backup <filename> lock
-
-The lock command will cause the system to ask for a password and then encrypt the backup file.
+This will compress the contents of the ~/.fin directory into a file with the given name.
 
 To subsequently restore from a backup:
 

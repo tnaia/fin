@@ -35,7 +35,6 @@
 #include "search.h"
 #include "transfer.h"
 #include "edit.h"
-#include "lock.h"
 #include "piechart.h"
 #include "narrator.h"
 #include "accounts.h"
@@ -143,10 +142,6 @@ int main(int argc, char* argv[])
     time_t now;
     struct tm *d;
     int distribution[DISTRIBUTION_SIZE];
-
-    if (unlock()!=0) {
-        return 0;
-    }
 
     timestr[0]=0;
 
@@ -496,14 +491,6 @@ int main(int argc, char* argv[])
         }
         else
             printf("Failed to undo %s\n", result);
-    }
-
-    /* lock */
-    result = get_lock(no_of_fields, (char*)fieldname, (char*)value);
-    if ((result!=0) && (command_run==0) && (backup_filename == 0)) {
-        command_run=1;
-        lock();
-        return 1;
     }
 
     /* backup */

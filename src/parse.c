@@ -554,12 +554,6 @@ char * get_to(int no_of_fields, char* fieldname, char* value)
     return result;
 }
 
-char * get_lock(int no_of_fields, char* fieldname, char* value)
-{
-    char * result = get_field(LOCK, no_of_fields, fieldname, value);
-    return result;
-}
-
 char * get_backup(int no_of_fields, char* fieldname, char* value)
 {
     char * result = get_field(BACKUP, no_of_fields, fieldname, value);
