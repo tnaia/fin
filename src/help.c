@@ -20,45 +20,45 @@
 
 void show_help_english()
 {
-  printf("%s","\nFin: The command line personal finances manager\n");
-  printf("%s","-----------------------------------------------\n\n");
+    printf("%s","\nFin: The command line personal finances manager\n");
+    printf("%s","-----------------------------------------------\n\n");
 
-  printf("%s","To log an amount of money spent:\n\n");
+    printf("%s","To log an amount of money spent:\n\n");
 
-  printf("%s","   fin spend <amount> on <thing purchased>\n\n");
+    printf("%s","   fin spend <amount> on <thing purchased>\n\n");
 
-  printf("%s","   fin spend 2.99 on cheese\n\n");
+    printf("%s","   fin spend 2.99 on cheese\n\n");
 
-  printf("%s","Currency symbols such as $ or £ should not be included in the amount.\n\n");
+    printf("%s","Currency symbols such as $ or £ should not be included in the amount.\n\n");
 
-  printf("%s","You might also wish to log where money was spent, so that you can use that as a search criteria later.\n\n");
+    printf("%s","You might also wish to log where money was spent, so that you can use that as a search criteria later.\n\n");
 
-  printf("%s","   fin spend 25.39 on groceries at supermarket\n\n");
+    printf("%s","   fin spend 25.39 on groceries at supermarket\n\n");
 
-  printf("%s","To receive an amount of money:\n\n");
+    printf("%s","To receive an amount of money:\n\n");
 
-  printf("%s","   fin receive <amount> from <source>\n\n");
+    printf("%s","   fin receive <amount> from <source>\n\n");
 
-  printf("%s","   fin receive 100 from \"balance brought forward\"\n\n");
+    printf("%s","   fin receive 100 from \"balance brought forward\"\n\n");
 
-  printf("%s","To show recent transactions just type \"fin\".  The most recent is at the top.  If you want to list more transactions:\n\n");
+    printf("%s","To show recent transactions just type \"fin\".  The most recent is at the top.  If you want to list more transactions:\n\n");
 
-  printf("%s","   fin transactions <number>\n\n");
+    printf("%s","   fin transactions <number>\n\n");
 
-  printf("%s","You can also see aggregated figures:\n\n");
+    printf("%s","You can also see aggregated figures:\n\n");
 
-  printf("%s","   fin monthly\n\n");
+    printf("%s","   fin monthly\n\n");
 
-  printf("%s","   fin yearly\n\n");
+    printf("%s","   fin yearly\n\n");
 
-  printf("%s","For more details see the README file.\n\n");
+    printf("%s","For more details see the README file.\n\n");
 }
 
 void show_help()
 {
-  char * language = settings_get_language();
+    char * language = settings_get_language();
 
-  if ((strcmp(language,"english uk")==0) || (strcmp(language,"english us")==0)) {
-    show_help_english();
-  }
+    if ((strcmp(language,"english uk") == 0) ||
+        (strcmp(language,"english us") == 0))
+        show_help_english();
 }

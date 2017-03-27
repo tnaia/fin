@@ -20,55 +20,55 @@
 
 int is_locked(char * directory)
 {
-  FILE * fp;
-  char filename[STRING_BLOCK];
-  int locked = 0;
+    FILE * fp;
+    char filename[STRING_BLOCK];
+    int locked = 0;
 
-  sprintf((char*)filename,"%s/settings.txt.bfe",directory);
-  fp = fopen(filename,"r");
-  if (fp!=0) {
-    locked = 1;
-    fclose(fp);
-  }
-
-  if (locked==0) {
-    sprintf((char*)filename,"%s/current.sqlite3.bfe",directory);
+    sprintf((char*)filename,"%s/settings.txt.bfe",directory);
     fp = fopen(filename,"r");
     if (fp!=0) {
-      locked = 1;
-      fclose(fp);
+        locked = 1;
+        fclose(fp);
     }
-  }
 
-  return locked;
+    if (locked==0) {
+        sprintf((char*)filename,"%s/current.sqlite3.bfe",directory);
+        fp = fopen(filename,"r");
+        if (fp!=0) {
+            locked = 1;
+            fclose(fp);
+        }
+    }
+
+    return locked;
 }
 
 int lock()
 {
-  char directory[STRING_BLOCK];
-  char command[STRING_BLOCK];
-  int retval=0;
+    char directory[STRING_BLOCK];
+    char command[STRING_BLOCK];
+    int retval=0;
 
-  database_directory(directory);
+    database_directory(directory);
 
-  if (is_locked(directory)==0) {
-    sprintf((char*)command,"bcrypt %s/*", directory);
-    retval = system(command);
-  }
-  return retval;
+    if (is_locked(directory)==0) {
+        sprintf((char*)command,"bcrypt %s/*", directory);
+        retval = system(command);
+    }
+    return retval;
 }
 
 int unlock()
 {
-  char directory[STRING_BLOCK];
-  char command[STRING_BLOCK];
+    char directory[STRING_BLOCK];
+    char command[STRING_BLOCK];
 
-  database_directory(directory);
-  if (is_locked(directory)!=0) {
-    sprintf((char*)command,"bcrypt %s/*.bfe", directory);
-    if (system(command)!=0) {
-      printf("Command failed\n");
+    database_directory(directory);
+    if (is_locked(directory)!=0) {
+        sprintf((char*)command,"bcrypt %s/*.bfe", directory);
+        if (system(command)!=0) {
+            printf("Command failed\n");
+        }
     }
-  }
-  return is_locked(directory);
+    return is_locked(directory);
 }
