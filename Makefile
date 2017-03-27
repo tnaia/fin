@@ -43,4 +43,4 @@ uninstall:
 	rm -rf ${PREFIX}/share/${APP}
 	rm -f ${PREFIX}/bin/${APP}
 clean:
-	rm -f ${APP} *.xz *.sig \#* \.#* gnuplot* *.png
+	rm -f ${APP} *.xz *.sig \#* \.#* gnuplot* *.png src/*.plist
